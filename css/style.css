@@ -1,0 +1,73 @@
+/* Empty. Add your own CSS if you like */
+
+@font-face {
+    font-family: ‘Quicksand';
+    src: url(‘Quicksand.ttf') format('opentype'),
+}
+
+body, .tab-item, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .ionic-body, .tab-item, input, button, select, textarea {
+ font-family: Quicksand !important; }
+
+.white {
+	color: #fff;	
+	padding-top: 4px;
+	font-weight: bold !important;}
+
+
+.p20 {
+	padding: 20px;
+}
+
+#logo {
+  margin: 30px 0px;
+  
+}
+
+#list {
+  width: 170px;
+  margin: 30px auto;
+  font-size: 20px;
+}
+#list ol {
+  margin-top: 30px;
+}
+#list ol li {
+  text-align: left;
+  list-style: decimal;
+  margin: 10px 0px;
+}
+
+.button.ng-hide{
+  display:none;
+}
+
+.bg-color-cg {
+	background-color: #666 !important;}
+
+.color-cg {
+	color: #666 !important;}
+
+/* Fonts */
+
+h2.miniDesc  {
+	font-size: 24px;
+}
+
+h1.title {
+	font-size: 18px !important;
+}
+
+.bar .title {
+   		height: 50px !important;
+    	font-size: 24px !important;
+    	line-height: 48px !important; }
+ 
+.salary {
+	font-size: 80px !important;
+	height: 100px !important;
+	text-align: right;
+}
+
+.button-next-mainScreen {
+	height: 100px !important;
+}

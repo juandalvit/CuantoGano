@@ -1,0 +1,23 @@
+<ion-view view-title="Jerarquias">
+  
+	<ion-content>
+  		<div class="list list-inset p20">
+			<h3 class="">País: ARGENTINA</h3>
+			<h3 class="">Sueldo: 20000</h3>
+		</div>
+
+  
+	    <ion-list>
+	      	<ion-item ng-repeat="hierarchy in hierarchies" href="#/app/areas/{{hierarchy.hierarchyId}}">
+	      		<h1 class="miniDesc">{{hierarchy.name}}</h1>
+				<p>{{hierarchy.description}}</p>
+				<i class="icon icon-right ion-chevron-right"></i>
+	      	</ion-item>
+	      	<a class="item item-avatar item-icon-right" href="#">
+		      <h2 class="miniDesc">Ayuda</h2>
+		      <p>Nuestro equipo esta para ayudarte</p>
+			  <i class="icon icon-right ion-chevron-right"></i>
+			</a>
+	    </ion-list>
+  	</ion-content>
+</ion-view>

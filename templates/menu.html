@@ -1,0 +1,94 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-dark">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+   
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-android-search" menu-toggle="right">
+        </button>
+      </ion-nav-buttons>
+   
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <ion-header-bar class="bar-dark">
+      <h1 class="title">Cuanto ganas?</h1>
+    </ion-header-bar>
+    <ion-content>
+      <ion-list>
+
+         <ion-item nav-clear menu-close href="#/app/data">
+          Datos
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/hierarchies">
+          Jerarquia (gris)
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/areas">
+          Area (gris)
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/seniorities">
+          Experiencia (gris)
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/positions">
+          Puesto (gris)
+        </ion-item>
+        
+        
+         <ion-item nav-clear menu-close href="#/app/profile">
+          Perfil
+        </ion-item>
+        
+        
+        <ion-item nav-clear menu-close href="#/app/search">
+          Buscador
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/profileVsSearch">
+          Perfil vs Puesto	
+        </ion-item>
+       <ion-item nav-clear menu-close href="#/app/profileVsPyramid">
+          Perfil vs Piramide
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/inflation">
+          Pronostico Inflacion
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/playlist">
+          Pronostico Aumentos
+        </ion-item>
+
+
+		 <ion-item nav-clear menu-close >
+          ------DEV DATA ------
+        </ion-item>
+
+        <ion-item nav-clear menu-close ng-click="login()">
+          Login
+        </ion-item>
+        <ion-item nav-clear menu-close ng-controller="ExampleController" ng-click="insert(1, 20000)">
+          Insert
+        </ion-item>
+        <ion-item nav-clear menu-close ng-controller="ExampleController" ng-click="select('1')">
+          Select
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/search">
+          Search
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/browse">
+          Browse
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/hierarchies">
+          Jerarquias
+        </ion-item>
+       
+
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>
