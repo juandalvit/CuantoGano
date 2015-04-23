@@ -167,15 +167,25 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
       }
     })
 
-  .state('app.single', {
-    url: "/playlists/:playlistId",
+
+    .state('app.profileVsSearch', {
+    url: "/profileVsSearch",
     views: {
       'menuContent': {
-        templateUrl: "templates/playlist.html",
-        controller: 'PlaylistCtrl'
+        templateUrl: "templates/profileVsSearch.html"
+      }
+    }
+  })
+
+  .state('app.profileVsPyramid', {
+    url: "/profileVsPyramid",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/profileVsPyramid.html"
       }
     }
   });
-  // if none of the above states are matched, use this as the fallback
+
+    // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/browse');
 });
