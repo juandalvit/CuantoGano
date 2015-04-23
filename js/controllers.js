@@ -123,6 +123,22 @@ angular.module('starter.controllers', [])
 })
 
 
+.controller('DataCtrl', function($scope, $cordovaSQLite) {
+
+		//alert('inside controller');
+
+
+		$scope.changeInput = function() {
+			alert('change input: '+$scope.amount);
+			var profileData=JSON.parse(localStorage.getItem("profileData"));
+			profileData.amount = $scope.amount;
+			localStorage.setItem("profileData",JSON.stringify(profileData));
+			
+			//alert('test_var: '+JSON.stringify(profileData));			
+			//alert('countryId: '+profileData.countryId);	
+      };
+
+})
 
 
 .controller("ExampleController", function($scope, $cordovaSQLite) {
