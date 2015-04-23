@@ -10,16 +10,19 @@
 
 
 	<ion-list>
-    	<ion-item ng-repeat="area in areas" class="item item-avatar item-icon-right" href="#/app/signorities/{{area.areaId}}">
-        	<h1 class="miniDesc">{{area.name}}</h1>
+
+    	<ion-item ng-repeat="area in areas" class="item item-icon-right" href="#/app/signorities/{{area.areaId}}">
+        	<h2 class="miniDesc">{{area.name}}</h2>
         	<p>{{area.description}}</p>
           	<i class="icon icon-right ion-chevron-right"></i>
       	</ion-item>
-      	<a class="item item-avatar item-icon-right" href="#">
-	      <h2 class="miniDesc">Ayuda</h2>
+      
+      	<a class="item item-icon-right" href="#">
+	      <h3 class="miniDesc">Ayuda</h3>
 	      <p>Nuestro equipo esta para ayudarte</p>
 		  <i class="icon icon-right ion-chevron-right"></i>
 		</a>
+
     </ion-list>
     
   </ion-content>
