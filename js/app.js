@@ -76,6 +76,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
         });
     })
 
+
     .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
 
@@ -194,6 +195,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                     }
                 }
             })
+            
+             .state('app.profile', {
+			    url: "/profile",
+			    views: {
+			      'menuContent': {
+			        templateUrl: "templates/profile.html"
+			      }
+			    }
+			  })
+
 
             .state('app.profileVsPyramid', {
                 url: "/profileVsPyramid",
@@ -203,6 +214,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                     }
                 }
             });
+            
+            
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/browse');
