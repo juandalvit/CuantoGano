@@ -1,48 +1,51 @@
 <ion-view view-title="DATOS">
-  
-  <ion-content> 
-	
-	<div class="list">
-	
-	
-	<div class="list list-inset">
 
-		<h4 class="p20">El primer dato que necesitamos es el pais en el que trabajas para poder utilizar la moneda correspondiente.</h4>
-	</div>
-	
-	   	<a class="item item-avatar item-icon-right" href="#">
-		  <img src="venkman.jpg">
+    <ion-content>
 
-	      <h2 class="miniDesc">País: Argentina</h2>
-		      <p>Para modificar haga click aqui.</p>
+        <div class="list">
 
-		  <i class="icon icon-right ion-chevron-right"></i>
-		</a>
 
-	<div class="list list-inset">
-		<h4 class="p20">El segundo dato es el monto que cobraste en el ultimo mes.</h4>
-	</div>
-	
-		<div class="list list-inset">
-		  <label class="item item-input">
-		    <input class="salary" ng-model="amount" type="number" ng-controller="DataCtrl" ng-blur="changeInput()"/>
-		  </label>
-		</div>
-	
-	</div>
-	
-		<a class="button button-block button-positive button-next-mainScreen" ng-href="#/app/hierarchy" >
-		  <h2 class="white" >Siguiente</h2>
-		</a>
+            <div class="list list-inset">
 
-	<a class="item item-avatar item-icon-right" href="#">
-	      <h2 class="miniDesc">Ayuda</h2>
-	      <p>Nuestro equipo esta para ayudarte</p>
-		  <i class="icon icon-right ion-chevron-right"></i>
-		</a>
-	
-	
-  </ion-content>
+                <h4 class="p20">El primer dato que necesitamos es el pais en el que trabajas para poder utilizar la
+                    moneda correspondiente.</h4>
+            </div>
+
+            <a class="item item-avatar item-icon-right" href="#">
+                <img src="ionic.jpg">
+
+                <h2 class="miniDesc">País: Argentina</h2>
+
+                <p>Para modificar haga click aqui.</p>
+
+                <i class="icon icon-right ion-chevron-right"></i>
+            </a>
+
+            <div class="list list-inset">
+                <h4 class="p20">El segundo dato es el monto que cobraste en el último mes.</h4>
+            </div>
+
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <input class="salary" ng-model="amount" type="number"/>
+                </label>
+            </div>
+
+        </div>
+
+        <a class="button button-block button-positive button-next-mainScreen" ng-href="#/app/hierarchies/{{amount}}">
+            <h2 class="white">Siguiente</h2>
+        </a>
+
+        <a class="item item-avatar item-icon-right" href="#">
+            <h2 class="miniDesc">Ayuda</h2>
+
+            <p>Nuestro equipo esta para ayudarte</p>
+            <i class="icon icon-right ion-chevron-right"></i>
+        </a>
+
+
+    </ion-content>
 
 
 </ion-view>

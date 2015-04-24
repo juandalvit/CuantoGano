@@ -1,0 +1,36 @@
+<ion-view view-title="Analysis">
+  
+  <ion-content> 
+	 
+	
+	<div class="list list-inset p20">
+		<h3 class="">País: {{profileData.countryName}}</h3>
+			<h3 class="">Sueldo: {{profileData.amount}}</h3>		
+			<h3 class="">Jerarquía: {{profileData.hierarchyName}}</h3>
+			<h3 class="">Area: {{profileData.areaName}}</h3>
+			<h3 class="">Experiencia: {{profileData.seniorityName}}</h3>
+			<h3 class="">Puesto: {{profileData.positionName}}</h3>
+	</div>
+	
+	<div class="list list-inset p20">
+			<h3 class="">average: {{positionData.average}}</h3>
+			<h3 class="">max: {{positionData.max}}</h3>		
+			<h3 class="">min: {{positionData.min}}</h3>
+			<h3 class="">small: {{positionData.small}}</h3>
+			<h3 class="">medium: {{positionData.medium}}</h3>
+			<h3 class="">large: {{positionData.large}}</h3>
+	</div>
+
+	
+	<ion-item nav-clear menu-close ng-click="clean()">
+          Clean
+        </ion-item>
+        <ion-item nav-clear menu-close ng-click="save()">
+          Save
+     </ion-item>
+	
+	
+  </ion-content>
+
+
+</ion-view>
