@@ -4,14 +4,14 @@
   	<div class="list list-inset p20">
 		<h3 class="">País: {{profileData.countryName}}</h3>
 		<h3 class="">Sueldo: {{profileData.amount}}</h3>		
-		<h3 class="">Jerarquía: {{profileData.hierarchyName}}</h3>
+
 
 	</div>
 
 
 	<ion-list>
 
-    	<ion-item ng-repeat="area in areas" class="item item-icon-right" href="#/app/seniorities/{{area.areaId}}/{{area.name}}">
+    	<ion-item ng-repeat="area in areas" class="item item-icon-right" href="#/app/hierarchies/{{area.areaId}}/{{area.name}}">
         	<h2 class="miniDesc">{{area.name}}</h2>
         	<p>{{area.description}}</p>
           	<i class="icon icon-right ion-chevron-right"></i>
