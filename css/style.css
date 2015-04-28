@@ -15,7 +15,7 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .ionic-body, .tab-it
 	font-weight: bold !important;}
 
 .p20 {
-	padding: 20px;}
+	padding: 8px;}
 	
 .button.ng-hide{
   display:none;}
@@ -31,17 +31,40 @@ h1.title {
 	font-size: 18px !important;
 }
 
+h1.salary {
+	font-size: 54px !important;
+}
+
+
 .bar .title {
    		height: 50px !important;
     	font-size: 24px !important;
     	line-height: 48px !important; }
  
 .salary {
-	font-size: 72px !important;
-	height: 90px !important;
+	font-size: 64px !important;
+	height: 80px !important;
 	text-align: right;
 }
 
 .button-next-mainScreen {
 	height: 100px !important;
+}
+
+.analysisGood {
+	background: #C4C442;
+}
+
+.list {
+	background: transparent;
+}
+
+input[type=range]::-webkit-slider-thumb {
+	background: green;
+	border-radius: 50%;
+	border: 0px transparent;
+}
+
+.Tcenter {
+	text-align: center;
 }

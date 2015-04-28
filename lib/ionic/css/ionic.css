@@ -6249,6 +6249,7 @@ input[type="radio"][disabled], input[type="checkbox"][disabled], input[type="rad
   margin-bottom: 5px;
   padding-right: 2px;
   padding-left: 1px;
+  color: #000;
   width: auto;
   height: 43px;
   outline: none;

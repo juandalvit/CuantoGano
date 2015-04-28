@@ -1,36 +1,53 @@
-<ion-view view-title="Analysis">
-  
-  <ion-content> 
-	 
-	
-	<div class="list list-inset p20">
-		<h3 class="">País: {{profileData.countryName}}</h3>
-			<h3 class="">Sueldo: {{profileData.amount}}</h3>		
-			<h3 class="">Jerarquía: {{profileData.hierarchyName}}</h3>
-			<h3 class="">Area: {{profileData.areaName}}</h3>
-			<h3 class="">Experiencia: {{profileData.seniorityName}}</h3>
-			<h3 class="">Puesto: {{profileData.positionName}}</h3>
-	</div>
-	
-	<div class="list list-inset p20">
-			<h3 class="">average: {{positionData.average}}</h3>
-			<h3 class="">max: {{positionData.max}}</h3>		
-			<h3 class="">min: {{positionData.min}}</h3>
-			<h3 class="">small: {{positionData.small}}</h3>
-			<h3 class="">medium: {{positionData.medium}}</h3>
-			<h3 class="">large: {{positionData.large}}</h3>
-	</div>
+<ion-view class="analysisGood" view-title="Analysis">
 
-	
-	<ion-item nav-clear menu-close ng-click="clean()">
-          Clean
-        </ion-item>
-        <ion-item nav-clear menu-close ng-click="save()">
-          Save
-     </ion-item>
-	
-	
-  </ion-content>
+	<ion-content>
+
+
+		<div class="list list-inset Tcenter">
+			<h4 class="">Tu sueldo bruto</h4>
+			<h1 class="salary Tcenter">{{profileData.amount}}</h1>
+			<h4 class="">Promedio del mercado</h4>
+			<h1 class="salary Tcenter">{{positionData.average}}</h1>
+			<h1 class="">+1000 = +12%</h1>
+		</div>
+
+		<div class="list list-inset Tcenter">
+			<h3 class="">{{profileData.positionName}}</h3>
+			<h5 class="">{{profileData.hierarchyName}} - {{profileData.seniorityName}} de {{profileData.areaName}} en {{profileData.countryName}}</h5>
+		</div>
+
+		<div class="list">
+			<div class="range analysisGood">
+				<h4 class="Tcenter">{{positionData.min}}<br>Min.</h4>
+				<input type="range" name="volume" min="{{positionData.min}}" max="{{positionData.max}}" value="{{profileData.amount}}">
+				<h4 class="Tcenter">{{positionData.max}}<br>Max.</h4>
+			</div>
+		</div>
+
+		<div class="list Tcenter">
+			<h4>Sueldos brutos promedios segun el tamaño de la empresa</h4>
+
+			<div class="row Tcenter">
+				<div class="col-33"><h4>{{positionData.small}}</h4>Pequeñas</div>
+				<div class="col-33"><h4>{{positionData.medium}}</h4>Medianas</div>
+				<div class="col-33"><h4>{{positionData.large}}</h4>Grandes</div>
+			</div>
+
+		</div>
+
+
+
+		<ion-item nav-clear menu-close ng-click="clean()">
+			Clean
+		</ion-item>
+		<ion-item nav-clear menu-close ng-click="save()">
+			Guardar
+		</ion-item>
+
+		<h4 class=""></h4>
+
+
+	</ion-content>
 
 
 </ion-view>
