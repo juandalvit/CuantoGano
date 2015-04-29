@@ -48,11 +48,10 @@ h1.salary {
 }
 
 .button-next-mainScreen {
-	height: 100px !important;
 }
 
 .analysisGood {
-	background: #C4C442;
+	background: #fff;
 }
 
 .list {
