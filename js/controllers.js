@@ -1,4 +1,199 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ngResource'])
+
+
+
+    .controller("JsonCtrl", function ($scope, $http, $cordovaSQLite) {
+
+        $scope.runJson = function () {
+
+            alert('Run Json');
+
+            //hacemos uso de $http para obtener los datos del json
+
+            var query = "SELECT Sync.date FROM Sync WHERE Sync.syncId = '1'";
+            $cordovaSQLite.execute(db, query, []).then(function (res) {
+
+
+                $scope.date = res.rows.item(0).date;
+
+
+                $scope.jsonURL = 'http://bits0.com/CuantoGano/Json/dbsync.php?lastDate='+$scope.date;
+
+                //alert('jsonURL: '+$scope.jsonURL);
+
+                $http.get($scope.jsonURL).success(function (data) {
+                    //Convert data to array.
+                    //datos lo tenemos disponible en la vista gracias a $scope
+                    $scope.datos = data;
+                    //alert(JSON.stringify(data));
+                    if(JSON.stringify(data) != '"null"'){
+
+
+                        //alert('datos length: '+ data.length);
+
+
+                        for (var i = 0; i < data.length; i++) {
+
+                            $scope.lastDateUpdate = data[i].date;
+
+                            if(data[i].operation == 'UPDATE'){
+                                /*1) Table
+                                 2) Field
+                                 3) Value
+                                 4) fieldID
+                                 5) valueID*/
+
+
+                                var query = "UPDATE "+data[i].table+" SET "+data[i].field+" = '"+data[i].value+"' WHERE "+data[i].fieldId+" = "+data[i].valueId;
+
+
+                                $cordovaSQLite.execute(db, query, []).then(function (res) {
+
+                                    //alert('Update query: '+query);
+
+                                 }, function (err) {
+                                     console.error(err);
+                                     alert(JSON.stringify(err));
+                                 });
+
+                            }else if(data[i].operation == 'INSERT'){
+                                /*1) Table
+                                 2) Field
+                                 3) Value
+                                 4) fieldID
+                                 5) valueID*/
+
+                                var query = "INSERT INTO "+data[i].table+" ("+data[i].field+")  ("+data[i].value+")";
+
+                                $cordovaSQLite.execute(db, query, []).then(function (res) {
+
+
+                                    //alert('Insert query: '+query);
+
+                                 }, function (err) {
+                                 console.error(err);
+                                 alert(JSON.stringify(err));
+                                 });
+                            }
+
+
+
+                        }
+
+                        var query = "UPDATE Sync SET date = '"+$scope.lastDateUpdate+"' WHERE syncId = 1";
+
+                        //alert('Update DB: ' + query);
+                        $cordovaSQLite.execute(db, query, []).then(function (res) {
+
+                            //alert('Update DONE DB: ' + query);
+
+                        }, function (err) {
+                            console.error(err);
+                            alert(JSON.stringify(err));
+                        });
+
+                        alert('DB UPDATED!');
+
+                    }else{
+                        alert('NO Update');
+                    }
+                });
+
+            }, function (err) {
+                console.error(err);
+                alert(JSON.stringify(err));
+            });;
+
+
+
+            //datosResource lo tenemos disponible en la vista gracias a $scope
+            //$scope.datosResource = dataResource.get();
+
+
+
+
+
+        }
+    })
+
+    .controller("TestSQLCtrl", function ($scope, $cordovaSQLite) {
+
+
+
+        $scope.countDB = function () {
+
+            alert('Cuont DB');
+
+            //var query = "SELECT Positions.positionId, Positions.name FROM Positions INNER JOIN PositionsRel ON Positions.positionId = PositionsRel.positionId WHERE Positions.positionId = 553 GROUP BY Positions.positionId";
+            var query = "SELECT COUNT(Positions.positionId) AS count FROM Positions";
+            $cordovaSQLite.execute(db, query, []).then(function (res) {
+                if (res.rows.length > 0) {
+
+                    //alert(JSON.stringify(res.rows.item));
+                    alert("COUNT positions: " + res.rows.item(0).count);
+                    //alert("SELECTED 1-> ID: "+ res.rows.item(1).hierarchyId +" -> "+ res.rows.item(1).name);
+                } else {
+                    console.log("No results found");
+                    alert("No results found: " + query);
+                }
+
+
+            }, function (err) {
+                console.error(err);
+                alert(JSON.stringify(err));
+            });
+
+            var query = "SELECT Positions.positionId FROM Positions ORDER BY Positions.positionId DESC";
+            $cordovaSQLite.execute(db, query, []).then(function (res) {
+                if (res.rows.length > 0) {
+
+                    //alert(JSON.stringify(res.rows.item));
+                    alert("MAX positions ID: " + res.rows.item(0).positionId);
+                    //alert("SELECTED 1-> ID: "+ res.rows.item(1).hierarchyId +" -> "+ res.rows.item(1).name);
+                } else {
+                    console.log("No results found");
+                    alert("No results found: " + query);
+                }
+
+
+            }, function (err) {
+                console.error(err);
+                alert(JSON.stringify(err));
+            });
+
+            var query = "SELECT COUNT(PositionsRel.posareaRelId) AS count FROM PositionsRel";
+            $cordovaSQLite.execute(db, query, []).then(function (res) {
+                if (res.rows.length > 0) {
+
+                    //alert(JSON.stringify(res.rows.item));
+                    alert("COUNT PositionsRel: " + res.rows.item(0).count);
+                    //alert("SELECTED 1-> ID: "+ res.rows.item(1).hierarchyId +" -> "+ res.rows.item(1).name);
+                } else {
+                    console.log("No results found");
+                    alert("No results found: " + query);
+                }
+
+
+            }, function (err) {
+                console.error(err);
+                alert(JSON.stringify(err));
+            });
+        }
+
+    })
+
+    /*
+    //de esta forma tan sencilla consumimos con $resource en AngularJS
+    .factory("dataResource", function ($resource) {
+        return $resource("js/data.json", //la url donde queremos consumir
+            {}, //aquí podemos pasar variables que queramos pasar a la consulta
+            //a la función get le decimos el método, y, si es un array lo que devuelve
+            //ponemos isArray en true
+            { get: { method: "GET", isArray: true }
+            })
+    })
+    */
+
 
     .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
         // Form data for the login modal
@@ -33,7 +228,7 @@ angular.module('starter.controllers', [])
         };
     })
 
-    .controller('DataCtrl', function ($scope, $cordovaSQLite) {
+    .controller('DataCtrl', function ($scope) {
 
         //alert('inside controller');
         //$scope.amount = 12;
@@ -67,11 +262,11 @@ angular.module('starter.controllers', [])
         $scope.hierarchies = [];
 
 
-        var query = "SELECT Hierarchies.hierarchyId, Hierarchies.name FROM Hierarchies INNER JOIN PositionsRel ON Hierarchies.hierarchyId = PositionsRel.hierarchyId WHERE Hierarchies.status = 'ACTIVE' AND PositionsRel.areaId = ?  GROUP BY Hierarchies.hierarchyId";
+        var query = "SELECT Hierarchies.hierarchyId, Hierarchies.name, Hierarchies.description FROM Hierarchies INNER JOIN PositionsRel ON Hierarchies.hierarchyId = PositionsRel.hierarchyId WHERE Hierarchies.status = 'ACTIVE' AND PositionsRel.areaId = ?  GROUP BY Hierarchies.hierarchyId";
         $cordovaSQLite.execute(db, query, [$scope.profileData.areaId]).then(function (res) {
             if (res.rows.length > 0) {
                 for (var i = 0; i < res.rows.length; i++) {
-                    $scope.hierarchies.push({name: res.rows.item(i).name, hierarchyId: res.rows.item(i).hierarchyId});
+                    $scope.hierarchies.push({name: res.rows.item(i).name, hierarchyId: res.rows.item(i).hierarchyId, description: res.rows.item(i).description});
                 }
 
                 //alert("SELECTED 0-> ID: "+ res.rows.item(0).hierarchyId +" -> "+ res.rows.item(0).name);
@@ -107,11 +302,11 @@ angular.module('starter.controllers', [])
 
 
         //var query = "SELECT Areas.areaId, Areas.name FROM Areas INNER JOIN PositionsRel ON Areas.areaId = PositionsRel.areaId WHERE Areas.status = 'ACTIVE' AND PositionsRel.hierarchyId = ? GROUP BY Areas.areaId";
-        var query = "SELECT Areas.areaId, Areas.name FROM Areas  WHERE Areas.status = 'ACTIVE'";
+        var query = "SELECT Areas.areaId, Areas.name, Areas.description FROM Areas  WHERE Areas.status = 'ACTIVE'";
         $cordovaSQLite.execute(db, query, []).then(function (res) {
             if (res.rows.length > 0) {
                 for (var i = 0; i < res.rows.length; i++) {
-                    $scope.areas.push({name: res.rows.item(i).name, areaId: res.rows.item(i).areaId});
+                    $scope.areas.push({name: res.rows.item(i).name, areaId: res.rows.item(i).areaId, description: res.rows.item(i).description});
                 }
 
                 //alert("SELECTED 0-> ID: "+ res.rows.item(0).hierarchyId +" -> "+ res.rows.item(0).name);
@@ -142,11 +337,11 @@ angular.module('starter.controllers', [])
         $scope.seniorities = [];
 
 
-        var query = "SELECT Seniorities.seniorityId, Seniorities.name FROM Seniorities INNER JOIN PositionsRel ON Seniorities.seniorityId = PositionsRel.seniorityId WHERE Seniorities.status = 'ACTIVE' AND PositionsRel.areaId = ? AND PositionsRel.hierarchyId = ? GROUP BY Seniorities.seniorityId";
+        var query = "SELECT Seniorities.seniorityId, Seniorities.name, Seniorities.description FROM Seniorities INNER JOIN PositionsRel ON Seniorities.seniorityId = PositionsRel.seniorityId WHERE Seniorities.status = 'ACTIVE' AND PositionsRel.areaId = ? AND PositionsRel.hierarchyId = ? GROUP BY Seniorities.seniorityId";
         $cordovaSQLite.execute(db, query, [$scope.profileData.areaId, $scope.profileData.hierarchyId]).then(function (res) {
             if (res.rows.length > 0) {
                 for (var i = 0; i < res.rows.length; i++) {
-                    $scope.seniorities.push({name: res.rows.item(i).name, seniorityId: res.rows.item(i).seniorityId});
+                    $scope.seniorities.push({name: res.rows.item(i).name, seniorityId: res.rows.item(i).seniorityId, description: res.rows.item(i).description});
                 }
 
                 //alert("SELECTED 0-> ID: "+ res.rows.item(0).hierarchyId +" -> "+ res.rows.item(0).name);
@@ -177,11 +372,13 @@ angular.module('starter.controllers', [])
         $scope.positions = [];
 
 
-        var query = "SELECT Positions.positionId, Positions.name FROM Positions INNER JOIN PositionsRel ON Positions.positionId = PositionsRel.positionId WHERE Positions.status = 'ACTIVE' AND PositionsRel.seniorityId = ? AND PositionsRel.areaId = ? AND PositionsRel.hierarchyId = ? GROUP BY Positions.positionId";
+        var query = "SELECT Positions.positionId, Positions.name, Positions.description FROM Positions INNER JOIN PositionsRel ON Positions.positionId = PositionsRel.positionId WHERE Positions.status = 'ACTIVE' AND PositionsRel.seniorityId = ? AND PositionsRel.areaId = ? AND PositionsRel.hierarchyId = ? GROUP BY Positions.positionId";
+        //var query = "SELECT Positions.positionId, Positions.name FROM Positions INNER JOIN PositionsRel ON Positions.positionId = PositionsRel.positionId WHERE Positions.positionId = 553 GROUP BY Positions.positionId";
+
         $cordovaSQLite.execute(db, query, [$stateParams.seniorityId, $scope.profileData.areaId, $scope.profileData.hierarchyId]).then(function (res) {
             if (res.rows.length > 0) {
                 for (var i = 0; i < res.rows.length; i++) {
-                    $scope.positions.push({name: res.rows.item(i).name, positionId: res.rows.item(i).positionId});
+                    $scope.positions.push({name: res.rows.item(i).name, positionId: res.rows.item(i).positionId, description: res.rows.item(i).description});
                 }
 
                 //alert("SELECTED 0-> ID: "+ res.rows.item(0).hierarchyId +" -> "+ res.rows.item(0).name);
@@ -196,6 +393,9 @@ angular.module('starter.controllers', [])
             console.error(err);
             alert(JSON.stringify(err));
         });
+
+
+
 
 
     })
@@ -267,55 +467,27 @@ angular.module('starter.controllers', [])
     })
 
 
-    .controller('DBSyncCtrl', function ($scope, $stateParams, $cordovaSQLite) {
-
-
-        var hash = "";
-
-            var dbsyncURL = 'http://bits0.com/CuantoGano/Json/dbsync.php?lastDate=2015-04-26 00:00:00';
-
-        $http.get(dbsyncURL).success(function(data) {
-            $scope.debtrow = data;
-            $scope.debtdata =  angular.fromJson($scope.debtrow);
+    .controller('SearchCtrl', function ($scope, $stateParams, $cordovaSQLite) {
 
 
 
-            $cordovaSQLite.execute(db, "drop table debtor");
-            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS debtor (id integer primary key, debtordata text)");
-            debtorquery = "INSERT INTO debtor (debtordata) VALUES (?)";
-
-            $cordovaSQLite.execute(db, debtorquery, [$scope.debtdata]).then(function(res) {
-                console.log($scope.debtdata)
-                //alert($scope.debtdata.DebtorSynchronizationResult.AccNo);
-            });
-        })
+        $scope.positions = [];
 
 
-        $scope.profileData = JSON.parse(localStorage.getItem("profileData"));
-        $scope.profileData.areaId = $stateParams.areaId;
-        $scope.profileData.areaName = $stateParams.areaName;
-        localStorage.setItem("profileData", JSON.stringify($scope.profileData));
-
-        //$scope.profileData = JSON.parse(localStorage.getItem("profileData"));
-
-        //alert('Hiarar - amount : ' + $stateParams.amount);
+        var query = "SELECT Positions.positionId, Positions.name, Positions.description  FROM Positions WHERE Positions.status = 'ACTIVE'";
 
 
-        $scope.hierarchies = [];
-
-
-        var query = "SELECT Hierarchies.hierarchyId, Hierarchies.name FROM Hierarchies INNER JOIN PositionsRel ON Hierarchies.hierarchyId = PositionsRel.hierarchyId WHERE Hierarchies.status = 'ACTIVE' AND PositionsRel.areaId = ?  GROUP BY Hierarchies.hierarchyId";
-        $cordovaSQLite.execute(db, query, [$scope.profileData.areaId]).then(function (res) {
+        $cordovaSQLite.execute(db, query, []).then(function (res) {
             if (res.rows.length > 0) {
                 for (var i = 0; i < res.rows.length; i++) {
-                    $scope.hierarchies.push({name: res.rows.item(i).name, hierarchyId: res.rows.item(i).hierarchyId});
+                    $scope.positions.push({name: res.rows.item(i).name, positionId: res.rows.item(i).positionId, description: res.rows.item(i).description});
                 }
 
                 //alert("SELECTED 0-> ID: "+ res.rows.item(0).hierarchyId +" -> "+ res.rows.item(0).name);
                 //alert("SELECTED 1-> ID: "+ res.rows.item(1).hierarchyId +" -> "+ res.rows.item(1).name);
             } else {
                 console.log("No results found");
-                alert("No results found");
+                alert("No results found: " + query);
             }
 
 
@@ -323,6 +495,28 @@ angular.module('starter.controllers', [])
             console.error(err);
             alert(JSON.stringify(err));
         });
+
+
+        $scope.customFilter = function (item) {
+            /*if (!$scope.search.$) {// your input field is empty or no checkbox checked
+                return true;
+            }*/
+
+            var searchVal = $scope.search.$;
+            searchVal = searchVal.replace(/([()[{*+.$^\\|?])/g, '\\$1'); //special char
+
+            var regex = new RegExp('' + searchVal, 'i');
+
+            var matchOnDescription = false, matchOnName= false;
+
+
+            //matchOnDescription = regex.test(item.description);
+            matchOnName = regex.test(item.name);
+
+
+            return matchOnName;
+        }
+
 
     })
 
