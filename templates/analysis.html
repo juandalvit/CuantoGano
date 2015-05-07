@@ -5,10 +5,18 @@
 
 		<div class="list list-inset Tcenter">
 			<h4 class="">Tu sueldo bruto</h4>
-			<h1 class="salary Tcenter">{{profileData.amount}}</h1>
+			<h1 class="salary Tcenter">${{profileData.amount}}</h1>
 			<h4 class="">El mercado esta pagando</h4>
-			<h1 class="salary Tcenter">{{positionData.average}}</h1>
-			<h1 class="">{{profileData.amount - positionData.average}} = {{round((profileData.amount - positionData.average)/positionData.average*100,0)}}%</h1>
+			<h1 class="salary Tcenter">${{positionData.average}}</h1>
+
+			<div class="row">
+				<div class="col-50 backBad">
+					<h1 class=" textPercentage">80%</h1>
+				</div>
+				<div class="col-50">
+					<h1 class="textBad textPercentage">${{profileData.amount - positionData.average}}</h1></h1>
+				</div>
+			</div>
 		</div>
 
 		<div class="list list-inset Tcenter">
@@ -19,7 +27,7 @@
 		<div class="list">
 			<div class="range analysisGood">
 				<h4 class="Tcenter">{{positionData.min}}<br>Min.</h4>
-				<input type="range" name="volume" min="{{positionData.min}}" max="{{positionData.max}}" value="{{profileData.amount}}">
+					<input class="" type="range" name="volume" min="{{positionData.min}}" max="{{positionData.max}}" value="{{profileData.amount}}">
 				<h4 class="Tcenter">{{positionData.max}}<br>Max.</h4>
 			</div>
 		</div>
@@ -38,10 +46,10 @@
 
 
 		<ion-item nav-clear menu-close ng-click="clean()">
-			Clean
+			Volver a cargar datos
 		</ion-item>
 		<ion-item nav-clear menu-close ng-click="save()">
-			Guardar
+			Continuar a mi perfil
 		</ion-item>
 
 		<h4 class=""></h4>
