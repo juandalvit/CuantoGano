@@ -180,6 +180,37 @@ angular.module('starter.controllers', ['ngResource'])
             });
         }
 
+        $scope.execQueryDB = function () {
+
+            alert('Exec Query DB');
+
+
+            var insertTest = "INSERT INTO PositionsRel (posareaRelId, hierarchyId, areaId, seniorityId, positionId, countryId) VALUES(1, 11, 13, 5, 1, 1);";
+            $cordovaSQLite.execute(db, insertTest);
+
+            //var query = "SELECT Positions.positionId, Positions.name FROM Positions INNER JOIN PositionsRel ON Positions.positionId = PositionsRel.positionId WHERE Positions.positionId = 553 GROUP BY Positions.positionId";
+            var query = "SELECT * FROM PositionsRel";
+            $cordovaSQLite.execute(db, query, []).then(function (res) {
+                if (res.rows.length > 0) {
+
+                    //alert(JSON.stringify(res.rows.item));
+                    //alert("COUNT positions: " + res.rows.item(0));
+                    alert("String result 0" + JSON.stringify(res.rows.item(0)))
+                    //alert("SELECTED 1-> ID: "+ res.rows.item(1).hierarchyId +" -> "+ res.rows.item(1).name);
+                } else {
+                    console.log("No results found");
+                    alert("No results found: " + query);
+                }
+
+
+            }, function (err) {
+                console.error(err);
+                alert(JSON.stringify(err));
+            });
+
+
+        }
+
     })
 
     /*

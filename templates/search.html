@@ -12,7 +12,7 @@
 
 	  <ion-list>
 
-		  <ion-item class="item item-icon-right" ng-repeat="position in positions | filter:searchQ as results" href="#/app/analysis/{{position.positionId}}/{{position.name}}">
+		  <ion-item class="item item-icon-right" ng-show="searchQ" ng-repeat="position in positions | filter:searchQ as results" href="#/app/analysis/{{position.positionId}}/{{position.name}}">
 			  <h2 class="miniDesc">{{position.name}}</h2>
 			  <p>{{position.description}}</p>
 			  <i class="icon icon-right ion-chevron-right"></i>
