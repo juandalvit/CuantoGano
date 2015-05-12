@@ -1,0 +1,35 @@
+<ion-view class="analysisGood" view-title="Consulta">
+
+	<ion-content>
+
+		<div class="list list-inset Tcenter">
+			<h4 class="">El mercado esta pagando</h4>
+			<h1 class="salaryMarket Tcenter">${{positionData.average}}</h1>
+		</div>
+
+		<div class="list list-inset Tcenter">
+			<h3 class="">{{profileData.positionName}} - {{profileData.positionId}}</h3>
+			<h5 class="">{{profileData.hierarchyName}} - {{profileData.seniorityName}} de {{profileData.areaName}} en {{profileData.countryName}}</h5>
+		</div>
+
+		<div class="list Tcenter">
+			<h4>Sueldos brutos promedios segun la experiencia del puesto</h4>
+
+			<div class="row Tcenter">
+				<div class="col-33"><h4>${{positionData.small}}</h4>Junior</div>
+				<div class="col-33"><h4>${{positionData.medium}}</h4>Pleno</div>
+				<div class="col-33"><h4>${{positionData.large}}</h4>Senior</div>
+			</div>
+		</div>
+
+		<ion-item nav-clear menu-close ng-click="clean()">
+			Volver a consultar
+		</ion-item>
+		<ion-item nav-clear menu-close ng-click="save()">
+			Cargar mi perfil
+		</ion-item>
+
+	</ion-content>
+
+
+</ion-view>
