@@ -40,29 +40,69 @@ h1.salary {
    		height: 50px !important;
     	font-size: 24px !important;
     	line-height: 48px !important; }
- 
+
+
 .salary {
 	font-size: 64px !important;
 	height: 80px !important;
 	text-align: right;
+	font-weight: bold;
 }
 
-.button-next-mainScreen {
+.salaryOwn {
+	font-size: 48px !important;
+	text-align: right;
+
 }
 
-.analysisGood {
-	background: #fff;
+.salaryMarket {
+	font-size: 72px !important;
+	text-align: right;
+	font-weight: bolder;
 }
+
+.backGood {
+	background: url("../img/green.png") no-repeat;
+	height: 200px;
+	width: 200px;
+	background-position: bottom; }
+
+.backBad {
+	background: url("../img/red.png") no-repeat;
+	height: 200px;
+	width: 200px;
+	background-position: bottom; }
+
+
+.textPercentageDif {
+	padding-top: 50%;
+	font-weight: bold;
+}
+
+.textAmountDif {
+	padding-top: 50%;
+	font-weight: bolder;
+}
+
+.textGood {
+	color: #5FBE7E; }
+
+.textBad {
+	color: #EF4739; }
 
 .list {
 	background: transparent;
 }
 
 input[type=range]::-webkit-slider-thumb {
-	background: green;
 	border-radius: 50%;
 	border: 0px transparent;
-}
+	background: #EF4739;}
+
+. circleGood input[type=range]::-webkit-slider-thumb {
+	border-radius: 50%;
+	border: 0px transparent;
+	background: #5FBE7E;}
 
 .Tcenter {
 	text-align: center;
