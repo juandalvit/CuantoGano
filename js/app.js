@@ -198,6 +198,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 if (res.rows.length == 0) {
 
                     var insertSync = "INSERT INTO Sync (syncId, date, status) VALUES(1, '2015-04-27 00:00:00', 'ACTIVE')";
+                    //var insertSync = "INSERT INTO Sync (syncId, date, status) VALUES(1, datetime('now','localtime'), 'ACTIVE')";
 
                     var insertAreas = "INSERT INTO Areas (areaId, name, description, status) VALUES(1, 'Administracion de proyectos', 'Administracion de proyectos Administracion de proy', 'ACTIVE'),(2, 'Asuntos regulatorios y relaciones gubernamentales', 'Asuntos regulatorios y relaciones gubernamentales ', 'ACTIVE'),(3, 'Atencion al cliente', 'Atencion al cliente Atencion al cliente Atencion a', 'ACTIVE'),(4, 'Business development', 'Business development Business development Business', 'ACTIVE'),(5, 'Calidad seguridad e higiene', 'Calidad seguridad e higiene Calidad seguridad e hi', 'ACTIVE'),(6, 'Cocina & Vigilacia & Limpieza', 'Cocina & Vigilacia & Limpieza Cocina & Vigilacia &', 'ACTIVE'),(7, 'Compras', 'Compras Compras Compras Compras Compras Compras Co', 'ACTIVE'),(8, 'Costos', 'Costos Costos Costos Costos Costos Costos Costos ', 'ACTIVE'),(9, 'Finanzas', 'Finanzas Finanzas Finanzas Finanzas Finanzas Finan', 'ACTIVE'),(10, 'Gerencia general & Direccion', 'Gerencia general & Direccion Gerencia general & Di', 'ACTIVE'),(11, 'Ingenieria', 'Ingenieria Ingenieria Ingenieria Ingenieria Ingeni', 'ACTIVE'),(12, 'Investigacion y desarrollo', 'Investigacion y desarrollo Investigacion y desarro', 'ACTIVE'),(13, 'Legales', 'Legales Legales Legales Legales Legales Legales Le', 'ACTIVE'),(14, 'Logistica & Operaciones', 'Logistica & Operaciones Logistica & Operaciones Lo', 'ACTIVE'),(15, 'Mantenimiento', 'Mantenimiento Mantenimiento Mantenimiento Mantenim', 'ACTIVE'),(16, 'Marketing & Publicidad', 'Marketing & Publicidad Marketing & Publicidad Mark', 'ACTIVE'),(17, 'Produccion', 'Produccion Produccion Produccion Produccion Produc', 'ACTIVE'),(18, 'RRHH', 'RRHH RRHH RRHH RRHH RRHH RRHH RRHH ', 'ACTIVE'),(19, 'Sistemas', 'Sistemas Sistemas Sistemas Sistemas Sistemas Siste', 'ACTIVE'),(20, 'Ventas', 'Ventas Ventas Ventas Ventas Ventas Ventas Ventas ', 'ACTIVE');";
 
@@ -379,7 +380,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 url: "/profileVsSearch",
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/profileVsSearch.html"
+                        templateUrl: "templates/profileVsSearch.html",
+                        controller: 'ProfileVsSearchCtrl'
+                    }
+                }
+            })
+
+            .state('app.profileVsResult', {
+                url: "/profileVsResult",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/profileVsResult.html",
+                        controller: 'ProfileVsResultCtrl'
                     }
                 }
             })
@@ -388,7 +400,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 url: "/profile",
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/profile.html"
+                        templateUrl: "templates/profile.html",
+                        controller: 'ProfileCtrl'
                     }
                 }
             })
@@ -398,7 +411,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 url: "/profileVsPyramid",
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/profileVsPyramid.html"
+                        templateUrl: "templates/profileVsPyramid.html",
+                        controller: 'ProfileVsPyramidCtrl'
                     }
                 }
             });

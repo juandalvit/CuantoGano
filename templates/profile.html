@@ -1,4 +1,4 @@
-<ion-view view-title="PERFIL">
+<ion-view view-title="PERFIL" cache-view="false">
   
   <ion-content> 
  
@@ -7,24 +7,25 @@
 	      	
 	      	<ion-item class="item item-icon-right">
 	      		<h1 class="miniDesc">Perfil privado</h1>
-	    		<h2 class="miniDesc">País: ARGENTINA</h2>
-	    	   	<h2 class="miniDesc">Sueldo: 20000</h2>
-	   			<h2 class="miniDesc">Area: Finanzas</h2>
-				<h2 class="miniDesc">Jerarquia: Jefe</h2>
-				<h2 class="miniDesc">Experiencia: Senior</h2>
+				<h3 class="">País: {{profileData.countryName}}</h3>
+				<h3 class="">Sueldo: {{profileData.amount}}</h3>
+				<h3 class="">Area: {{profileData.areaName}}</h3>
+				<h3 class="">Jerarquía: {{profileData.hierarchyName}}</h3>
+				<h3 class="">Experiencia: {{profileData.seniorityName}}</h3>
+				<h3 class="">Puesto: {{profileData.positionName}}</h3>
 		  	</ion-item>
 	    
-	    	<ion-item class="item item-avatar item-icon-right"  href="#/app/areas">
+	    	<ion-item class="item item-avatar item-icon-right"  href="#/app/data">
 	     		<h3>Editar mi perfil</h3>
 	    	    <i class="icon icon-right ion-chevron-right"></i>
 		  	</ion-item>
 	    
-	    	<ion-item class="item item-avatar item-icon-right"  href="#/app/areas">
+	    	<ion-item class="item item-avatar item-icon-right"  href="#/app/data">
 	     		<h3>+ aumento sueldo</h3>
 	      	    <i class="icon icon-right ion-chevron-right"></i>
 		  	</ion-item>
 	    
-	     	<ion-item class="item item-avatar item-icon-right"  href="#/app/areas">
+	     	<ion-item class="item item-avatar item-icon-right"  href="#/app/data">
 	     		<h3>+ Ascenso / Nuevo puesto</h3>
 	      	    <i class="icon icon-right ion-chevron-right"></i>
 		  	</ion-item>
