@@ -231,19 +231,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
 
 
 
-                    var insertAreas = "INSERT INTO Areas (areaId, name, description, order, coef_peq, coef_med, coef_grand, coef_min, coef_max, status) VALUES();";
+                    var insertAreas = "INSERT INTO Areas (areaId, name, description, order, coef_peq, coef_med, coef_grand, coef_min, coef_max, status) VALUES(1, 'Administracion de proyectos', 'Administracion de proyectos Administracion de proy', 1, 0.8, 1, 1.1, 0.8, 1.2, 'ACTIVE'),(2, 'Asuntos regulatorios y relaciones gubernamentales', 'Asuntos regulatorios y relaciones gubernamentales ', 2, 0.8, 1, 1.1, 0.8, 1.2, 'ACTIVE');";
 
-                    var insertSectors = "INSERT INTO Sectors (seniorityId, name, description, order, status) VALUES();";
+                    var insertSectors = "INSERT INTO Sectors (seniorityId, name, description, order, status) VALUES(1, 1, 'adm proy sect 1', 'desc adm proy sect 1', 1, 'ACTIVE'),(2, 1, 'adm proy sect 2', 'desc adm proy sect 2', 2, 'ACTIVE'), (3, 2, 'Asunt reg sec 1', 'desc Asunt reg sec 1', 2, 'ACTIVE'), (4, 2, 'Asunt reg sec 2', 'desc Asunt reg sec 2', 1, 'ACTIVE');";
 
-                    var insertHierarchies = "INSERT INTO Hierarchies (hierarchyId, name, description, order, status) VALUES();";
+                    var insertHierarchies = "INSERT INTO Hierarchies (hierarchyId, name, description, order, status) VALUES(1, 'Analista', 'Analista Analista Analista Analista Analista Anali', NULL, 'ACTIVE'),(2, 'Asistente', 'Asistente Asistente Asistente Asistente Asistente ', NULL, 'ACTIVE');";
 
-                    var insertSeniorities = "INSERT INTO Seniorities (seniorityId, name, description, order, status) VALUES()";
+                    var insertSeniorities = "INSERT INTO Seniorities (seniorityId, name, description, order, status) VALUES(1, 'Especialista', 'Especialista Especialista Especialista Especialist', NULL, 'ACTIVE'),(2, 'Experto', 'Experto Experto Experto Experto Experto Experto Ex', NULL, 'ACTIVE'),(3, 'Junior', 'Junior Junior Junior Junior Junior Junior Junior ', NULL, 'ACTIVE'),(4, 'NA', 'NA NA NA NA NA NA NA ', NULL, 'ACTIVE'),(5, 'Semi senior', 'Semi senior Semi senior Semi senior Semi senior Se', NULL, 'ACTIVE'),(6, 'Senior', 'Senior Senior Senior Senior Senior Senior Senior ', NULL, 'ACTIVE')";
 
                     var insertCountries = "INSERT INTO Countries (countryId, countryName, countryCurrency, exchangeRateDolar, status) VALUES (1, 'Argentina', 'Pesos', 8.9, 'ACTIVE');";
 
 
 
-                    var insertPositions1 = "INSERT INTO Positions (positionId, name, description, average, max, min, small, medium, large, status) VALUES()";
+                    var insertPositions1 = "INSERT INTO Positions (positionId, name, description, average, max, min, small, medium, large, status) VALUES(1, NULL, NULL, 1, 1, 1, 10000, 8000, 9500, 11200, 1, 1, 'ACTIVE'),(2, NULL, NULL, 1, 2, 2, 15000, 13000, 15000, 15500, 2, 1, 'ACTIVE'),(3, NULL, NULL, 2, 3, 1, 20000, 19000, 20000, 22000, 1, 1, 'ACTIVE'),(4, NULL, NULL, 2, 4, 2, 25000, 22000, 25500, 27000, 2, 1, 'ACTIVE');";
                     var insertPositions2 = "INSERT INTO Positions (positionId, name, description, average, max, min, small, medium, large, status) VALUES()";
                     var insertPositions3 = "INSERT INTO Positions (positionId, name, description, average, max, min, small, medium, large, status) VALUES()";
                     var insertPositions4 = "INSERT INTO Positions (positionId, name, description, average, max, min, small, medium, large, status) VALUES()";
@@ -259,9 +259,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                     $cordovaSQLite.execute(db, insertCountries);
 
                     $cordovaSQLite.execute(db, insertPositions1);
-                    $cordovaSQLite.execute(db, insertPositions2);
-                    $cordovaSQLite.execute(db, insertPositions3);
-                    $cordovaSQLite.execute(db, insertPositions4);
+                    //$cordovaSQLite.execute(db, insertPositions2);
+                    //$cordovaSQLite.execute(db, insertPositions3);
+                    //$cordovaSQLite.execute(db, insertPositions4);
 
                     alert("inserted on db");
                 } else {
@@ -291,41 +291,169 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 controller: 'AppCtrl'
             })
 
-            .state('app.areas', {
-                url: "/areas/:amount",
+            .state('app.c1_areas', {
+                url: "/c1_areas",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/c1_areas.html",
-                        controller: 'AreasCtrl'
+                        controller: 'c1_areasCtrl'
                     }
                 }
             })
 
-            .state('app.hierarchies', {
-                url: "/hierarchies/:areaId/:areaName",
+
+            .state('app.c1_sectors', {
+                url: "/c1_sectors/:areaId/:areaName",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/c1_sectors.html",
+                        controller: 'c1_sectorsCtrl'
+                    }
+                }
+            })
+
+
+            .state('app.c1_hierarchies', {
+                url: "/c1_hierarchies/:sectorId/:sectorName",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/c1_hierarchies.html",
-                        controller: 'HierarchiesCtrl'
+                        controller: 'c1_hierarchiesCtrl'
                     }
                 }
             })
 
-            .state('app.browse', {
-                url: "/browse",
+            .state('app.c1_consultResult', {
+                url: "/c1_consultResult/:hierarchyId/:hierarchyName",
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/*browse.html"
+                        templateUrl: "templates/c1_consultResult.html",
+                        controller: 'c1_consultResultCtrl'
                     }
                 }
             })
 
-            .state('app.data', {
-                url: "/data",
+            .state('app.c2_areas', {
+                url: "/c2_areas",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/c2_areas.html",
+                        controller: 'c2_areasCtrl'
+                    }
+                }
+            })
+
+
+            .state('app.c2_sectors', {
+                url: "/c2_sectors/:areaId/:areaName",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/c2_sectors.html",
+                        controller: 'c2_sectorsCtrl'
+                    }
+                }
+            })
+
+
+            .state('app.c2_hierarchies', {
+                url: "/c2_hierarchies/:sectorId/:sectorName",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/c2_hierarchies.html",
+                        controller: 'c2_hierarchiesCtrl'
+                    }
+                }
+            })
+
+            .state('app.c2_seniorities', {
+                url: "/c2_seniorities/:hierarchyId/:hierarchyName",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/c2_seniorities.html",
+                        controller: 'c2_senioritiesCtrl'
+                    }
+                }
+            })
+
+            .state('app.c2_data', {
+                url: "/c2_data/:seniorityId/:seniorityName",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/c2_data.html",
-                        controller: 'DataCtrl'
+                        controller: 'c2_dataCtrl'
+                    }
+                }
+            })
+
+            .state('app.c2_analysis', {
+                url: "/c2_analysis/:amount",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/c2_analysis.html",
+                        controller: 'c2_analysisCtrl'
+                    }
+                }
+            })
+
+            .state('app.c3_areas', {
+                url: "/c3_areas",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/c3_areas.html",
+                        controller: 'c3_areasCtrl'
+                    }
+                }
+            })
+
+
+            .state('app.c3_sectors', {
+                url: "/c3_sectors/:areaId/:areaName",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/c3_sectors.html",
+                        controller: 'c3_sectorsCtrl'
+                    }
+                }
+            })
+
+
+            .state('app.c3_hierarchies', {
+                url: "/c3_hierarchies/:sectorId/:sectorName",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/c3_hierarchies.html",
+                        controller: 'c3_hierarchiesCtrl'
+                    }
+                }
+            })
+
+            .state('app.c3_seniorities', {
+                url: "/c3_seniorities/:hierarchyId/:hierarchyName",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/c3_seniorities.html",
+                        controller: 'c3_senioritiesCtrl'
+                    }
+                }
+            })
+
+            .state('app.c3_profileVsResult', {
+                url: "/c3_profileVsResult/:seniorityId/:seniorityName",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/c3_profileVsResult.html",
+                        controller: 'c3_profileVsResultCtrl'
+                    }
+                }
+            })
+
+
+            .state('app.c4_profileVsPyramid', {
+                url: "/c4_profileVsPyramid",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/c4_profileVsPyramid.html",
+                        controller: 'c4_profileVsPyramidCtrl'
                     }
                 }
             })
@@ -352,15 +480,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
             })
 
 
-            .state('app.search', {
-                url: "/search",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/*search.html",
-                        controller: 'SearchCtrl'
-                    }
-                }
-            })
 
             .state('app.devtest', {
                 url: "/devtest",
@@ -368,79 +487,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                     'menuContent': {
                         templateUrl: "templates/devtest.html",
                         controller: 'TestSQLCtrl'
-                    }
-                }
-            })
-
-
-            .state('app.seniorities', {
-                url: "/seniorities/:hierarchyId/:hierarchyName",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/c2_seniorities.html",
-                        controller: 'SenioritiesCtrl'
-                    }
-                }
-            })
-
-            .state('app.positions', {
-                url: "/positions/:seniorityId/:seniorityName",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/*positions.html",
-                        controller: 'PositionsCtrl'
-                    }
-                }
-            })
-
-            .state('app.analysis', {
-                url: "/analysis/:positionId/:positionName",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/c2_analysis.html",
-                        controller: 'AnalysisCtrl'
-                    }
-                }
-            })
-
-
-            .state('app.profileVsSearch', {
-                url: "/profileVsSearch",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/*profileVsSearch.html",
-                        controller: 'ProfileVsSearchCtrl'
-                    }
-                }
-            })
-
-            .state('app.profileVsResult', {
-                url: "/profileVsResult",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/c3_profileVsResult.html",
-                        controller: 'ProfileVsResultCtrl'
-                    }
-                }
-            })
-
-            .state('app.profile', {
-                url: "/profile",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/profile.html",
-                        controller: 'ProfileCtrl'
-                    }
-                }
-            })
-
-
-            .state('app.profileVsPyramid', {
-                url: "/profileVsPyramid",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/c4_profileVsPyramid.html",
-                        controller: 'ProfileVsPyramidCtrl'
                     }
                 }
             });
