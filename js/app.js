@@ -76,6 +76,28 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 StatusBar.styleDefault();
             }
 
+            if(window.plugins && window.plugins.AdMob) {
+                var admob_key = device.platform == "Android" ? "ca-app-pub-8185646918327384/6127887751" : "ca-app-pub-8185646918327384/9081354156";
+                var admob = window.plugins.AdMob;
+                admob.createBannerView(
+                    {
+                        'publisherId': admob_key,
+                        'adSize': admob.AD_SIZE.BANNER,
+                        'bannerAtTop': false
+                    },
+                    function() {
+                        admob.requestAd(
+                            { 'isTesting': false },
+                            function() {
+                                admob.showAd(true);
+                            },
+                            function() { console.log('failed to request ad'); }
+                        );
+                    },
+                    function() { console.log('failed to create banner view'); }
+                );
+            }
+
             if (window.cordova) {
 
                 //Clean DB
@@ -287,7 +309,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 url: "/browse",
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/browse.html"
+                        templateUrl: "templates/*browse.html"
                     }
                 }
             })
@@ -328,7 +350,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 url: "/search",
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/search.html",
+                        templateUrl: "templates/*search.html",
                         controller: 'SearchCtrl'
                     }
                 }
@@ -359,7 +381,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 url: "/positions/:seniorityId/:seniorityName",
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/positions.html",
+                        templateUrl: "templates/*positions.html",
                         controller: 'PositionsCtrl'
                     }
                 }
@@ -380,7 +402,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 url: "/profileVsSearch",
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/profileVsSearch.html",
+                        templateUrl: "templates/*profileVsSearch.html",
                         controller: 'ProfileVsSearchCtrl'
                     }
                 }
