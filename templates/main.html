@@ -1,11 +1,3 @@
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title>Cuanto Ganas - main</title>
-  
-  </head>
-
   <body ng-app="ionicApp">
 
     <ion-nav-bar class="bar-dark">
@@ -14,25 +6,43 @@
     </ion-nav-bar>
 
 
-    <ion-nav-view>
+    <ion-view view-title="Cuanto Ganas?">
 
-        Buscar
+      <ion-content>
+        <ion-list>
 
-        Comparar
+            <ion-item nav-clear menu-close href="#/app/profile">
+              Mi datos
+            </ion-item>
 
-        <ion-item nav-clear menu-close href="#/app/profile">
-          Mi datos
-        </ion-item>
+            <ion-item nav-clear menu-close href="#/app/c2_areas">
+              Comparar
+            </ion-item>
 
-       Inflacion
+            <ion-item nav-clear menu-close href="#/app/c1_areas">
+              Buscar
+            </ion-item>
 
-        Aumentos
+            <ion-item nav-clear menu-close href="#/app/c5_inflation">
+              Inflacion
+            </ion-item>
 
-        Comparar vs. Mi area
+            <ion-item nav-clear menu-close href="#/app/c6_salaryIncrease">
+               Aumentos
+            </ion-item>
 
-        Comparar vs. otro puesto
-    
-    </ion-nav-view>
+            <ion-item nav-clear menu-close href="#/app/profileVsPyramid">
+              Comparar vs. Mi area
+            </ion-item>
+
+            <ion-item nav-clear menu-close href="#/app/c3_areas">
+              Comparar vs. otro puesto
+            </ion-item>
+
+       </ion-list>
+    </ion-content>
+
+    </ion-view>
 
 
     <script id="templates/intro.html" type="text/ng-template"> 
@@ -102,5 +112,5 @@
     </script>
     
   </body>
-</html>
+
 
