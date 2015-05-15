@@ -1,58 +1,59 @@
 <ion-view view-title="COMPARAR CON UN PUESTO">
-  
-  
-  
-  <ion-content> 
-	
-		<a class="item item-avatar item-icon-right" href="#">
-		  <img src="venkman.jpg">
-	      <h2 class="miniDesc">Mi perfil</h2>
-		      <p class="">Mini descripción:</p>
-		      <p style="widht: 100%;">Bla bla bla bla Bla bla bla bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla</p>
-		      <p>Bla bla bla bla Bla bla bla bla</p>
-		  <i class="icon icon-right ion-chevron-right"></i>
-		</a>
-	
-	<div class="list list-inset">
-	  <label class="item item-input">
-	    <i class="icon ion-search item-icon-right placeholder-icon"></i>
-	    <input type="text" placeholder="	Buscador por texto">
-	  </label>
-	</div>
-	
-	
-	<div class="list">
-	
 
-		<a class="item item-avatar item-icon-right" href="#">
-		  <img src="venkman.jpg">
-	      <h2 class="miniDesc">Gerente de RRHH</h2>
-		      <p class="">Mini descripción:</p>
-		      <p style="widht: 100%;">Bla bla bla bla Bla bla bla bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla</p>
-		      <p>Bla bla bla bla Bla bla bla bla</p>
-		  <i class="icon icon-right ion-chevron-right"></i>
-		</a>
-	
-	    <a class="item item-avatar item-icon-right" href="#">
-		  <img src="venkman.jpg">
-	      <h2 class="miniDesc">Gerente de Producción</h2>
-		      <p class="">Mini descripción:</p>
-		      <p style="widht: 100%;">Bla bla bla bla Bla bla bla bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla</p>
-		      <p>Bla bla bla bla Bla bla bla bla</p>
-		  <i class="icon icon-right ion-chevron-right"></i>
-		</a>
+	<ion-item class="item item-avatar item-icon-right" ng-repeat="pyramidPosition in pyramidPositions" href="#/app/profileVsResult/{{position.positionId}}/{{position.name}}">
+		<h2 class="miniDesc">{{pyramidPosition.name}}</h2>
+		<span class="badge badge-balanced"><h2 class="white">{{(pyramidPosition.average-profileData.amount)/profileData.amount*100 | number:0}}%</h2></span>
+		<p class="">Remuneración mensual: {{pyramidPosition.average}}</p>
+		<p style="widht: 100%;">{{pyramidPosition.description}}</p>
+		<i class="icon icon-right ion-chevron-right"></i>
+	</ion-item>
+  
+  <ion-content>
 
-	
-	    <a class="item item-avatar item-icon-right" href="#">
-		  <img src="venkman.jpg">
-	      <h2 class="miniDesc">Gerente de Ventas</h2>
-		      <p class="">Mini descripción:</p>
-		      <p style="widht: 100%;">Bla bla bla bla Bla bla bla bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla</p>
-		      <p>Bla bla bla bla Bla bla bla bla</p>
-		  <i class="icon icon-right ion-chevron-right"></i>
-		</a>
-	
-		<a class="item item-avatar item-icon-right" href="#">
+
+	  <div class="row">
+		  <div class="col-33 backBad">
+			  Columna 1 sueldo perfil
+		  </div>
+
+		  <div class="col-33 backBad">
+			  Icono y monto diferencia
+		  </div>
+
+		  <div class="col-33 backBad">
+			  Columna 2 sueldo comparado
+		  </div>
+	  </div>
+
+	  <div class="row">
+		  <div class="col-33 backBad">
+			  Columna 1 Experiencia perfil
+		  </div>
+
+		  <div class="col-33 backBad">
+			  Icono y cantidad de años diferencia
+		  </div>
+
+		  <div class="col-33 backBad">
+			  Columna 2 Experiencia comparado
+		  </div>
+	  </div>
+
+	  <div class="row">
+		  <div class="col-33 backBad">
+			  Columna 1 educacion perfil
+		  </div>
+
+		  <div class="col-33 backBad">
+			  Icono
+		  </div>
+
+		  <div class="col-33 backBad">
+			  Columna 2 educacion comparado
+		  </div>
+	  </div>
+
+		  <a class="item item-avatar item-icon-right" href="#">
 		  <img src="venkman.jpg">
 	      <h2 class="miniDesc">No existe en nuestra base...</h2>
 	      <p>Por favor busca nuevamente o solicitala haciendo </p>
