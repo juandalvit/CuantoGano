@@ -3,8 +3,8 @@
 	<ion-content>
   	
   		<div class="list list-inset p20">
-			<h3 class="">Area: {{profileData.areaName}}</h3>
-			<h3 class="">Sector: {{profileData.areaName}}</h3>
+			<h3 class="">Area: {{buscarData.areaName}}</h3>
+			<h3 class="">Sector: {{buscarData.sectorName}}</h3>
 			<!--
 			<h3 class="">País: {{profileData.countryName}}</h3>
 			<h3 class="">Sueldo: {{profileData.amount}}</h3>
@@ -13,7 +13,7 @@
 
   
 	    <ion-list>
-	      	<ion-item class="item item-icon-right" ng-repeat="hierarchy in hierarchies" href="#/app/seniorities/{{hierarchy.hierarchyId}}/{{hierarchy.name}}">
+	      	<ion-item class="item item-icon-right" ng-repeat="hierarchy in hierarchies" href="#/app/c1_consultResult/{{hierarchy.hierarchyId}}/{{hierarchy.name}}">
 	      		<h2 class="miniDesc">{{hierarchy.name}}</h2>
 				<p>{{hierarchy.description}}</p>
 				<i class="icon icon-right ion-chevron-right"></i>

@@ -26,6 +26,17 @@ var profileData = {
 
 localStorage.setItem("profileData", JSON.stringify(profileData));
 
+var buscarData = {
+    areaId: 0,
+    areaName: '',
+    sectorId: 0,
+    sectorName: '',
+    hierarchyId: 0,
+    hierarchyName: 0,
+};
+
+localStorage.setItem("buscarData", JSON.stringify(buscarData));
+
 
 
 //json
@@ -101,14 +112,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
             if (window.cordova) {
 
                 //Clean DB
-                //$cordovaSQLite.deleteDB("CuantoGanoDB");
+                $cordovaSQLite.deleteDB("CuantoGanoDBv1.2");
 
-                db = $cordovaSQLite.openDB("CuantoGanoDB");
+                db = $cordovaSQLite.openDB("CuantoGanoDBv1.2");
 
             }else{
 
 
-                db = window.openDatabase("CuantoGanoDB", '1', 'my', 1024 * 1024 * 100); // browser
+                db = window.openDatabase("CuantoGanoDBv1.31", '1', 'my', 1024 * 1024 * 100); // browser
 
 
                 /*alert('Detele all DB');
@@ -136,20 +147,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
 
 
 
-
-
-
             $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS Areas " +
                 "(areaId integer primary key, " +
                 "name text, " +
                 "description text, " +
-                "order integer, " +
+                "orden integer, " +
                 "coef_peq real, " +
                 "coef_med real, " +
                 "coef_grand real, " +
                 "coef_min real, " +
                 "coef_max real, " +
-                "status text);");
+                "status text)");
+                
+
+
 
 
             $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS Countries (" +
@@ -164,8 +175,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 "hierarchyId integer primary key, " +
                 "name text, " +
                 "description text, " +
-                "order integer, " +
+                "orden integer, " +
                 "status text);");
+
 
 
             $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS Positions (" +
@@ -179,7 +191,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 "junior integer, " +
                 "semisenior integer, " +
                 "senior integer, " +
-                "order integer, " +
+                "orden integer, " +
                 "countryId integer, " +
                 "status text);");
 
@@ -204,7 +216,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 "areaId integer, " +
                 "name text, " +
                 "description text, " +
-                "order integer, " +
+                "orden integer, " +
                 "status text);");
 
 
@@ -212,7 +224,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 "seniorityId integer primary key, " +
                 "name text, " +
                 "description text, " +
-                "order integer, " +
+                "orden integer, " +
                 "status text);");
 
             $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS Sync (" +
@@ -231,13 +243,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
 
 
 
-                    var insertAreas = "INSERT INTO Areas (areaId, name, description, order, coef_peq, coef_med, coef_grand, coef_min, coef_max, status) VALUES(1, 'Administracion de proyectos', 'Administracion de proyectos Administracion de proy', 1, 0.8, 1, 1.1, 0.8, 1.2, 'ACTIVE'),(2, 'Asuntos regulatorios y relaciones gubernamentales', 'Asuntos regulatorios y relaciones gubernamentales ', 2, 0.8, 1, 1.1, 0.8, 1.2, 'ACTIVE');";
+                    var insertAreas = "INSERT INTO Areas (areaId, name, description, orden, coef_peq, coef_med, coef_grand, coef_min, coef_max, status) VALUES(1, 'Administracion de proyectos', 'Administracion de proyectos Administracion de proy', 1, 0.8, 1, 1.1, 0.8, 1.2, 'ACTIVE'),(2, 'Asuntos regulatorios y relaciones gubernamentales', 'Asuntos regulatorios y relaciones gubernamentales ', 2, 0.8, 1, 1.1, 0.8, 1.2, 'ACTIVE');";
 
-                    var insertSectors = "INSERT INTO Sectors (seniorityId, name, description, order, status) VALUES(1, 1, 'adm proy sect 1', 'desc adm proy sect 1', 1, 'ACTIVE'),(2, 1, 'adm proy sect 2', 'desc adm proy sect 2', 2, 'ACTIVE'), (3, 2, 'Asunt reg sec 1', 'desc Asunt reg sec 1', 2, 'ACTIVE'), (4, 2, 'Asunt reg sec 2', 'desc Asunt reg sec 2', 1, 'ACTIVE');";
+                    var insertSectors = "INSERT INTO Sectors (sectorId, areaId, name, description, orden, status) VALUES(1, 1, 'adm proy sect 1', 'desc adm proy sect 1', 1, 'ACTIVE'),(2, 1, 'adm proy sect 2', 'desc adm proy sect 2', 2, 'ACTIVE'), (3, 2, 'Asunt reg sec 1', 'desc Asunt reg sec 1', 2, 'ACTIVE'), (4, 2, 'Asunt reg sec 2', 'desc Asunt reg sec 2', 1, 'ACTIVE');";
 
-                    var insertHierarchies = "INSERT INTO Hierarchies (hierarchyId, name, description, order, status) VALUES(1, 'Analista', 'Analista Analista Analista Analista Analista Anali', NULL, 'ACTIVE'),(2, 'Asistente', 'Asistente Asistente Asistente Asistente Asistente ', NULL, 'ACTIVE');";
+                    var insertHierarchies = "INSERT INTO Hierarchies (hierarchyId, name, description, orden, status) VALUES(1, 'Analista', 'Analista Analista Analista Analista Analista Anali', NULL, 'ACTIVE'),(2, 'Asistente', 'Asistente Asistente Asistente Asistente Asistente ', NULL, 'ACTIVE');";
 
-                    var insertSeniorities = "INSERT INTO Seniorities (seniorityId, name, description, order, status) VALUES(1, 'Especialista', 'Especialista Especialista Especialista Especialist', NULL, 'ACTIVE'),(2, 'Experto', 'Experto Experto Experto Experto Experto Experto Ex', NULL, 'ACTIVE'),(3, 'Junior', 'Junior Junior Junior Junior Junior Junior Junior ', NULL, 'ACTIVE'),(4, 'NA', 'NA NA NA NA NA NA NA ', NULL, 'ACTIVE'),(5, 'Semi senior', 'Semi senior Semi senior Semi senior Semi senior Se', NULL, 'ACTIVE'),(6, 'Senior', 'Senior Senior Senior Senior Senior Senior Senior ', NULL, 'ACTIVE')";
+                    var insertSeniorities = "INSERT INTO Seniorities (seniorityId, name, description, orden, status) VALUES(1, 'Especialista', 'Especialista Especialista Especialista Especialist', NULL, 'ACTIVE'),(2, 'Experto', 'Experto Experto Experto Experto Experto Experto Ex', NULL, 'ACTIVE'),(3, 'Junior', 'Junior Junior Junior Junior Junior Junior Junior ', NULL, 'ACTIVE'),(4, 'NA', 'NA NA NA NA NA NA NA ', NULL, 'ACTIVE'),(5, 'Semi senior', 'Semi senior Semi senior Semi senior Semi senior Se', NULL, 'ACTIVE'),(6, 'Senior', 'Senior Senior Senior Senior Senior Senior Senior ', NULL, 'ACTIVE')";
 
                     var insertCountries = "INSERT INTO Countries (countryId, countryName, countryCurrency, exchangeRateDolar, status) VALUES (1, 'Argentina', 'Pesos', 8.9, 'ACTIVE');";
 
@@ -493,5 +505,5 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
 
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/data');
+        $urlRouterProvider.otherwise('/app/main');
     });
