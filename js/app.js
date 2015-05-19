@@ -502,7 +502,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
 
 
             .state('app.help', {
-                url: "/intro",
+                url: "/help",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/help.html"
@@ -520,7 +520,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
             })
 
             .state('app.profile', {
-                url: "/intro",
+                url: "/profile",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/profile.html"
