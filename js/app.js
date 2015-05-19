@@ -95,7 +95,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 StatusBar.styleDefault();
             }
 
-            if(window.plugins && window.plugins.AdMob && false) {
+            if(window.plugins && window.plugins.AdMob) {
                 var admob_key = device.platform == "Android" ? "ca-app-pub-8185646918327384/6127887751" : "ca-app-pub-8185646918327384/9081354156";
                 var admob = window.plugins.AdMob;
                 admob.createBannerView(
@@ -120,14 +120,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
             if (window.cordova) {
 
                 //Clean DB
-                //$cordovaSQLite.deleteDB("CuantoGanoDBv1.3");
+                $cordovaSQLite.deleteDB("CuantoGanoDBv1.3");
 
                 db = $cordovaSQLite.openDB("CuantoGanoDBv1.3");
 
             }else{
 
 
-                db = window.openDatabase("CuantoGanoDBv1.36", '1', 'my', 1024 * 1024 * 100); // browser
+                db = window.openDatabase("CuantoGanoDBv1.37", '1', 'my', 1024 * 1024 * 100); // browser
 
 
                 /*alert('Detele all DB');
@@ -266,7 +266,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
 
 
 
-                    var insertPositions1 = "INSERT INTO Positions (positionId, name, description, areaId, sectorId, hierarchyId, average, junior, semisenior, senior, orden, countryId, status) VALUES(1, NULL, NULL, 1, 1, 1, 10000, 8000, 9500, 11200, 1, 1, 'ACTIVE'),(2, NULL, NULL, 1, 2, 2, 15000, 13000, 15000, 15500, 2, 1, 'ACTIVE'),(3, NULL, NULL, 2, 3, 1, 20000, 19000, 20000, 22000, 1, 1, 'ACTIVE'),(4, NULL, NULL, 2, 4, 2, 25000, 22000, 25500, 27000, 2, 1, 'ACTIVE');";
+                    var insertPositions1 = "INSERT INTO Positions (positionId, name, description, areaId, sectorId, hierarchyId, average, junior, semisenior, senior, orden, countryId, status) VALUES" +
+                        "(1, NULL, NULL, 1, 1, 1, 10000, 8000, 9500, 11200, 1, 1, 'ACTIVE')," +
+                        "(2, NULL, NULL, 1, 1, 2, 15000, 13000, 15000, 15500, 2, 1, 'ACTIVE')," +
+                        "(3, NULL, NULL, 2, 3, 1, 20000, 19000, 20000, 22000, 1, 1, 'ACTIVE')," +
+                        "(4, NULL, NULL, 2, 3, 2, 25000, 22000, 25500, 27000, 2, 1, 'ACTIVE')," +
+                        "(5, NULL, NULL, 1, 2, 1, 10000, 8000, 9500, 11200, 1, 1, 'ACTIVE')," +
+                        "(6, NULL, NULL, 1, 2, 2, 15000, 13000, 15000, 15500, 2, 1, 'ACTIVE')," +
+                        "(7, NULL, NULL, 2, 4, 1, 20000, 19000, 20000, 22000, 1, 1, 'ACTIVE')," +
+                        "(8, NULL, NULL, 2, 4, 2, 25000, 22000, 25500, 27000, 2, 1, 'ACTIVE');";
                     var insertPositions2 = "INSERT INTO Positions (positionId, name, description, areaId, sectorId, hierarchyId, average, junior, semisenior, senior, orden, countryId, status) VALUES()";
                     var insertPositions3 = "INSERT INTO Positions (positionId, name, description, areaId, sectorId, hierarchyId, average, junior, semisenior, senior, orden, countryId, status) VALUES()";
                     var insertPositions4 = "INSERT INTO Positions (positionId, name, description, areaId, sectorId, hierarchyId, average, junior, semisenior, senior, orden, countryId, status) VALUES()";
@@ -493,7 +501,25 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
 
 
 
+            .state('app.help', {
+                url: "/intro",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/intro.html"
+                    }
+                }
+            })
+
             .state('app.intro', {
+                url: "/intro",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/intro.html"
+                    }
+                }
+            })
+
+            .state('app.profile', {
                 url: "/intro",
                 views: {
                     'menuContent': {

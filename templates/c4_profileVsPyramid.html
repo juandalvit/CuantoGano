@@ -2,19 +2,8 @@
 
   <ion-content> 
 	<ion-list>
-	<!--
-		<a class="item item-avatar item-icon-right" href="#">
-		  <h2 class="miniDesc">Director de Finanzas</h2>
-	      <span class="badge badge-balanced"><h2 class="white">+45%</h2></span>
-	          <p class="">Remuneración mensual: 100000</p>
-		      <p style="widht: 100%;">Bla bla bla bla Bla bla bla bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla</p>
-		      <p>Bla bla bla bla Bla bla bla bla</p>
-		  <i class="icon icon-right ion-chevron-right"></i>
-		</a>
 
-	-->
-
-		<ion-item class="item item-avatar item-icon-right" ng-repeat="pyramidPosition in pyramidPositions" href="#/app/profileVsResult/{{position.positionId}}/{{position.name}}">
+		<ion-item class="item item-avatar item-icon-right" ng-repeat="profileVsPyramid in profileVsPyramids" href="#/app/profileVsResult/{{position.positionId}}/{{position.name}}">
 		  <img src="venkman.jpg">
 	      <h2 class="miniDesc">{{pyramidPosition.name}}</h2>
 	      <span class="badge badge-balanced"><h2 class="white">{{(pyramidPosition.average-profileData.amount)/profileData.amount*100 | number:0}}%</h2></span>
