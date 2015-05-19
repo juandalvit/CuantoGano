@@ -1,10 +1,9 @@
-<ion-view view-title="COMPARAR CON UN PUESTO">
+<ion-view view-title="C3 COMPARAR CON UN PUESTO">
 
-	<ion-item class="item item-avatar item-icon-right" ng-repeat="pyramidPosition in pyramidPositions" href="#/app/profileVsResult/{{position.positionId}}/{{position.name}}">
-		<h2 class="miniDesc">{{pyramidPosition.name}}</h2>
-		<span class="badge badge-balanced"><h2 class="white">{{(pyramidPosition.average-profileData.amount)/profileData.amount*100 | number:0}}%</h2></span>
-		<p class="">Remuneración mensual: {{pyramidPosition.average}}</p>
-		<p style="widht: 100%;">{{pyramidPosition.description}}</p>
+	<ion-item class="item item-avatar item-icon-right" >
+		<h2 class="miniDesc">{{profileData.hierarchyName}} de {{profileData.sectorName}} de {{profileData.areaName}}</h2>
+		<span class="badge badge-balanced"><h2 class="white">{{((((profileData.amount - profileData.marketValue)/profileData.marketValue))*100)-1  | number:0}}%</h2></span>
+		<p class="">Remuneración mensual: {{profileData.average}}</p>
 		<i class="icon icon-right ion-chevron-right"></i>
 	</ion-item>
   

@@ -3,9 +3,10 @@
 var db = null;
 
 
-var profileData = [];
-var consultData = [];
-var profileVsResultData = [];
+var profileData = {};
+var consultData = {};
+var profileVsResultData = {};
+
 localStorage.setItem("profileData", JSON.stringify(profileData));
 localStorage.setItem("consultData", JSON.stringify(consultData));
 localStorage.setItem("profileVsResultData", JSON.stringify(profileVsResultData));

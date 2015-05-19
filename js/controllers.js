@@ -665,7 +665,7 @@ angular.module('starter.controllers', ['ngResource'])
                 //alert("SELECTED 1-> ID: "+ res.rows.item(1).hierarchyId +" -> "+ res.rows.item(1).name);
             } else {
                 console.log("No results found");
-                alert("No results found: " + query);
+                alert("No results found: " + query + "With val: "+ $scope.profileData.sectorId + ", " +  $scope.profileData.hierarchyId);
             }
 
 
@@ -880,6 +880,7 @@ angular.module('starter.controllers', ['ngResource'])
         localStorage.setItem("profileVsResultData", JSON.stringify($scope.profileVsResultData));
 
 
+
         $scope.analysis = [];
 
 
@@ -918,7 +919,7 @@ angular.module('starter.controllers', ['ngResource'])
                 //alert("SELECTED 1-> ID: "+ res.rows.item(1).hierarchyId +" -> "+ res.rows.item(1).name);
             } else {
                 console.log("No results found");
-                alert("No results found: " + query);
+                alert("No results found: " + query + " -- With val: "+$scope.profileData.sectorId + ", " + $scope.profileData.hierarchyId);
             }
 
 
