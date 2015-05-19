@@ -2,15 +2,14 @@
   	<ion-content>
   
 	  	<div class="list list-inset p20">
-			<h3 class="">País: {{profileData.countryName}}</h3>
-			<h3 class="">Sueldo: {{profileData.amount}}</h3>
 			<h3 class="">Area: {{profileData.areaName}}</h3>
+			<h3 class="">Sector: {{profileData.sectorName}}</h3>
 			<h3 class="">Jerarquía: {{profileData.hierarchyName}}</h3>
 		</div>
 		
 	    <ion-list>
 	      
-	      <ion-item ng-repeat="seniority in seniorities" class="item item-avatar item-icon-right" href="#/app/positions/{{seniority.seniorityId}}/{{seniority.name}}">
+	      <ion-item ng-repeat="seniority in seniorities" class="item item-avatar item-icon-right" href="#/app/c2_data/{{seniority.seniorityId}}/{{seniority.name}}">
 	        	<h2 class="miniDesc">{{seniority.name}}</h2>
 				<p>{{seniority.description}}</p>
 	          	<i class="icon icon-right ion-chevron-right"></i>

@@ -1,28 +1,21 @@
 <ion-view view-title="Areas">
-  <ion-content>
+	<ion-content>
 
-	  <!--
-      <div class="list list-inset p20">
-        <h3 class="">País: {{profileData.countryName}}</h3>
-        <h3 class="">Sueldo: {{profileData.amount}}</h3>
-    </div>
-    -->
+		<ion-list>
 
-	  <ion-list>
+			<ion-item ng-repeat="area in areas" class="item item-icon-right" href="#/app/c2_sectors/{{area.areaId}}/{{area.name}}">
+				<h2 class="miniDesc">{{area.name}}</h2>
+				<p>{{area.description}}</p>
+				<i class="icon icon-right ion-chevron-right"></i>
+			</ion-item>
 
-    	<ion-item ng-repeat="area in areas" class="item item-icon-right" href="#/app/hierarchies/{{area.areaId}}/{{area.name}}">
-        	<h2 class="miniDesc">{{area.name}}</h2>
-        	<p>{{area.description}}</p>
-          	<i class="icon icon-right ion-chevron-right"></i>
-      	</ion-item>
-      
-      	<a class="item item-icon-right" href="#">
-	      <h3 class="miniDesc">Ayuda</h3>
-	      <p>Nuestro equipo esta para ayudarte</p>
-		  <i class="icon icon-right ion-chevron-right"></i>
-		</a>
+			<a class="item item-icon-right" href="#">
+				<h3 class="miniDesc">Ayuda</h3>
+				<p>Nuestro equipo esta para ayudarte</p>
+				<i class="icon icon-right ion-chevron-right"></i>
+			</a>
 
-    </ion-list>
-    
-  </ion-content>
+		</ion-list>
+
+	</ion-content>
 </ion-view>

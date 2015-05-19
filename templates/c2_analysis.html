@@ -7,29 +7,28 @@
 			<h4 class="">Tu sueldo bruto</h4>
 			<h1 class="salaryOwn Tcenter">${{profileData.amount}}</h1>
 			<h4 class="">El mercado esta pagando</h4>
-			<h1 class="salaryMarket Tcenter">${{positionData.average}}</h1>
+			<h1 class="salaryMarket Tcenter">${{profileData.marketValue}}</h1>
 
 			<div class="row">
-				<div class="col-50 backBad">
-					<h1 class=" textPercentageDif">80%</h1>
-					<!-- {{((1-((profileData.amount - positionData.average)/positionData.average)*-1)*100)}} -->
+				<div class="col-50 back{{profileData.amountStatus}}">
+					<h1 class=" textPercentageDif">{{((((profileData.amount - profileData.marketValue)/profileData.marketValue))*100)-1  | number:0}}%</h1>
+
 				</div>
 				<div class="col-50">
-					<h1 class="textBad textAmountDif">${{profileData.amount - positionData.average}}</h1></h1>
+					<h1 class="text{{profileData.amountStatus}} textAmountDif">${{profileData.amount - profileData.marketValue}}</h1></h1>
 				</div>
 			</div>
 		</div>
 
 		<div class="list list-inset Tcenter">
-			<h3 class="">{{profileData.positionName}} - {{profileData.positionId}}</h3>
-			<h5 class="">{{profileData.hierarchyName}} - {{profileData.seniorityName}} de {{profileData.areaName}} en {{profileData.countryName}}</h5>
+			<h5 class="">{{profileData.hierarchyName}} de {{profileData.sectorName}} de {{profileData.areaName}}</h5>
 		</div>
 
 		<div class="list">
 			<div class="range analysisGood">
-				<h4 class="Tcenter">${{positionData.min}}<br>Min.</h4>
-					<input class="" type="range" name="volume" min="{{positionData.min}}" max="{{positionData.max}}" value="{{profileData.amount}}">
-				<h4 class="Tcenter">${{positionData.max}}<br>Max.</h4>
+				<h4 class="Tcenter">${{profileData.min}}<br>Min.</h4>
+					<input class="" type="range" name="volume" min="{{profileData.min}}" max="{{profileData.max}}" value="{{profileData.amount}}">
+				<h4 class="Tcenter">${{profileData.max}}<br>Max.</h4>
 			</div>
 		</div>
 
@@ -37,9 +36,9 @@
 			<h4>Sueldos brutos promedios segun el tamaño de la empresa</h4>
 
 			<div class="row Tcenter">
-				<div class="col-33"><h4>${{positionData.small}}</h4>Pequeñas</div>
-				<div class="col-33"><h4>${{positionData.medium}}</h4>Medianas</div>
-				<div class="col-33"><h4>${{positionData.large}}</h4>Grandes</div>
+				<div class="col-33"><h4>${{profileData.small}}</h4>Pequeñas</div>
+				<div class="col-33"><h4>${{profileData.medium}}</h4>Medianas</div>
+				<div class="col-33"><h4>${{profileData.large}}</h4>Grandes</div>
 			</div>
 
 		</div>

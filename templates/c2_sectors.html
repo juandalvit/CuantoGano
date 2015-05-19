@@ -1,31 +1,25 @@
-<ion-view view-title="Sector">
-  
-  <ion-content> 
-	 
-	
-	<div class="list list-inset p20">
-		<h3 class="">País: {{profileData.countryName}}</h3>
-			<h3 class="">Sueldo: {{profileData.amount}}</h3>
+<ion-view view-title="Sect">
+	<ion-content>
+
+		<div class="list list-inset p20">
 			<h3 class="">Area: {{profileData.areaName}}</h3>
-			<h3 class="">Sector: {{profileData.sectorName}}</h3> <!-- agregar sector -->
-	</div>
-	
-	 <ion-list>
-	      	
-	      	<ion-item class="item item-icon-right" ng-repeat="position in positions" href="#/app/analysis/{{position.positionId}}/{{position.name}}">
-	      		<h2 class="miniDesc">{{position.name}}</h2>
-				<p>{{position.description}}</p>
+		</div>
+
+		<ion-list>
+
+			<ion-item ng-repeat="sector in sectors" class="item item-icon-right" href="#/app/c2_hierarchies/{{sector.sectorId}}/{{sector.name}}">
+				<h2 class="miniDesc">{{sector.name}}</h2>
+				<p>{{sector.description}}</p>
 				<i class="icon icon-right ion-chevron-right"></i>
-	      	</ion-item>
-	      	
-	      	<a class="item item-avatar item-icon-right" href="#">
-		      <h3 class="miniDesc">Ayuda</h3>
-		      <p>Nuestro equipo esta para ayudarte</p>
-			  <i class="icon icon-right ion-chevron-right"></i>
+			</ion-item>
+
+			<a class="item item-icon-right" href="#">
+				<h3 class="miniDesc">Ayuda</h3>
+				<p>Nuestro equipo esta para ayudarte</p>
+				<i class="icon icon-right ion-chevron-right"></i>
 			</a>
-	    </ion-list>
 
-  </ion-content>
+		</ion-list>
 
-
+	</ion-content>
 </ion-view>

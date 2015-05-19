@@ -3,7 +3,14 @@
 var db = null;
 
 
-var profileData = {
+var profileData = [];
+var consultData = [];
+var profileVsResultData = [];
+localStorage.setItem("profileData", JSON.stringify(profileData));
+localStorage.setItem("consultData", JSON.stringify(consultData));
+localStorage.setItem("profileVsResultData", JSON.stringify(profileVsResultData));
+
+/*var profileData = {
     profileId: 1,
     name: '',
     date: '',
@@ -24,9 +31,9 @@ var profileData = {
 
 
 
-localStorage.setItem("profileData", JSON.stringify(profileData));
+localStorage.setItem("profileData", JSON.stringify(profileData));*/
 
-var buscarData = {
+/*var consultData = {
     areaId: 0,
     areaName: '',
     sectorId: 0,
@@ -35,7 +42,7 @@ var buscarData = {
     hierarchyName: 0,
 };
 
-localStorage.setItem("buscarData", JSON.stringify(buscarData));
+localStorage.setItem("consultData", JSON.stringify(consultData));*/
 
 
 
@@ -87,7 +94,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 StatusBar.styleDefault();
             }
 
-            if(window.plugins && window.plugins.AdMob) {
+            if(window.plugins && window.plugins.AdMob && false) {
                 var admob_key = device.platform == "Android" ? "ca-app-pub-8185646918327384/6127887751" : "ca-app-pub-8185646918327384/9081354156";
                 var admob = window.plugins.AdMob;
                 admob.createBannerView(
@@ -112,14 +119,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
             if (window.cordova) {
 
                 //Clean DB
-                $cordovaSQLite.deleteDB("CuantoGanoDBv1.2");
+                //$cordovaSQLite.deleteDB("CuantoGanoDBv1.3");
 
-                db = $cordovaSQLite.openDB("CuantoGanoDBv1.2");
+                db = $cordovaSQLite.openDB("CuantoGanoDBv1.3");
 
             }else{
 
 
-                db = window.openDatabase("CuantoGanoDBv1.31", '1', 'my', 1024 * 1024 * 100); // browser
+                db = window.openDatabase("CuantoGanoDBv1.36", '1', 'my', 1024 * 1024 * 100); // browser
 
 
                 /*alert('Detele all DB');
@@ -186,7 +193,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 "description text, " +
                 "areaId integer, " +
                 "sectorId integer, " +
-                "heriarchyId integer, " +
+                "hierarchyId integer, " +
                 "average integer, " +
                 "junior integer, " +
                 "semisenior integer, " +
@@ -249,16 +256,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
 
                     var insertHierarchies = "INSERT INTO Hierarchies (hierarchyId, name, description, orden, status) VALUES(1, 'Analista', 'Analista Analista Analista Analista Analista Anali', NULL, 'ACTIVE'),(2, 'Asistente', 'Asistente Asistente Asistente Asistente Asistente ', NULL, 'ACTIVE');";
 
-                    var insertSeniorities = "INSERT INTO Seniorities (seniorityId, name, description, orden, status) VALUES(1, 'Especialista', 'Especialista Especialista Especialista Especialist', NULL, 'ACTIVE'),(2, 'Experto', 'Experto Experto Experto Experto Experto Experto Ex', NULL, 'ACTIVE'),(3, 'Junior', 'Junior Junior Junior Junior Junior Junior Junior ', NULL, 'ACTIVE'),(4, 'NA', 'NA NA NA NA NA NA NA ', NULL, 'ACTIVE'),(5, 'Semi senior', 'Semi senior Semi senior Semi senior Semi senior Se', NULL, 'ACTIVE'),(6, 'Senior', 'Senior Senior Senior Senior Senior Senior Senior ', NULL, 'ACTIVE')";
+                    var insertSeniorities = "INSERT INTO Seniorities (seniorityId, name, description, orden, status) VALUES(1, 'Junior', 'Junior Junior Junior Junior Junior Junior Junior ', NULL, 'ACTIVE'),(2, 'Semi senior', 'Semi senior Semi senior Semi senior Semi senior Se', NULL, 'ACTIVE'),(3, 'Senior', 'Senior Senior Senior Senior Senior Senior Senior ', NULL, 'ACTIVE')";
 
                     var insertCountries = "INSERT INTO Countries (countryId, countryName, countryCurrency, exchangeRateDolar, status) VALUES (1, 'Argentina', 'Pesos', 8.9, 'ACTIVE');";
 
 
 
-                    var insertPositions1 = "INSERT INTO Positions (positionId, name, description, average, max, min, small, medium, large, status) VALUES(1, NULL, NULL, 1, 1, 1, 10000, 8000, 9500, 11200, 1, 1, 'ACTIVE'),(2, NULL, NULL, 1, 2, 2, 15000, 13000, 15000, 15500, 2, 1, 'ACTIVE'),(3, NULL, NULL, 2, 3, 1, 20000, 19000, 20000, 22000, 1, 1, 'ACTIVE'),(4, NULL, NULL, 2, 4, 2, 25000, 22000, 25500, 27000, 2, 1, 'ACTIVE');";
-                    var insertPositions2 = "INSERT INTO Positions (positionId, name, description, average, max, min, small, medium, large, status) VALUES()";
-                    var insertPositions3 = "INSERT INTO Positions (positionId, name, description, average, max, min, small, medium, large, status) VALUES()";
-                    var insertPositions4 = "INSERT INTO Positions (positionId, name, description, average, max, min, small, medium, large, status) VALUES()";
+
+
+
+                    var insertPositions1 = "INSERT INTO Positions (positionId, name, description, areaId, sectorId, hierarchyId, average, junior, semisenior, senior, orden, countryId, status) VALUES(1, NULL, NULL, 1, 1, 1, 10000, 8000, 9500, 11200, 1, 1, 'ACTIVE'),(2, NULL, NULL, 1, 2, 2, 15000, 13000, 15000, 15500, 2, 1, 'ACTIVE'),(3, NULL, NULL, 2, 3, 1, 20000, 19000, 20000, 22000, 1, 1, 'ACTIVE'),(4, NULL, NULL, 2, 4, 2, 25000, 22000, 25500, 27000, 2, 1, 'ACTIVE');";
+                    var insertPositions2 = "INSERT INTO Positions (positionId, name, description, areaId, sectorId, hierarchyId, average, junior, semisenior, senior, orden, countryId, status) VALUES()";
+                    var insertPositions3 = "INSERT INTO Positions (positionId, name, description, areaId, sectorId, hierarchyId, average, junior, semisenior, senior, orden, countryId, status) VALUES()";
+                    var insertPositions4 = "INSERT INTO Positions (positionId, name, description, areaId, sectorId, hierarchyId, average, junior, semisenior, senior, orden, countryId, status) VALUES()";
 
 
 
@@ -275,10 +285,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                     //$cordovaSQLite.execute(db, insertPositions3);
                     //$cordovaSQLite.execute(db, insertPositions4);
 
-                    alert("inserted on db");
+                    //alert("inserted on db");
                 } else {
                     var date = res.rows.item(0).date;
-                    alert("Data Allready on db date: "+date);
+                    //alert("Data Allready on db date: "+date);
                 }
 
 
@@ -299,8 +309,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
             .state('app', {
                 url: "/app",
                 abstract: true,
-                templateUrl: "templates/menu.html",
-                controller: 'AppCtrl'
+                templateUrl: "templates/menu.html"
+            })
+
+            .state('app.main', {
+                url: "/main",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/main.html"
+                    }
+                }
             })
 
             .state('app.c1_areas', {
@@ -311,6 +329,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                         controller: 'c1_areasCtrl'
                     }
                 }
+
             })
 
 
@@ -322,6 +341,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                         controller: 'c1_sectorsCtrl'
                     }
                 }
+
             })
 
 
@@ -482,14 +502,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
             })
 
 
-            .state('app.main', {
-                url: "/main",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/main.html"
-                    }
-                }
-            })
+
 
 
 
