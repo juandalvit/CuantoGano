@@ -3,12 +3,12 @@
   <ion-content> 
 	<ion-list>
 
-		<ion-item class="item item-avatar item-icon-right" ng-repeat="profileVsPyramid in profileVsPyramids" href="#/app/profileVsResult/{{position.positionId}}/{{position.name}}">
+		<ion-item class="item item-avatar item-icon-right" ng-repeat="profileVsPyramid in profileVsPyramids">
 		  <img src="venkman.jpg">
-	      <h2 class="miniDesc">{{pyramidPosition.name}}</h2>
-	      <span class="badge badge-balanced"><h2 class="white">{{(pyramidPosition.average-profileData.amount)/profileData.amount*100 | number:0}}%</h2></span>
-	          <p class="">Remuneración mensual: {{pyramidPosition.average}}</p>
-		      <p style="widht: 100%;">{{pyramidPosition.description}}</p>
+	      <h2 class="miniDesc">{{profileVsPyramid.hierarchyName}} de {{profileData.sectorName}} de {{profileData.areaName}}</h2>
+	      <span class="badge badge-balanced"><h2 class="white">{{((((profileData.amount - profileVsPyramid.average)/profileVsPyramid.average))*100)-1  | number:0}}%</h2></span>
+	          <p class="">Remuneración mensual: {{profileVsPyramid.average}}</p>
+		      <p style="widht: 100%;">{{profileVsPyramid.description}}</p>
 		  <i class="icon icon-right ion-chevron-right"></i>
 		</ion-item>
 

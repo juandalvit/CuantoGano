@@ -993,44 +993,18 @@ angular.module('starter.controllers', ['ngResource'])
         $scope.profileVsPyramids = [];
 
 
-        var query = "SELECT Positions.positionId, Positions.name, Positions.description, Positions.average FROM Positions WHERE Positions.status = 'ACTIVE' AND Positions.sectorId = ?";
+        var query = "SELECT Positions.positionId, Positions.name, Positions.description, Positions.average, Hierarchies.name AS hierarchyName FROM Positions INNER JOIN Hierarchies ON Hierarchies.hierarchyId = Positions.hierarchyId WHERE Positions.status = 'ACTIVE' AND Positions.sectorId = ?";
         $cordovaSQLite.execute(db, query, [$scope.profileData.sectorId]).then(function (res) {
             if (res.rows.length > 0) {
                 //alert("Results found: " + query + " -- With val: "+$scope.profileData.sectorId + ", " + $scope.profileData.hierarchyId);
 
                 for (var i = 0; i < res.rows.length; i++) {
-                    $scope.profileVsPyramids.push({name: res.rows.item(i).name, seniorityId: res.rows.item(i).seniorityId, description: res.rows.item(i).description});
+                    $scope.profileVsPyramids.push({name: res.rows.item(i).name, description: res.rows.item(i).description, average: res.rows.item(i).average, hierarchyName: res.rows.item(i).hierarchyName});
                 }
 
 
-                $scope.analysis.average = res.rows.item(0).average;
-                $scope.analysis.junior = res.rows.item(0).junior;
-                $scope.analysis.semisenior = res.rows.item(0).semisenior;
-                $scope.analysis.senior = res.rows.item(0).senior;
-                $scope.analysis.positionId = res.rows.item(0).positionId;
 
-
-                if($scope.profileData.seniorityId == 1) {
-                    $scope.analysis.marketValue = res.rows.item(0).junior;
-                }else if($scope.profileData.seniorityId == 2) {
-                    $scope.analysis.marketValue = res.rows.item(0).semisenior;
-                }else if($scope.profileData.seniorityId == 3){
-                    $scope.analysis.marketValue = res.rows.item(0).senior;
-                }
-
-                if($scope.profileData.amount >= $scope.profileData.marketValue){
-                    $scope.profileData.amountStatus = 'Good';
-                }else{
-                    $scope.profileData.amountStatus = 'Bad';
-                }
-
-                $scope.profileData.average = $scope.analysis.average;
-                $scope.profileData.marketValue = $scope.analysis.marketValue;
-                $scope.profileData.positionId = $scope.analysis.positionId;
-
-                localStorage.setItem("profileData", JSON.stringify($scope.profileData));
-
-                alert("SELECTED 0-> average: "+ res.rows.item(0).average +" ->positionId: "+ res.rows.item(0).positionId);
+                //alert("SELECTED 0-> average: "+ res.rows.item(0).average +" ->positionId: "+ res.rows.item(0).positionId);
                 //alert("SELECTED 1-> ID: "+ res.rows.item(1).hierarchyId +" -> "+ res.rows.item(1).name);
             } else {
                 console.log("No results found");
