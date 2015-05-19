@@ -505,7 +505,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 url: "/intro",
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/intro.html"
+                        templateUrl: "templates/help.html"
                     }
                 }
             })
@@ -523,7 +523,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 url: "/intro",
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/intro.html"
+                        templateUrl: "templates/profile.html"
                     }
                 }
             })
