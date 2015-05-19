@@ -107,3 +107,12 @@ input[type=range]::-webkit-slider-thumb {
 .Tcenter {
 	text-align: center;
 }
+
+.row {
+	margin-top: 32px;
+	margin-bottom: 32px;
+}
+
+.tCenter {
+	text-align: center;
+}
