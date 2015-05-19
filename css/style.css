@@ -56,7 +56,7 @@ h1.salary {
 }
 
 .salaryMarket {
-	font-size: 72px !important;
+	font-size: 64px !important;
 	text-align: right;
 	font-weight: bolder;
 }
@@ -75,12 +75,12 @@ h1.salary {
 
 
 .textPercentageDif {
-	padding-top: 25%;
+	padding-top: 37%;
 	font-weight: bold;
 }
 
 .textAmountDif {
-	padding-top: 25%;
+	padding-top: 37%;
 	font-weight: bolder;
 }
 
@@ -108,7 +108,7 @@ input[type=range]::-webkit-slider-thumb {
 	text-align: center;
 }
 
-.row {
+.p32 {
 	margin-top: 32px;
 	margin-bottom: 32px;
 }
