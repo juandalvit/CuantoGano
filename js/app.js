@@ -117,10 +117,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 );
             }
 
+
             if (window.cordova) {
 
                 //Clean DB
-                $cordovaSQLite.deleteDB("CuantoGanoDBv1.3");
+                //$cordovaSQLite.deleteDB("CuantoGanoDBv1.3");
 
                 db = $cordovaSQLite.openDB("CuantoGanoDBv1.3");
 
@@ -298,6 +299,80 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 } else {
                     var date = res.rows.item(0).date;
                     //alert("Data Allready on db date: "+date);
+
+
+
+
+                    if(profileData.positionId > 0){
+                        //alert('profile already loaded');
+                    }else{
+                        //alert('Load profile from DB');
+                        var query = "SELECT * FROM Profiles WHERE Profiles.profileId = '1'";
+                        $cordovaSQLite.execute(db, query, []).then(function (res) {
+
+
+                            if (res.rows.length > 0) {
+
+                                var query1 = "SELECT name FROM Hierarchies WHERE Hierarchies.hierarchyId = "+res.rows.item(0).hierarchyId;
+                                $cordovaSQLite.execute(db, query1, []).then(function (res1) {
+                                    var profileData = JSON.parse(localStorage.getItem("profileData"));
+                                    profileData.hierarchyName = res1.rows.item(0).name;
+                                    //alert("Hierarcy inside name: " + profileData.hierarchyName);
+                                    localStorage.setItem("profileData", JSON.stringify(profileData));
+                                });
+
+                                var query1 = "SELECT name FROM Areas WHERE Areas.areaId = "+res.rows.item(0).areaId;
+                                $cordovaSQLite.execute(db, query1, []).then(function (res1) {
+                                    var profileData = JSON.parse(localStorage.getItem("profileData"));
+                                    profileData.areaName = res1.rows.item(0).name;
+                                    localStorage.setItem("profileData", JSON.stringify(profileData));
+                                });
+
+                                var query1 = "SELECT name FROM Sectors WHERE Sectors.sectorId = "+res.rows.item(0).sectorId;
+                                $cordovaSQLite.execute(db, query1, []).then(function (res1) {
+                                    var profileData = JSON.parse(localStorage.getItem("profileData"));
+                                    profileData.sectorName = res1.rows.item(0).name;
+                                    localStorage.setItem("profileData", JSON.stringify(profileData));
+                                });
+
+                                var query1 = "SELECT name FROM Seniorities WHERE Seniorities.seniorityId = "+res.rows.item(0).seniorityId;
+                                $cordovaSQLite.execute(db, query1, []).then(function (res1) {
+                                    var profileData = JSON.parse(localStorage.getItem("profileData"));
+                                    profileData.seniorityName = res1.rows.item(0).name;
+                                    localStorage.setItem("profileData", JSON.stringify(profileData));
+                                });
+                                //alert(JSON.stringify(res.rows.item));
+                                //alert("COUNT positions: " + res.rows.item(0));
+                                //alert("String result 0" + JSON.stringify(res.rows.item(0)))
+                                //alert("SELECTED 1-> ID: "+ res.rows.item(1).hierarchyId +" -> "+ res.rows.item(1).name);
+                                var profileData = JSON.parse(localStorage.getItem("profileData"));
+                                profileData.amount = res.rows.item(0).amount;
+                                profileData.hierarchyId = res.rows.item(0).hierarchyId;
+                                profileData.areaId = res.rows.item(0).areaId;
+                                profileData.sectorId = res.rows.item(0).sectorId;
+                                profileData.seniorityId = res.rows.item(0).seniorityId;
+                                localStorage.setItem("profileData", JSON.stringify(profileData));
+
+                                //alert("Hierarcy outside name: " + profileData.hierarchyName);
+
+
+
+                                //alert('profile loaded form db');
+
+
+                            } else {
+                                console.log("No results found");
+                                alert("No results found: " + query);
+                            }
+
+
+
+                        }, function (err) {
+                            console.error(err);
+                            alert(JSON.stringify(err));
+                        });
+
+                    }
                 }
 
 
