@@ -711,6 +711,14 @@ angular.module('starter.controllers', ['ngResource'])
 
     .controller('c3_areasCtrl', function ($scope, $stateParams, $cordovaSQLite) {
 
+        $scope.profileData = JSON.parse(localStorage.getItem("profileData"));
+        //alert("posId: "+$scope.profileData.positionId);
+
+        if($scope.profileData.positionId > 0){
+            //alert('profile already loaded');
+        }else {
+            window.location = "#/app/c2_areas";
+        }
 
         $scope.areas = [];
 
@@ -893,6 +901,7 @@ angular.module('starter.controllers', ['ngResource'])
 
 
         $scope.profileData = JSON.parse(localStorage.getItem("profileData"));
+        //alert("posId: "+$scope.profileData.positionId);
 
         if($scope.profileData.positionId > 0){
             //alert('profile already loaded');
@@ -939,107 +948,15 @@ angular.module('starter.controllers', ['ngResource'])
         $scope.profileData = JSON.parse(localStorage.getItem("profileData"));
         //alert("profile controler");
 
-
-    })
-
-    .controller('PositionsCtrl', function ($scope, $stateParams, $cordovaSQLite) {
-
-
-        $scope.profileData = JSON.parse(localStorage.getItem("profileData"));
-        $scope.profileData.seniorityId = $stateParams.seniorityId;
-        $scope.profileData.seniorityName = $stateParams.seniorityName;
-        localStorage.setItem("profileData", JSON.stringify($scope.profileData));
-
-
-        $scope.positions = [];
-
-
-        var query = "SELECT Positions.positionId, Positions.name, Positions.description FROM Positions INNER JOIN PositionsRel ON Positions.positionId = PositionsRel.positionId WHERE Positions.status = 'ACTIVE' AND PositionsRel.seniorityId = ? AND PositionsRel.areaId = ? AND PositionsRel.hierarchyId = ? GROUP BY Positions.positionId";
-        //var query = "SELECT Positions.positionId, Positions.name FROM Positions INNER JOIN PositionsRel ON Positions.positionId = PositionsRel.positionId WHERE Positions.positionId = 553 GROUP BY Positions.positionId";
-
-        $cordovaSQLite.execute(db, query, [$stateParams.seniorityId, $scope.profileData.areaId, $scope.profileData.hierarchyId]).then(function (res) {
-            if (res.rows.length > 0) {
-                for (var i = 0; i < res.rows.length; i++) {
-                    $scope.positions.push({name: res.rows.item(i).name, positionId: res.rows.item(i).positionId, description: res.rows.item(i).description});
-                }
-
-                //alert("SELECTED 0-> ID: "+ res.rows.item(0).hierarchyId +" -> "+ res.rows.item(0).name);
-                //alert("SELECTED 1-> ID: "+ res.rows.item(1).hierarchyId +" -> "+ res.rows.item(1).name);
-            } else {
-                console.log("No results found");
-                alert("No results found: " + query + " and Data seniorityId: " + $stateParams.seniorityId + " - areaId: " + $scope.profileData.areaId + " - hierarchyId: " + $scope.profileData.hierarchyId + " - ");
-            }
-
-
-        }, function (err) {
-            console.error(err);
-            alert(JSON.stringify(err));
-        });
-
-
-
+        if($scope.profileData.positionId > 0){
+            //alert('profile already loaded');
+        }else {
+            window.location = "#/app/c2_areas";
+        }
 
 
     })
 
-
-
-    .controller('ProfileVsPyramidCtrl', function ($scope, $cordovaSQLite) {
-
-
-
-        $scope.profileData = JSON.parse(localStorage.getItem("profileData"));
-
-        $scope.pyramidPositions = [];
-
-
-        var query = "SELECT Positions.positionId, Positions.name, Positions.description, Positions.average FROM Positions INNER JOIN PositionsRel ON Positions.positionId = PositionsRel.positionId WHERE Positions.status = 'ACTIVE' AND PositionsRel.seniorityId = ? AND PositionsRel.areaId = ? GROUP BY Positions.positionId ORDER BY PositionsRel.hierarchyId";
-        //var query = "SELECT Positions.positionId, Positions.name FROM Positions INNER JOIN PositionsRel ON Positions.positionId = PositionsRel.positionId WHERE Positions.positionId = 553 GROUP BY Positions.positionId";
-
-        //alert("Query: " + query + " and Data seniorityId: " + $scope.profileData.seniorityId + " - areaId: " + $scope.profileData.areaId + " - ");
-
-        $cordovaSQLite.execute(db, query, [$scope.profileData.seniorityId, $scope.profileData.areaId]).then(function (res) {
-            if (res.rows.length > 0) {
-                for (var i = 0; i < res.rows.length; i++) {
-                    $scope.pyramidPositions.push({name: res.rows.item(i).name, positionId: res.rows.item(i).positionId, description: res.rows.item(i).description, average: res.rows.item(i).average});
-                }
-
-            } else {
-                console.log("No results found");
-                alert("No results found: " + query + " and Data seniorityId: " + $stateParams.seniorityId + " - areaId: " + $scope.profileData.areaId + " - hierarchyId: " + $scope.profileData.hierarchyId + " - ");
-            }
-
-
-        }, function (err) {
-            console.error(err);
-            alert(JSON.stringify(err));
-        });
-
-    })
-
-    .controller('ProfileVsResultCtrl', function ($scope, $stateParams, $cordovaSQLite) {
-
-
-        //alert('update profile data');
-        $scope.profileData = JSON.parse(localStorage.getItem("profileData"));
-
-
-
-
-
-    })
-
-    .controller('ProfileVsSearchCtrl', function ($scope, $stateParams, $cordovaSQLite) {
-
-
-        alert('update profile data');
-        $scope.profileData = JSON.parse(localStorage.getItem("profileData"));
-
-
-
-
-
-    })
 
 
 

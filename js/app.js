@@ -101,7 +101,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 admob.createBannerView(
                     {
                         'publisherId': admob_key,
-                        'adSize': admob.AD_SIZE.BANNER,
+                        'adSize': admob.AD_SIZE.SMART_BANNER,
                         'bannerAtTop': false
                     },
                     function() {
@@ -304,7 +304,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
 
 
                     if(profileData.positionId > 0){
-                        //alert('profile already loaded');
+                        alert('profile already loaded');
                     }else{
                         //alert('Load profile from DB');
                         var query = "SELECT * FROM Profiles WHERE Profiles.profileId = '1'";
@@ -346,6 +346,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                                 //alert("String result 0" + JSON.stringify(res.rows.item(0)))
                                 //alert("SELECTED 1-> ID: "+ res.rows.item(1).hierarchyId +" -> "+ res.rows.item(1).name);
                                 var profileData = JSON.parse(localStorage.getItem("profileData"));
+                                profileData.positionId = res.rows.item(0).positionId;
                                 profileData.amount = res.rows.item(0).amount;
                                 profileData.hierarchyId = res.rows.item(0).hierarchyId;
                                 profileData.areaId = res.rows.item(0).areaId;
@@ -368,8 +369,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
 
 
                         }, function (err) {
-                            console.error(err);
-                            alert(JSON.stringify(err));
+                            //console.error(err);
+                            //alert(JSON.stringify(err));
                         });
 
                     }
