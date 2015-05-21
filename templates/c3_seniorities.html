@@ -1,10 +1,13 @@
 <ion-view view-title="C3 Experiencia">
 	<ion-content>
 
-		<div class="list list-inset p20">
-			<h3 class="">Area: {{profileVsResultData.areaName}}</h3>
-			<h3 class="">Sector: {{profileVsResultData.sectorName}}</h3>
-			<h3 class="">Jerarquía: {{profileVsResultData.hierarchyName}}</h3>
+
+		<div class="list list-inset p20 Tcenter">
+			<h5>Estas comparando tu perfil contra un:</h5>
+			<h5 style="font-weight: bold;">{{profileVsResultData.hierarchyName}} de {{profileVsResultData.sectorName}} del area de {{profileVsResultData.areaName}} </h5>
+			<br />
+			<h4>Por favor selecciona con que experiencia cuenta el puesto de con el que te queres comparar.</h4>
+
 		</div>
 
 		<ion-list>
