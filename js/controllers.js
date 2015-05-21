@@ -1,9 +1,11 @@
 angular.module('starter.controllers', ['ngResource'])
 
-    .controller('AppCtrl', function ($scope, $ionicModal, $cordovaSQLite) {
+    .controller('AppCtrl', function ($scope) {
 
         //alert('Exec code when open');
-
+        $scope.goHome = function () {
+            window.location = "#/app/main";
+        }
 
 
 
@@ -892,7 +894,11 @@ angular.module('starter.controllers', ['ngResource'])
 
         $scope.profileData = JSON.parse(localStorage.getItem("profileData"));
 
-
+        if($scope.profileData.positionId > 0){
+            //alert('profile already loaded');
+        }else {
+            window.location = "#/app/c2_areas";
+        }
 
 
         $scope.profileVsPyramids = [];
