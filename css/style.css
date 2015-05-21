@@ -75,12 +75,12 @@ h1.salary {
 
 
 .textPercentageDif {
-	padding-top: 37%;
+	padding-top: 50%;
 	font-weight: bold;
 }
 
 .textAmountDif {
-	padding-top: 37%;
+	padding-top: 50%;
 	font-weight: bolder;
 }
 
@@ -115,4 +115,9 @@ input[type=range]::-webkit-slider-thumb {
 
 .tCenter {
 	text-align: center;
+}
+
+.itemBadgeC4 {
+	top: 8px !important;
+	right: 40px !important;
 }

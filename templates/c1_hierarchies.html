@@ -2,15 +2,14 @@
   
 	<ion-content>
   	
-  		<div class="list list-inset p20">
-			<h3 class="">Area: {{consultData.areaName}}</h3>
-			<h3 class="">Sector: {{consultData.sectorName}}</h3>
-			<!--
-			<h3 class="">País: {{profileData.countryName}}</h3>
-			<h3 class="">Sueldo: {{profileData.amount}}</h3>
-			-->
-		</div>
+  		<div class="list list-inset p20 Tcenter">
 
+			<h4>Estas buscando en el area de:
+				<h4 style="font-weight: bold;">{{consultData.areaName}} </h4>
+			<h4>Y el sector de:
+				<h4 style="font-weight: bold;">{{consultData.sectorName}} </h4>
+			el puesto que deseas encontrar.</h4>
+		</div>
   
 	    <ion-list>
 	      	<ion-item class="item item-icon-right" ng-repeat="hierarchy in hierarchies" href="#/app/c1_consultResult/{{hierarchy.hierarchyId}}/{{hierarchy.name}}">

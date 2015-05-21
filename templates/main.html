@@ -1,61 +1,13 @@
   <body ng-app="ionicApp">
 
     <ion-nav-bar class="bar-dark">
-        <ion-nav-back-button>
-        </ion-nav-back-button>
+
+        <ion-nav-buttons side="right" href="#/app/main">
+            <button class="button button-icon button-clear ion-home" menu-toggle="right" ng-click="/app/main" >
+            </button>
+        </ion-nav-buttons>
+
     </ion-nav-bar>
-
-
-    <ion-view view-title="Cuanto Ganas?">
-
-      <ion-content>
-        <ion-list>
-
-            <ion-item nav-clear menu-close href="#/app/profile">
-              Mi datos
-            </ion-item>
-
-            <ion-item nav-clear menu-close href="#/app/c1_areas">
-              Buscar
-            </ion-item>
-
-            <ion-item nav-clear menu-close href="#/app/c2_areas">
-                Comparar
-            </ion-item>
-
-            <ion-item nav-clear menu-close href="#/app/c3_areas">
-                Comparar vs. otro puesto
-            </ion-item>
-
-            <ion-item nav-clear menu-close href="#/app/c4_profileVsPyramid">
-                Comparar vs. Mi area
-            </ion-item>
-
-            <ion-item nav-clear menu-close href="#/app/c5_inflation">
-              Inflacion
-            </ion-item>
-
-            <ion-item nav-clear menu-close href="#/app/c6_salaryIncrease">
-               Aumentos
-            </ion-item>
-
-
-
-
-
-            <ion-item nav-clear menu-close href="#/app/c3_areas">
-                Tutorial
-            </ion-item>
-
-            <ion-item nav-clear menu-close href="#/app/help">
-                Ayuda
-            </ion-item>
-
-        </ion-list>
-    </ion-content>
-
-    </ion-view>
-
 
     <script id="templates/intro.html" type="text/ng-template"> 
       <ion-view view-title="Intro">
@@ -114,15 +66,56 @@
       </ion-view>
     </script>
 
-    <script id="templates/main.html" type="text/ng-template">
-      <ion-view hide-back-button="true" view-title="Awesome">
-        <ion-content class="padding">
-          <h1>Main app here</h1>
-          <button class="button" ng-click="toIntro()">Do Tutorial Again</button>
-        </ion-content>
-      </ion-view>
-    </script>
-    
+    <!--<script id="templates/main.html" type="text/ng-template"> -->
+
+        <ion-view view-title="Cuanto Ganas?">
+
+            <ion-content>
+                <ion-list>
+
+                    <ion-item nav-clear menu-close href="#/app/profile">
+                        Mi datos
+                    </ion-item>
+
+                    <ion-item nav-clear menu-close href="#/app/c1_areas">
+                        Buscar
+                    </ion-item>
+
+                    <ion-item nav-clear menu-close href="#/app/c2_areas">
+                        Comparar
+                    </ion-item>
+
+                    <ion-item nav-clear menu-close href="#/app/c3_areas">
+                        Comparar vs. otro puesto
+                    </ion-item>
+
+                    <ion-item nav-clear menu-close href="#/app/c4_profileVsPyramid">
+                        Comparar vs. Mi area
+                    </ion-item>
+
+                    <ion-item nav-clear menu-close href="#/app/c5_inflation">
+                        Inflacion
+                    </ion-item>
+
+                    <ion-item nav-clear menu-close href="#/app/c6_salaryIncrease">
+                        Aumentos
+                    </ion-item>
+
+                    <ion-item nav-clear menu-close  ng-click="toIntro()">
+                        Tutorial
+                    </ion-item>
+
+                    <ion-item nav-clear menu-close href="#/app/help">
+                        Ayuda
+                    </ion-item>
+
+                </ion-list>
+            </ion-content>
+
+          </ion-view>
+
+<!--//        </script> -->
+
   </body>
 
 

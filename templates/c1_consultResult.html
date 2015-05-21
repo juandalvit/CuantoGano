@@ -1,3 +1,12 @@
+<ion-nav-bar class="bar-dark">
+
+	<ion-nav-buttons side="right" href="#/app/main">
+		<button class="button button-icon button-clear ion-home" menu-toggle="right"  ng-click="/app/main" >
+		</button>
+	</ion-nav-buttons>
+
+</ion-nav-bar>
+
 <ion-view class="analysisGood" view-title="C1 Puesto">
 
 	<ion-content>
@@ -8,7 +17,9 @@
 		</div>
 
 		<div class="list list-inset Tcenter">
-			<h5 class="">{{consultData.hierarchyName}} de {{consultData.sectorName}} de {{consultData.areaName}}</h5>
+			<h4 style="font-weight: bold;">{{consultData.hierarchyName}}</h4>
+			 <h5>del sector de {{consultData.sectorName}}</h5>
+			 <h5>y del area de {{consultData.areaName}}</h5>
 		</div>
 
 		<div class="list Tcenter">

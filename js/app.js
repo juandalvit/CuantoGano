@@ -127,7 +127,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
             }else{
 
 
-                db = window.openDatabase("CuantoGanoDBv1.37", '1', 'my', 1024 * 1024 * 100); // browser
+                db = window.openDatabase("CuantoGanoDBv1.38", '1', 'my', 1024 * 1024 * 100); // browser
 
 
                 /*alert('Detele all DB');
@@ -500,6 +500,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 }
             })
 
+            .state('app.c5_inflation', {
+                url: "/c5_inflation",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/c5_inflation.html"
+                    }
+                }
+            })
+
+            .state('app.c6_salaryIncrease', {
+                url: "/c6_salaryIncrease",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/c6_salaryIncrease.html"
+                    }
+                }
+            })
 
 
             .state('app.help', {
