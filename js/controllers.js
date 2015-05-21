@@ -6,13 +6,15 @@ angular.module('starter.controllers', ['ngResource'])
         $scope.profileData = JSON.parse(localStorage.getItem("profileData"));
 
 
-
+        /*
 
         if(profileData.positionId > 0){
             alert('profile already loaded');
         }else{
             var query = "SELECT * FROM Profiles WHERE Profiles.profileId = '1'";
             $cordovaSQLite.execute(db, query, []).then(function (res) {
+
+
                 if (res.rows.length > 0) {
 
                     var query1 = "SELECT name FROM Hierarchies WHERE Hierarchies.hierarchyId = "+res.rows.item(0).hierarchyId;
@@ -58,12 +60,14 @@ angular.module('starter.controllers', ['ngResource'])
                 }
 
 
+
             }, function (err) {
                 console.error(err);
                 alert(JSON.stringify(err));
             });
 
         }
+                 */
 
 
 
