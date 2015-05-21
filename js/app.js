@@ -318,7 +318,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
             .state('app', {
                 url: "/app",
                 abstract: true,
-                templateUrl: "templates/menu.html"
+                templateUrl: "templates/menu.html",
+                controller: 'AppCtrl'
             })
 
             .state('app.main', {
@@ -523,7 +524,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 url: "/profile",
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/profile.html"
+                        templateUrl: "templates/profile.html",
+                        controller: 'profileCtrl'
                     }
                 }
             })

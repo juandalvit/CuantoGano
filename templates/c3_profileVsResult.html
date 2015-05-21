@@ -8,7 +8,7 @@
 				<h3 class="miniDesc">{{profileData.hierarchyName}} de {{profileData.sectorName}} de {{profileData.areaName}}</h3>
 			</div>
 			<div class="col-50 tCenter">
-				<h3 class="miniDesc">{{profileData.hierarchyName}} de {{profileData.sectorName}} de {{profileData.areaName}}</h3>
+				<h3 class="miniDesc">{{profileVsResultData.hierarchyName}} de {{profileVsResultData.sectorName}} de {{profileVsResultData.areaName}}</h3>
 			</div>
 		</div>
 	</ion-item>
@@ -17,15 +17,15 @@
 
 	  <div class="row p32 tCenter">
 		  <div class="col-33 ">
-			  <h3>$10.000</h3>
+			  <h3>${{profileData.amount}}</h3>
 		  </div>
 
 		  <div class="col-33 ">
-			  <h3>-10%</h3>
+			  <h3>{{((((profileData.amount - profileVsResultData.average)/profileVsResultData.average))*100)-1  | number:0}}%</h3>
 		  </div>
 
 		  <div class="col-33 ">
-			  <h3>$11.000</h3>
+			  <h3>${{profileVsResultData.average}}</h3>
 		  </div>
 	  </div>
 
