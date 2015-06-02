@@ -26,9 +26,9 @@
 			<h4>Sueldos brutos promedios segun la experiencia del puesto</h4>
 
 			<div class="row Tcenter">
-				<div class="col-33"><h4>${{positionData.junior}}</h4>Junior</div>
-				<div class="col-33"><h4>${{positionData.semisenior}}</h4>Pleno</div>
-				<div class="col-33"><h4>${{positionData.senior}}</h4>Senior</div>
+				<div class="col-33"><h4>${{positionData.average*positionData.coef_junior | number:0}}</h4>Junior</div>
+				<div class="col-33"><h4>${{positionData.average}}</h4>Pleno</div>
+				<div class="col-33"><h4>${{positionData.average*positionData.coef_senior | number:0}}</h4>Senior</div>
 			</div>
 		</div>
 

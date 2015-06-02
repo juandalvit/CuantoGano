@@ -1,50 +1,160 @@
 angular.module('starter.services', [])
 
-.factory('Chats', function() {
-  // Might use a resource here that returns a JSON array
+    .factory('syncServer', function ($http, $cordovaSQLite) {
+        return {
 
-  // Some fake testing data
-  var chats = [{
-    id: 0,
-    name: 'Ben Sparrow',
-    lastText: 'You on your way?? wow',
-    face: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png'
-  }, {
-    id: 1,
-    name: 'Max Lynx',
-    lastText: 'Hey, it\'s me',
-    face: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460'
-  }, {
-    id: 2,
-    name: 'Andrew Jostlin',
-    lastText: 'Did you get the ice cream?',
-    face: 'https://pbs.twimg.com/profile_images/491274378181488640/Tti0fFVJ.jpeg'
-  }, {
-    id: 3,
-    name: 'Adam Bradleyson',
-    lastText: 'I should buy a boat',
-    face: 'https://pbs.twimg.com/profile_images/479090794058379264/84TKj_qa.jpeg'
-  }, {
-    id: 4,
-    name: 'Perry Governor',
-    lastText: 'Look at my mukluks!',
-    face: 'https://pbs.twimg.com/profile_images/491995398135767040/ie2Z_V6e.jpeg'
-  }];
 
-  return {
-    all: function() {
-      return chats;
-    },
-    remove: function(chat) {
-      chats.splice(chats.indexOf(chat), 1);
-    },
-    get: function(chatId) {
-      for (var i = 0; i < chats.length; i++) {
-        if (chats[i].id === parseInt(chatId)) {
-          return chats[i];
         }
-      }
-      return null;
-    }
-  };
-});
+    /*
+        // Might use a resource here that returns a JSON array
+
+        alert('Run Json');
+
+        //hacemos uso de $http para obtener los datos del json
+
+        return {
+            getUpdates: function () {
+                var query = "SELECT Sync.date FROM Sync WHERE Sync.syncId = '1'";
+                $cordovaSQLite.execute(db, query, []).then(function (res) {
+
+
+                    $scope.date = res.rows.item(0).date;
+
+
+                    $scope.jsonURL = 'http://bits0.com/CuantoGano/Json/dbsync.php?lastDate=' + $scope.date;
+
+                    alert('jsonURL: ' + $scope.jsonURL);
+
+                    $http.get($scope.jsonURL).success(function (data) {
+                        //Convert data to array.
+                        //datos lo tenemos disponible en la vista gracias a $scope
+                        $scope.datos = data;
+                        //alert(JSON.stringify(data));
+                        if (JSON.stringify(data) != '"null"') {
+
+
+                            //alert('datos length: '+ data.length);
+
+
+                            for (var i = 0; i < data.length; i++) {
+
+                                $scope.lastDateUpdate = data[i].date;
+
+                                if (data[i].operation == 'UPDATE') {
+                                    /!*1) Table
+                                     2) Field
+                                     3) Value
+                                     4) fieldID
+                                     5) valueID*!/
+
+
+                                    var query = "UPDATE " + data[i].table + " SET " + data[i].field + " = '" + data[i].value + "' WHERE " + data[i].fieldId + " = " + data[i].valueId;
+
+
+                                    $cordovaSQLite.execute(db, query, []).then(function (res) {
+
+                                        //alert('Update query: '+query);
+
+                                    }, function (err) {
+                                        console.error(err);
+                                        alert(JSON.stringify(err));
+                                    });
+
+                                } else if (data[i].operation == 'INSERT') {
+                                    /!*1) Table
+                                     2) Field
+                                     3) Value
+                                     4) fieldID
+                                     5) valueID*!/
+
+                                    var query = "INSERT INTO " + data[i].table + " (" + data[i].field + ")  (" + data[i].value + ")";
+
+                                    $cordovaSQLite.execute(db, query, []).then(function (res) {
+
+
+                                        //alert('Insert query: '+query);
+
+                                    }, function (err) {
+                                        console.error(err);
+                                        alert(JSON.stringify(err));
+                                    });
+                                }
+
+
+                            }
+
+                            var query = "UPDATE Sync SET date = '" + $scope.lastDateUpdate + "' WHERE syncId = 1";
+
+                            //alert('Update DB: ' + query);
+                            $cordovaSQLite.execute(db, query, []).then(function (res) {
+
+                                //alert('Update DONE DB: ' + query);
+
+                            }, function (err) {
+                                console.error(err);
+                                alert(JSON.stringify(err));
+                            });
+
+                            alert('DB UPDATED!');
+
+                        } else {
+                            alert('NO Update');
+                        }
+                    });
+
+                }, function (err) {
+                    console.error(err);
+                    alert(JSON.stringify(err));
+                });
+
+
+            },
+
+            sendJson: function () {
+                alert('Run send Json');
+
+                //hacemos uso de $http para obtener los datos del json
+
+                var query = "SELECT Sync.date FROM Sync WHERE Sync.syncId = '1'";
+                $cordovaSQLite.execute(db, query, []).then(function (res) {
+
+
+                    $scope.date = res.rows.item(0).date;
+
+
+                    /!*$scope.postData = [];
+                     $scope.postData.push({name: 1, value: 1});
+                     $scope.postData.push({name: 2, value: 2});
+                     $scope.postData.push({name: 3, value: 3});*!/
+
+                    $scope.post = {'storyMessage': 'Hello', postToFB: true, postToTwitter: true, postToTeam: false};
+
+                    $scope.posts = JSON.stringify($scope.post);
+
+
+
+                    $scope.jsonSendURL = 'http://bits0.com/CuantoGano/Json/dbpush.php';
+
+
+                    //alert('jsonURL: '+$scope.jsonURL);
+
+                    $http.post($scope.jsonSendURL, $scope.post).success(function (data) {
+
+
+                        alert('Data: '+JSON.stringify(data));
+
+                    }).error(function(error) {
+                        alert(JSON.stringify(error));
+                    });
+
+
+                }, function (err) {
+                    console.error(err);
+                    alert(JSON.stringify(err));
+                });
+
+            }
+        }*/
+
+
+    });

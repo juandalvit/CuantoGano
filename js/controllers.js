@@ -29,7 +29,7 @@ angular.module('starter.controllers', ['ngResource'])
 
                 $scope.jsonURL = 'http://bits0.com/CuantoGano/Json/dbsync.php?lastDate='+$scope.date;
 
-                //alert('jsonURL: '+$scope.jsonURL);
+                alert('jsonURL: '+$scope.jsonURL);
 
                 $http.get($scope.jsonURL).success(function (data) {
                     //Convert data to array.
@@ -116,8 +116,6 @@ angular.module('starter.controllers', ['ngResource'])
 
 
 
-            //datosResource lo tenemos disponible en la vista gracias a $scope
-            //$scope.datosResource = dataResource.get();
 
 
 
@@ -286,7 +284,7 @@ angular.module('starter.controllers', ['ngResource'])
 
 
         //var query = "SELECT Areas.areaId, Areas.name FROM Areas INNER JOIN PositionsRel ON Areas.areaId = PositionsRel.areaId WHERE Areas.status = 'ACTIVE' AND PositionsRel.hierarchyId = ? GROUP BY Areas.areaId";
-        var query = "SELECT Areas.areaId, Areas.name, Areas.description FROM Areas WHERE Areas.status = 'ACTIVE'";
+        var query = "SELECT Areas.areaId, Areas.name, Areas.description FROM Areas INNER JOIN Positions ON Areas.areaId = Positions.areaId WHERE Areas.status = 'ACTIVE' GROUP BY Areas.areaId";
         $cordovaSQLite.execute(db, query, []).then(function (res) {
             if (res.rows.length > 0) {
                 for (var i = 0; i < res.rows.length; i++) {
@@ -297,7 +295,7 @@ angular.module('starter.controllers', ['ngResource'])
                 //alert("SELECTED 1-> ID: "+ res.rows.item(1).hierarchyId +" -> "+ res.rows.item(1).name);
             } else {
                 console.log("No results found");
-                alert("No results found - query: " + query + " -- AND hierarchyId: "+$stateParams.hierarchyId);
+                alert("No results found - query: " + query );
             }
 
 
@@ -321,7 +319,7 @@ angular.module('starter.controllers', ['ngResource'])
 
          $scope.sectors = [];
 
-        var query = "SELECT Sectors.sectorId, Sectors.name, Sectors.description FROM Sectors WHERE Sectors.status = 'ACTIVE' AND Sectors.areaId = ?  GROUP BY Sectors.orden";
+        var query = "SELECT Sectors.sectorId, Sectors.name, Sectors.description FROM Sectors INNER JOIN Positions ON Sectors.sectorId = Positions.sectorId WHERE Sectors.status = 'ACTIVE' AND Sectors.areaId = ?  GROUP BY Sectors.sectorId";
         $cordovaSQLite.execute(db, query, [$stateParams.areaId]).then(function (res) {
             if (res.rows.length > 0) {
                 for (var i = 0; i < res.rows.length; i++) {
@@ -362,7 +360,7 @@ angular.module('starter.controllers', ['ngResource'])
         $scope.hierarchies = [];
 
 
-        var query = "SELECT Hierarchies.hierarchyId, Hierarchies.name, Hierarchies.description FROM Hierarchies INNER JOIN Positions ON Hierarchies.hierarchyId = Positions.hierarchyId WHERE Hierarchies.status = 'ACTIVE' AND Positions.sectorId = ?";
+        var query = "SELECT Hierarchies.hierarchyId, Hierarchies.name, Hierarchies.description FROM Hierarchies INNER JOIN Positions ON Hierarchies.hierarchyId = Positions.hierarchyId WHERE Hierarchies.status = 'ACTIVE' AND Positions.sectorId = ? GROUP BY Hierarchies.hierarchyId ORDER BY Hierarchies.orden";
         $cordovaSQLite.execute(db, query, [$stateParams.sectorId]).then(function (res) {
             if (res.rows.length > 0) {
                 for (var i = 0; i < res.rows.length; i++) {
@@ -373,7 +371,7 @@ angular.module('starter.controllers', ['ngResource'])
                 //alert("SELECTED 1-> ID: "+ res.rows.item(1).hierarchyId +" -> "+ res.rows.item(1).name);
             } else {
                 console.log("No results found");
-
+                alert("No results found - query: " + query );
             }
             //alert("CANT result: "+res.rows.length);
 
@@ -395,7 +393,7 @@ angular.module('starter.controllers', ['ngResource'])
 
 
 
-        var query = "SELECT Positions.positionId, Positions.name, Positions.average, Positions.junior, Positions.semisenior, Positions.senior FROM Positions WHERE Positions.status = 'ACTIVE' AND Positions.sectorId = ? AND Positions.hierarchyId = ? ";
+        var query = "SELECT Positions.positionId, Positions.average, Hierarchies.coef_junior, Hierarchies.coef_senior FROM Positions INNER JOIN Hierarchies ON Positions.hierarchyId = Hierarchies.hierarchyId WHERE Positions.status = 'ACTIVE' AND Positions.sectorId = ? AND Positions.hierarchyId = ? ";
         $cordovaSQLite.execute(db, query, [$scope.consultData.sectorId, $stateParams.hierarchyId]).then(function (res) {
             if (res.rows.length > 0) {
                 for (var i = 0; i < res.rows.length; i++) {
@@ -438,7 +436,7 @@ angular.module('starter.controllers', ['ngResource'])
 
 
         //var query = "SELECT Areas.areaId, Areas.name FROM Areas INNER JOIN PositionsRel ON Areas.areaId = PositionsRel.areaId WHERE Areas.status = 'ACTIVE' AND PositionsRel.hierarchyId = ? GROUP BY Areas.areaId";
-        var query = "SELECT Areas.areaId, Areas.name, Areas.description FROM Areas WHERE Areas.status = 'ACTIVE'";
+        var query = "SELECT Areas.areaId, Areas.name, Areas.description FROM Areas INNER JOIN Positions ON Areas.areaId = Positions.areaId WHERE Areas.status = 'ACTIVE' GROUP BY Areas.areaId";
         $cordovaSQLite.execute(db, query, []).then(function (res) {
             if (res.rows.length > 0) {
                 for (var i = 0; i < res.rows.length; i++) {
@@ -449,7 +447,7 @@ angular.module('starter.controllers', ['ngResource'])
                 //alert("SELECTED 1-> ID: "+ res.rows.item(1).hierarchyId +" -> "+ res.rows.item(1).name);
             } else {
                 console.log("No results found");
-                alert("No results found - query: " + query + " -- AND hierarchyId: "+$stateParams.hierarchyId);
+                alert("No results found - query: " + query);
             }
 
 
@@ -472,7 +470,7 @@ angular.module('starter.controllers', ['ngResource'])
 
         $scope.sectors = [];
 
-        var query = "SELECT Sectors.sectorId, Sectors.name, Sectors.description FROM Sectors WHERE Sectors.status = 'ACTIVE' AND Sectors.areaId = ?  GROUP BY Sectors.orden";
+        var query = "SELECT Sectors.sectorId, Sectors.name, Sectors.description FROM Sectors INNER JOIN Positions ON Sectors.sectorId = Positions.sectorId WHERE Sectors.status = 'ACTIVE' AND Sectors.areaId = ?  GROUP BY Sectors.sectorId";
         $cordovaSQLite.execute(db, query, [$stateParams.areaId]).then(function (res) {
             if (res.rows.length > 0) {
                 for (var i = 0; i < res.rows.length; i++) {
@@ -513,7 +511,7 @@ angular.module('starter.controllers', ['ngResource'])
         $scope.hierarchies = [];
 
 
-        var query = "SELECT Hierarchies.hierarchyId, Hierarchies.name, Hierarchies.description FROM Hierarchies INNER JOIN Positions ON Hierarchies.hierarchyId = Positions.hierarchyId WHERE Hierarchies.status = 'ACTIVE' AND Positions.sectorId = ?";
+        var query = "SELECT Hierarchies.hierarchyId, Hierarchies.name, Hierarchies.description FROM Hierarchies INNER JOIN Positions ON Hierarchies.hierarchyId = Positions.hierarchyId WHERE Hierarchies.status = 'ACTIVE' AND Positions.sectorId = ? GROUP BY Hierarchies.hierarchyId ORDER BY Hierarchies.orden";
         $cordovaSQLite.execute(db, query, [$stateParams.sectorId]).then(function (res) {
             if (res.rows.length > 0) {
                 for (var i = 0; i < res.rows.length; i++) {
@@ -602,26 +600,31 @@ angular.module('starter.controllers', ['ngResource'])
 		$scope.analysis = [];
 
 
-        var query = "SELECT Positions.positionId, Positions.name, Positions.average, Positions.junior, Positions.semisenior, Positions.senior FROM Positions WHERE Positions.status = 'ACTIVE' AND Positions.sectorId = ? AND Positions.hierarchyId = ? ";
+        var query = "SELECT Positions.positionId, Positions.average, Hierarchies.coef_junior, Hierarchies.coef_senior, Hierarchies.coef_peq, Hierarchies.coef_med, Hierarchies.coef_grand, Hierarchies.coef_min, Hierarchies.coef_max FROM Positions INNER JOIN Hierarchies ON Positions.hierarchyId = Hierarchies.hierarchyId WHERE Positions.status = 'ACTIVE' AND Positions.sectorId = ? AND Positions.hierarchyId = ? ";
         $cordovaSQLite.execute(db, query, [$scope.profileData.sectorId, $scope.profileData.hierarchyId]).then(function (res) {
             if (res.rows.length > 0) {
 
                 $scope.analysis.average = res.rows.item(0).average;
-                $scope.analysis.junior = res.rows.item(0).junior;
-                $scope.analysis.semisenior = res.rows.item(0).semisenior;
-                $scope.analysis.senior = res.rows.item(0).senior;
+                $scope.analysis.junior = res.rows.item(0).average*res.rows.item(0).coef_junior;
+                $scope.analysis.semisenior = res.rows.item(0).average;
+                $scope.analysis.senior = res.rows.item(0).average*res.rows.item(0).coef_senior;
                 $scope.analysis.positionId = res.rows.item(0).positionId;
+                $scope.analysis.min = res.rows.item(0).average*res.rows.item(0).coef_min;
+                $scope.analysis.max = res.rows.item(0).average*res.rows.item(0).coef_max;
+                $scope.analysis.peq = res.rows.item(0).average*res.rows.item(0).coef_peq;
+                $scope.analysis.med = res.rows.item(0).average*res.rows.item(0).coef_med;
+                $scope.analysis.grand = res.rows.item(0).average*res.rows.item(0).coef_grand;
 
 
                 if($scope.profileData.seniorityId == 1) {
-                    $scope.analysis.marketValue = res.rows.item(0).junior;
+                    $scope.analysis.marketValue = $scope.analysis.junior;
                 }else if($scope.profileData.seniorityId == 2) {
-                    $scope.analysis.marketValue = res.rows.item(0).semisenior;
+                    $scope.analysis.marketValue = $scope.analysis.semisenior;
                 }else if($scope.profileData.seniorityId == 3){
-                        $scope.analysis.marketValue = res.rows.item(0).senior;
+                        $scope.analysis.marketValue = $scope.analysis.senior;
                 }
 
-                if($scope.profileData.amount >= $scope.profileData.marketValue){
+                if($scope.profileData.amount >= $scope.analysis.marketValue){
                     $scope.profileData.amountStatus = 'Good';
                 }else{
                     $scope.profileData.amountStatus = 'Bad';
@@ -724,7 +727,7 @@ angular.module('starter.controllers', ['ngResource'])
 
 
         //var query = "SELECT Areas.areaId, Areas.name FROM Areas INNER JOIN PositionsRel ON Areas.areaId = PositionsRel.areaId WHERE Areas.status = 'ACTIVE' AND PositionsRel.hierarchyId = ? GROUP BY Areas.areaId";
-        var query = "SELECT Areas.areaId, Areas.name, Areas.description FROM Areas WHERE Areas.status = 'ACTIVE'";
+        var query = "SELECT Areas.areaId, Areas.name, Areas.description FROM Areas INNER JOIN Positions ON Areas.areaId = Positions.areaId WHERE Areas.status = 'ACTIVE' GROUP BY Areas.areaId";
         $cordovaSQLite.execute(db, query, []).then(function (res) {
             if (res.rows.length > 0) {
                 for (var i = 0; i < res.rows.length; i++) {
@@ -735,7 +738,7 @@ angular.module('starter.controllers', ['ngResource'])
                 //alert("SELECTED 1-> ID: "+ res.rows.item(1).hierarchyId +" -> "+ res.rows.item(1).name);
             } else {
                 console.log("No results found");
-                alert("No results found - query: " + query + " -- AND hierarchyId: "+$stateParams.hierarchyId);
+                alert("No results found - query: " + query);
             }
 
 
@@ -758,7 +761,7 @@ angular.module('starter.controllers', ['ngResource'])
 
         $scope.sectors = [];
 
-        var query = "SELECT Sectors.sectorId, Sectors.name, Sectors.description FROM Sectors WHERE Sectors.status = 'ACTIVE' AND Sectors.areaId = ? ORDER BY Sectors.orden";
+        var query = "SELECT Sectors.sectorId, Sectors.name, Sectors.description FROM Sectors INNER JOIN Positions ON Sectors.sectorId = Positions.sectorId WHERE Sectors.status = 'ACTIVE' AND Sectors.areaId = ?  GROUP BY Sectors.sectorId";
         $cordovaSQLite.execute(db, query, [$stateParams.areaId]).then(function (res) {
             if (res.rows.length > 0) {
                 for (var i = 0; i < res.rows.length; i++) {
@@ -799,7 +802,7 @@ angular.module('starter.controllers', ['ngResource'])
         $scope.hierarchies = [];
 
 
-        var query = "SELECT Hierarchies.hierarchyId, Hierarchies.name, Hierarchies.description FROM Hierarchies INNER JOIN Positions ON Hierarchies.hierarchyId = Positions.hierarchyId WHERE Hierarchies.status = 'ACTIVE' AND Positions.sectorId = ?";
+        var query = "SELECT Hierarchies.hierarchyId, Hierarchies.name, Hierarchies.description FROM Hierarchies INNER JOIN Positions ON Hierarchies.hierarchyId = Positions.hierarchyId WHERE Hierarchies.status = 'ACTIVE' AND Positions.sectorId = ? GROUP BY Hierarchies.hierarchyId ORDER BY Hierarchies.orden";
         $cordovaSQLite.execute(db, query, [$stateParams.sectorId]).then(function (res) {
             if (res.rows.length > 0) {
                 for (var i = 0; i < res.rows.length; i++) {
@@ -872,7 +875,7 @@ angular.module('starter.controllers', ['ngResource'])
         $scope.analysis = [];
 
 
-        var query = "SELECT Positions.positionId, Positions.name, Positions.average, Positions.junior, Positions.semisenior, Positions.senior FROM Positions WHERE Positions.status = 'ACTIVE' AND Positions.sectorId = ? AND Positions.hierarchyId = ? ";
+        var query = "SELECT Positions.positionId, Positions.average FROM Positions WHERE Positions.status = 'ACTIVE' AND Positions.sectorId = ? AND Positions.hierarchyId = ? ";
         $cordovaSQLite.execute(db, query, [$scope.profileVsResultData.sectorId, $scope.profileVsResultData.hierarchyId]).then(function (res) {
             if (res.rows.length > 0) {
 
@@ -913,12 +916,19 @@ angular.module('starter.controllers', ['ngResource'])
         $scope.profileVsPyramids = [];
 
 
-        var query = "SELECT Positions.positionId, Positions.name, Positions.description, Positions.average, Hierarchies.name AS hierarchyName FROM Positions INNER JOIN Hierarchies ON Hierarchies.hierarchyId = Positions.hierarchyId WHERE Positions.status = 'ACTIVE' AND Positions.sectorId = ?";
+        var query = "SELECT Positions.positionId, Positions.average, Hierarchies.name AS hierarchyName FROM Positions INNER JOIN Hierarchies ON Hierarchies.hierarchyId = Positions.hierarchyId WHERE Positions.status = 'ACTIVE' AND Positions.sectorId = ?";
         $cordovaSQLite.execute(db, query, [$scope.profileData.sectorId]).then(function (res) {
             if (res.rows.length > 0) {
                 //alert("Results found: " + query + " -- With val: "+$scope.profileData.sectorId + ", " + $scope.profileData.hierarchyId);
 
                 for (var i = 0; i < res.rows.length; i++) {
+
+                    if($scope.profileData.amount >= res.rows.item(i).average){
+                        $scope.profileData.amountHierarchyStatus = 'Good';
+                    }else{
+                        $scope.profileData.amountHierarchyStatus = 'Bad';
+                    }
+
                     $scope.profileVsPyramids.push({name: res.rows.item(i).name, description: res.rows.item(i).description, average: res.rows.item(i).average, hierarchyName: res.rows.item(i).hierarchyName});
                 }
 
