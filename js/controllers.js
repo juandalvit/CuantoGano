@@ -350,7 +350,7 @@ angular.module('starter.controllers', ['ngResource'])
 
 
         //var query = "SELECT Areas.areaId, Areas.name FROM Areas INNER JOIN PositionsRel ON Areas.areaId = PositionsRel.areaId WHERE Areas.status = 'ACTIVE' AND PositionsRel.hierarchyId = ? GROUP BY Areas.areaId";
-        var query = "SELECT Areas.areaId, Areas.name, Areas.description FROM Areas INNER JOIN Positions ON Areas.areaId = Positions.areaId WHERE Areas.status = 'ACTIVE' GROUP BY Areas.areaId";
+        var query = "SELECT Areas.areaId, Areas.name, Areas.description FROM Areas WHERE Areas.status = 'ACTIVE'";
         $cordovaSQLite.execute(db, query, []).then(function (res) {
             if (res.rows.length > 0) {
                 for (var i = 0; i < res.rows.length; i++) {
