@@ -117,11 +117,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 );
             }
 
+            if(typeof analytics !== undefined) {
+                analytics.startTrackerWithId("UA-63703895-1");
+            } else {
+                alert("Google Analytics Unavailable");
+            }
+
 
             if (window.cordova) {
 
                 //Clean DB
-                $cordovaSQLite.deleteDB("CuantoGanoDBv2.0");
+                //$cordovaSQLite.deleteDB("CuantoGanoDBv2.0");
 
                 db = $cordovaSQLite.openDB("CuantoGanoDBv2.0");
 

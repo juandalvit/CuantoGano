@@ -177,6 +177,72 @@ angular.module('starter.controllers', ['ngResource'])
 
     })
 
+    .controller("analyticsTrackView-c1_areas", function ($scope) {
+        if(typeof analytics !== undefined) {
+            analytics.trackView("analyticsTrackView-c1_areas");
+        }
+    })
+
+    .controller("analyticsTrackView-c1_consultResult", function ($scope) {
+        if(typeof analytics !== undefined) {
+            analytics.trackView("analyticsTrackView-c1_consultResult");
+        }
+    })
+
+    .controller("analyticsTrackView-c2_areas", function ($scope) {
+        if(typeof analytics !== undefined) {
+            analytics.trackView("analyticsTrackView-c2_areas");
+        }
+    })
+
+    .controller("analyticsTrackView-c2_analysis", function ($scope) {
+        if(typeof analytics !== undefined) {
+            analytics.trackView("analyticsTrackView-c2_analysis");
+        }
+    })
+
+    .controller("analyticsTrackView-c3_areas", function ($scope) {
+        if(typeof analytics !== undefined) {
+            analytics.trackView("analyticsTrackView-c3_areas");
+        }
+    })
+
+    .controller("analyticsTrackView-c3_profileVsResult", function ($scope) {
+        if(typeof analytics !== undefined) {
+            analytics.trackView("analyticsTrackView-c3_profileVsResult");
+        }
+    })
+
+    .controller("analyticsTrackView-c4_profileVsPyramid", function ($scope) {
+        if(typeof analytics !== undefined) {
+            analytics.trackView("analyticsTrackView-c4_profileVsPyramid");
+        }
+    })
+
+    .controller("analyticsTrackView-c5_inflation", function ($scope) {
+        if(typeof analytics !== undefined) {
+            analytics.trackView("analyticsTrackView-c5_inflation");
+        }
+    })
+
+    .controller("analyticsTrackView-c6_salaryIncrease", function ($scope) {
+        if(typeof analytics !== undefined) {
+            analytics.trackView("analyticsTrackView-c6_salaryIncrease");
+        }
+    })
+
+    .controller("analyticsTrackView-help", function ($scope) {
+        if(typeof analytics !== undefined) {
+            analytics.trackView("analyticsTrackView-help");
+        }
+    })
+
+    .controller("analyticsTrackView-profile", function ($scope) {
+        if(typeof analytics !== undefined) {
+            analytics.trackView("analyticsTrackView-profile");
+        }
+    })
+
     .controller("TestSQLCtrl", function ($scope, $cordovaSQLite) {
 
 
