@@ -666,29 +666,33 @@ angular.module('starter.controllers', ['ngResource'])
 		$scope.analysis = [];
 
 
-        var query = "SELECT Positions.positionId, Positions.average, Hierarchies.coef_junior, Hierarchies.coef_senior, Hierarchies.coef_peq, Hierarchies.coef_med, Hierarchies.coef_grand, Hierarchies.coef_min, Hierarchies.coef_max FROM Positions INNER JOIN Hierarchies ON Positions.hierarchyId = Hierarchies.hierarchyId WHERE Positions.status = 'ACTIVE' AND Positions.sectorId = ? AND Positions.hierarchyId = ? ";
+        var query = "SELECT Positions.positionId, Positions.average, Hierarchies.coef_junior, Hierarchies.coef_pleno, Hierarchies.coef_senior, Hierarchies.coef_peq, Hierarchies.coef_med, Hierarchies.coef_grand, Hierarchies.coef_min, Hierarchies.coef_max FROM Positions INNER JOIN Hierarchies ON Positions.hierarchyId = Hierarchies.hierarchyId WHERE Positions.status = 'ACTIVE' AND Positions.sectorId = ? AND Positions.hierarchyId = ? ";
         $cordovaSQLite.execute(db, query, [$scope.profileData.sectorId, $scope.profileData.hierarchyId]).then(function (res) {
             if (res.rows.length > 0) {
 
                 $scope.analysis.average = res.rows.item(0).average;
                 $scope.analysis.junior = res.rows.item(0).average*res.rows.item(0).coef_junior;
-                $scope.analysis.semisenior = res.rows.item(0).average;
+                $scope.analysis.semisenior = res.rows.item(0).average*res.rows.item(0).coef_pleno;
                 $scope.analysis.senior = res.rows.item(0).average*res.rows.item(0).coef_senior;
                 $scope.analysis.positionId = res.rows.item(0).positionId;
-                $scope.analysis.min = res.rows.item(0).average*res.rows.item(0).coef_min;
-                $scope.analysis.max = res.rows.item(0).average*res.rows.item(0).coef_max;
-                $scope.analysis.peq = res.rows.item(0).average*res.rows.item(0).coef_peq;
-                $scope.analysis.med = res.rows.item(0).average*res.rows.item(0).coef_med;
-                $scope.analysis.grand = res.rows.item(0).average*res.rows.item(0).coef_grand;
+
 
 
                 if($scope.profileData.seniorityId == 1) {
-                    $scope.analysis.marketValue = $scope.analysis.junior;
+                    $scope.profileData.siniorityCoef = res.rows.item(0).coef_junior;
                 }else if($scope.profileData.seniorityId == 2) {
-                    $scope.analysis.marketValue = $scope.analysis.semisenior;
+                    $scope.profileData.siniorityCoef = res.rows.item(0).coef_pleno;
                 }else if($scope.profileData.seniorityId == 3){
-                        $scope.analysis.marketValue = $scope.analysis.senior;
+                    $scope.profileData.siniorityCoef = res.rows.item(0).coef_senior;
                 }
+
+                $scope.analysis.marketValue = $scope.analysis.average*$scope.profileData.siniorityCoef;
+
+                $scope.analysis.min = res.rows.item(0).average*res.rows.item(0).coef_min*$scope.analysis.siniorityCoef;
+                $scope.analysis.max = res.rows.item(0).average*res.rows.item(0).coef_max*$scope.analysis.siniorityCoef;
+                $scope.analysis.peq = res.rows.item(0).average*res.rows.item(0).coef_peq*$scope.analysis.siniorityCoef;
+                $scope.analysis.med = res.rows.item(0).average*res.rows.item(0).coef_med*$scope.analysis.siniorityCoef;
+                $scope.analysis.grand = res.rows.item(0).average*res.rows.item(0).coef_grand*$scope.analysis.siniorityCoef;
 
                 if($scope.profileData.amount >= $scope.analysis.marketValue){
                     $scope.profileData.amountStatus = 'Good';
@@ -983,20 +987,20 @@ angular.module('starter.controllers', ['ngResource'])
         $scope.profileVsPyramids = [];
 
 
-        var query = "SELECT Positions.positionId, Positions.average, Hierarchies.name AS hierarchyName FROM Positions INNER JOIN Hierarchies ON Hierarchies.hierarchyId = Positions.hierarchyId WHERE Positions.status = 'ACTIVE' AND Positions.sectorId = ?";
+        var query = "SELECT Positions.positionId, Positions.average, Hierarchies.name AS hierarchyName FROM Positions INNER JOIN Hierarchies ON Hierarchies.hierarchyId = Positions.hierarchyId WHERE Positions.status = 'ACTIVE' AND Positions.sectorId = ? ORDER BY Hierarchies.orden DESC";
         $cordovaSQLite.execute(db, query, [$scope.profileData.sectorId]).then(function (res) {
             if (res.rows.length > 0) {
                 //alert("Results found: " + query + " -- With val: "+$scope.profileData.sectorId + ", " + $scope.profileData.hierarchyId);
 
                 for (var i = 0; i < res.rows.length; i++) {
 
-                    if($scope.profileData.amount >= res.rows.item(i).average){
+                    if($scope.profileData.amount >= res.rows.item(i).average*$scope.profileData.siniorityCoef){
                         $scope.profileData.amountHierarchyStatus = 'Good';
                     }else{
                         $scope.profileData.amountHierarchyStatus = 'Bad';
                     }
 
-                    $scope.profileVsPyramids.push({name: res.rows.item(i).name, description: res.rows.item(i).description, average: res.rows.item(i).average, hierarchyName: res.rows.item(i).hierarchyName, hierarchyStatus: $scope.profileData.amountHierarchyStatus });
+                    $scope.profileVsPyramids.push({name: res.rows.item(i).name, description: res.rows.item(i).description, average: res.rows.item(i).average*$scope.profileData.siniorityCoef, hierarchyName: res.rows.item(i).hierarchyName, hierarchyStatus: $scope.profileData.amountHierarchyStatus });
                 }
 
 
