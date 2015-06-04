@@ -128,7 +128,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
             if (window.cordova) {
 
                 //Clean DB
-                $cordovaSQLite.deleteDB("CuantoGanoDBv2.2");
+                //$cordovaSQLite.deleteDB("CuantoGanoDBv2.2");
 
                 db = $cordovaSQLite.openDB("CuantoGanoDBv2.2");
 

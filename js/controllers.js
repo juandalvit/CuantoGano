@@ -996,7 +996,7 @@ angular.module('starter.controllers', ['ngResource'])
                         $scope.profileData.amountHierarchyStatus = 'Bad';
                     }
 
-                    $scope.profileVsPyramids.push({name: res.rows.item(i).name, description: res.rows.item(i).description, average: res.rows.item(i).average, hierarchyName: res.rows.item(i).hierarchyName});
+                    $scope.profileVsPyramids.push({name: res.rows.item(i).name, description: res.rows.item(i).description, average: res.rows.item(i).average, hierarchyName: res.rows.item(i).hierarchyName, hierarchyStatus: $scope.profileData.amountHierarchyStatus });
                 }
 
 
