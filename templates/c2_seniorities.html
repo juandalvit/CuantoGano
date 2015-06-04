@@ -1,24 +1,24 @@
-<ion-view view-title="C2 Experiencia">
+<ion-view view-title="Experiencia?">
   	<ion-content>
   
 	  	<div class="list list-inset p20 Tcenter">
 
-			<h5>Te estas comparando con el mercado en el area de:</h5>
+			<h5>Te estas comparando con el mercado en el área de:</h5>
 				<h5 style="font-weight: bold;">{{profileData.areaName}} </h5>
 				<h5>Y el sector de:
 				<h5 style="font-weight: bold;">{{profileData.sectorName}} </h5>
 				<h5>tu puesto de:</h5>
 				<h5 style="font-weight: bold;">	{{profileData.hierarchyName}}</h5>
 				<br />
-				<h4>Por favor selecciona la experiencia que tenes:</h4>
+				<h4>Por favor selecciona la experiencia con la que contas:</h4>
 
 		</div>
 		
 	    <ion-list>
 	      
-	      <ion-item ng-repeat="seniority in seniorities" class="item item-avatar item-icon-right" href="#/app/c2_data/{{seniority.seniorityId}}/{{seniority.name}}">
+	      <ion-item ng-repeat="seniority in seniorities" class="item item-icon-right" href="#/app/c2_data/{{seniority.seniorityId}}/{{seniority.name}}">
 	        	<h2 class="miniDesc">{{seniority.name}}</h2>
-				<p>{{seniority.description}}</p>
+				<!-- <p>{{seniority.description}}</p> -->
 	          	<i class="icon icon-right ion-chevron-right"></i>
 	      </ion-item>
 	     

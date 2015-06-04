@@ -1,11 +1,11 @@
-<ion-view view-title="C3 Areas">
+<ion-view view-title="Área?">
 	<ion-content ng-controller="analyticsTrackView-c3_areas">
 
 		<ion-list>
 
 			<ion-item ng-repeat="area in areas" class="item item-icon-right" href="#/app/c3_sectors/{{area.areaId}}/{{area.name}}">
 				<h2 class="miniDesc">{{area.name}}</h2>
-				<p>{{area.description}}</p>
+				<!-- <p>{{area.description}}</p> -->
 				<i class="icon icon-right ion-chevron-right"></i>
 			</ion-item>
 

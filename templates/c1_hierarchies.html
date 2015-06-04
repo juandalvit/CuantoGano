@@ -1,10 +1,10 @@
-<ion-view view-title="C1 Jerarquias">
+<ion-view view-title="Jerarquía?">
   
 	<ion-content>
   	
   		<div class="list list-inset p20 Tcenter">
 
-			<h4>Estas buscando en el area de:
+			<h4>Estas buscando en el área de:
 				<h4 style="font-weight: bold;">{{consultData.areaName}} </h4>
 			<h4>Y el sector de:
 				<h4 style="font-weight: bold;">{{consultData.sectorName}} </h4>
@@ -14,7 +14,7 @@
 	    <ion-list>
 	      	<ion-item class="item item-icon-right" ng-repeat="hierarchy in hierarchies" href="#/app/c1_consultResult/{{hierarchy.hierarchyId}}/{{hierarchy.name}}">
 	      		<h2 class="miniDesc">{{hierarchy.name}}</h2>
-				<p>{{hierarchy.description}}</p>
+				<!-- <p>{{hierarchy.description}}</p> -->
 				<i class="icon icon-right ion-chevron-right"></i>
 	      	</ion-item>
 	      	<a class="item item-avatar item-icon-right" href="#">

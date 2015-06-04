@@ -1,15 +1,30 @@
-<ion-view view-title="C4 vs. Piramide" cache-view="false">
+<ion-view view-title="Vs. pirámide" cache-view="false">
 
   <ion-content ng-controller="analyticsTrackView-c4_profileVsPyramid">
 	<ion-list>
 
-		<ion-item class="item item-avatar item-icon-right" ng-repeat="profileVsPyramid in profileVsPyramids">
-		  <img src="venkman.jpg">
-	      <h2 class="miniDesc">{{profileVsPyramid.hierarchyName}} de {{profileData.sectorName}} de {{profileData.areaName}}</h2>
-	      <span class="badge badge-balanced"><h2 class="white">{{((((profileData.amount - profileVsPyramid.average)/profileVsPyramid.average))*100)-1  | number:0}}%</h2></span>
-	          <p class="">Remuneración mensual: {{profileVsPyramid.average}}</p>
-		      <p style="widht: 100%;">{{profileVsPyramid.description}}</p>
-		  <i class="icon icon-right ion-chevron-right"></i>
+		<ion-item class="item " ng-repeat="profileVsPyramid in profileVsPyramids">
+			<div class="row">
+
+				<div class="col col-80">
+
+				<h2 class="miniDesc">{{profileVsPyramid.hierarchyName}} de {{profileData.sectorName}} de {{profileData.areaName}}</h2>
+			<!-- <p style="widht: 100%;">{{profileVsPyramid.description}}</p>
+
+			  <i class="icon icon-right ion-chevron-right"></i>
+
+			 -->
+					<p class="">Rem. bruta mensual: ${{profileVsPyramid.average}}</p>
+				</div>
+				<div class="col col-20">
+					<button class="button badge button-balanced">
+						<h2 class="white">{{((((profileData.amount - profileVsPyramid.average)/profileVsPyramid.average))*100)-1  | number:0}}%</h2>
+					</button>
+				</div>
+
+			</div>
+
+
 		</ion-item>
 
 	</ion-list>

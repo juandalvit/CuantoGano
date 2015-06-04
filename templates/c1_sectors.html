@@ -1,17 +1,17 @@
-<ion-view view-title="C1 Sect">
+<ion-view view-title="Sector?">
 	<ion-content>
 
 		<div class="list list-inset p20 Tcenter">
-					<h4>Estas buscando en el area de:
+					<h4>Estas buscando en el área de:
 					<h4 style="font-weight: bold;">{{consultData.areaName}} </h4>
-					el sector dentro del cual esta el puesto que deseas encontrar.</h4>
+					el sector dentro del cual está el puesto que deseas encontrar.</h4>
 		</div>
 
 		<ion-list>
 
 			<ion-item ng-repeat="sector in sectors" class="item item-icon-right" href="#/app/c1_hierarchies/{{sector.sectorId}}/{{sector.name}}">
 				<h2 class="miniDesc">{{sector.name}}</h2>
-				<p>{{sector.description}}</p>
+				<!-- <p>{{sector.description}}</p> -->
 				<i class="icon icon-right ion-chevron-right"></i>
 			</ion-item>
 

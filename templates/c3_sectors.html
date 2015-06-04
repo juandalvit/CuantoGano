@@ -1,8 +1,8 @@
-<ion-view view-title="C3 Sect">
+<ion-view view-title="Sector?">
 	<ion-content>
 
 		<div class="list list-inset p20 Tcenter">
-			<h5>Estas comparando tu perfil contra alguien en el area de:</h5>
+			<h5>Estas comparando tu perfil contra alguien en el área de:</h5>
 			<h5 style="font-weight: bold;">{{profileVsResultData.areaName}} </h5>
 			<br/>
 			<h4>Por favor selecciona el sector al que pertenece.</h4>
@@ -12,7 +12,7 @@
 
 			<ion-item ng-repeat="sector in sectors" class="item item-icon-right" href="#/app/c3_hierarchies/{{sector.sectorId}}/{{sector.name}}">
 				<h2 class="miniDesc">{{sector.name}}</h2>
-				<p>{{sector.description}}</p>
+				<!-- <p>{{sector.description}}</p> -->
 				<i class="icon icon-right ion-chevron-right"></i>
 			</ion-item>
 

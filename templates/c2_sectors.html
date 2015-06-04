@@ -1,8 +1,8 @@
-<ion-view view-title="C2 Sect">
+<ion-view view-title="Sector?">
 	<ion-content>
 
 		<div class="list list-inset p20 Tcenter">
-			<h5>Te estas comparando con el mercado en el area de:</h5>
+			<h5>Te estas comparando con el mercado en el área de:</h5>
 			<h5 style="font-weight: bold;">{{profileData.areaName}} </h5>
 			<br />
 			<h4>por favor selecciona el sector de tu puesto de trabajo.</h4>
@@ -12,7 +12,7 @@
 
 			<ion-item ng-repeat="sector in sectors" class="item item-icon-right" href="#/app/c2_hierarchies/{{sector.sectorId}}/{{sector.name}}">
 				<h2 class="miniDesc">{{sector.name}}</h2>
-				<p>{{sector.description}}</p>
+				<!-- <p>{{sector.description}}</p> -->
 				<i class="icon icon-right ion-chevron-right"></i>
 			</ion-item>
 

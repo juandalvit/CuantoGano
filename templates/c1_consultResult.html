@@ -7,7 +7,7 @@
 
 </ion-nav-bar>
 
-<ion-view class="analysisGood" view-title="C1 Puesto">
+<ion-view class="analysisGood" view-title="Puesto">
 
 	<ion-content ng-controller="analyticsTrackView-c1_consultResult">
 
@@ -19,16 +19,16 @@
 		<div class="list list-inset Tcenter">
 			<h4 style="font-weight: bold;">{{consultData.hierarchyName}}</h4>
 			 <h5>del sector de {{consultData.sectorName}}</h5>
-			 <h5>y del area de {{consultData.areaName}}</h5>
+			 <h5>y del área de {{consultData.areaName}}</h5>
 		</div>
 
 		<div class="list Tcenter">
-			<h4>Sueldos brutos promedios segun la experiencia del puesto</h4>
+			<h4>Sueldos brutos promedios según la experiencia del puesto</h4>
 
 			<div class="row Tcenter">
-				<div class="col-33"><h4>${{positionData.average*positionData.coef_junior | number:0}}</h4>Junior</div>
-				<div class="col-33"><h4>${{positionData.average}}</h4>Pleno</div>
-				<div class="col-33"><h4>${{positionData.average*positionData.coef_senior | number:0}}</h4>Senior</div>
+				<div class="col col-33"><h4>${{positionData.average*positionData.coef_junior | number:0}}</h4>Junior</div>
+				<div class="col col-33"><h4>${{positionData.average}}</h4>Pleno</div>
+				<div class="col col-33"><h4>${{positionData.average*positionData.coef_senior | number:0}}</h4>Senior</div>
 			</div>
 		</div>
 
