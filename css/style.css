@@ -127,6 +127,8 @@ input[type=range]::-webkit-slider-thumb {
 	font-weight: bolder;
 	text-align: center ;
 	align-content: center;
-	align-items: center;
+	align-items: center;  }
 
+.backgroundOdd {
+	background-color: #eee;
 }
