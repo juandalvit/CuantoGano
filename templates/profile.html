@@ -7,18 +7,19 @@
 
 		 <div class="list list-inset Tcenter">
 			 <h3 class="">{{profileData.hierarchyName}} {{profileData.seniorityName}} de {{profileData.sectorName}} de {{profileData.areaName}}</h3>
-			 <h1>${{profileData.amount}}</h1>
+			 <h1>${{profileData.amount | number:0}}</h1>
 			 <h3 class=miniDesc"">de remuneración bruta mensual</h3>
 
 			 <p>Cuando ganas? no guarda datos que te puedan identificar para resguardar la privacidad de todos.</p>
 		 </div>
 
-	    	<ion-item class="item  item-icon-right" href="#/app/c2_areas">
+	    	<ion-item class="item item-icon-right" href="#/app/c2_areas">
 	     		<h2>Editar mi perfil</h2>
-	    	    <i class="icon icon-right ion-chevron-right"></i>
-		  	</ion-item>
+				<i class="icon icon-right ion-chevron-right"></i>
+			</ion-item>
 
-		 <ion-item class="item  item-icon-right"  href="#/app/c2_areas">
+		 	<!--
+		   <ion-item class="item  item-icon-right"  href="#/app/c2_areas">
 	     		<h2>+ Aumento sueldo</h2>
 	      	    <i class="icon icon-right ion-chevron-right"></i>
 		  	</ion-item>
@@ -27,6 +28,8 @@
 	     		<h2>+ Ascenso / Nuevo puesto</h2>
 	      	    <i class="icon icon-right ion-chevron-right"></i>
 		  	</ion-item>
+
+			-->
 
 		 <ion-item class="item  item-icon-right"  href="mailto:cuantoganas@bits0.com">
 		      <h2 class="miniDesc">Ayuda</h2>

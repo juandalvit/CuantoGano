@@ -10,7 +10,8 @@
 				<h4 style="font-weight: bold;">{{profileData.areaName}} </h4>
 				Contra tu perfil:
 				<h4 style="font-weight: bold;"> {{profileData.hierarchyName}} {{profileData.seniorityName}}</h4>
-			</div>
+				<h3>${{profileData.amount | number:0}}</h3>
+		</div>
 
 		<ion-item class="item {{profileVsPyramid.selectedHierarchyClass}}" ng-repeat="profileVsPyramid in profileVsPyramids">
 			<div class="row ">
