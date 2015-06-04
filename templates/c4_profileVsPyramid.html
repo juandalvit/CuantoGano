@@ -4,8 +4,13 @@
 	<ion-list>
 
 		<div class="list list-inset Tcenter">
-			<h3 class="tcenter">Comparación del sector de {{profileData.sectorName}} del área de {{profileData.areaName}} vs. tu rem. bruta mensual:</h3>
-		</div>
+				<h4>Comparación del sector:</h4>
+				<h4 style="font-weight: bold;">{{profileData.sectorName}} </h4>
+				<h4>del área de:</h4>
+				<h4 style="font-weight: bold;">{{profileData.areaName}} </h4>
+				Contra tu perfil:
+				<h4 style="font-weight: bold;"> {{profileData.hierarchyName}} {{profileData.seniorityName}}</h4>
+			</div>
 
 		<ion-item class="item {{profileVsPyramid.selectedHierarchyClass}}" ng-repeat="profileVsPyramid in profileVsPyramids">
 			<div class="row ">
