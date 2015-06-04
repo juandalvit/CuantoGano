@@ -952,6 +952,14 @@ angular.module('starter.controllers', ['ngResource'])
 
                 $scope.profileVsResultData.average = res.rows.item(0).average;
 
+
+                if(profileData.amount>= profileVsResultData.average){
+                    $scope.profileVsResultData.amountStatus = 'Good';
+                }else{
+                    $scope.profileVsResultData.amountStatus = 'Bad';
+                }
+
+
                 //alert("SELECTED 0-> average: "+ res.rows.item(0).average +" ->positionId: "+ res.rows.item(0).positionId);
                 //alert("SELECTED 1-> ID: "+ res.rows.item(1).hierarchyId +" -> "+ res.rows.item(1).name);
             } else {
