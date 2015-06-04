@@ -95,9 +95,60 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 StatusBar.styleDefault();
             }
 
-            if(window.plugins && window.plugins.AdMob) {
+            if(window.AdMob) {
+
+                // Detect platform
+                var adMobId = "";
+                if ( /(android)/i.test(navigator.userAgent ) ) { // for android
+                    adMobId = "ca-app-pub-8185646918327384/6127887751";
+                } else if( /(ipod|iphone|ipad)/i.test(navigator.userAgent) ) { // for ios
+                    adMobId = "ca-app-pub-8185646918327384/9081354156";
+                }
+
+
+                //banner Options
+             /*   window.AdMob.setOptions({
+                    // adSize: 'SMART_BANNER',
+                    // width: integer, // valid when set adSize 'CUSTOM'
+                    // height: integer, // valid when set adSize 'CUSTOM'
+                    position: AdMob.AD_POSITION.BOTTOM_CENTER,
+                    // offsetTopBar: false, // avoid overlapped by status bar, for iOS7+
+                    bgColor: 'black', // color name, or '#RRGGBB'
+                    // x: integer,		// valid when set position to 0 / POS_XY
+                    // y: integer,		// valid when set position to 0 / POS_XY
+                    //isTesting: true, // set to true, to receiving test ad for testing purpose
+                    autoShow: true // auto show interstitial ad when loaded, set to false if prepare/show
+
+                });*/
+
+                // Create banner
+                window.AdMob.createBanner({
+                    adId: adMobId,
+                    position: AdMob.AD_POSITION.BOTTOM_CENTER,
+                    adSize: AdMob.AD_SIZE.SMART_BANNER,
+                    autoShow: true
+                    },
+                    function(){
+                        //alert("Success Ad");
+                        AdMob.requestAd(
+                            { 'isTesting': false },
+                            function() {
+                                AdMob.showAd(true);
+                            },
+                            function() { alert('failed to request ad'); }
+                        );
+                    },
+                    function(error){
+                        alert("Error ad: "+error);
+                    }
+
+                );
+            }
+
+            /*
+            if(window.AdMob) {
                 var admob_key = device.platform == "Android" ? "ca-app-pub-8185646918327384/6127887751" : "ca-app-pub-8185646918327384/9081354156";
-                var admob = window.plugins.AdMob;
+                var admob = window.AdMob;
                 admob.createBannerView(
                     {
                         'publisherId': admob_key,
@@ -115,7 +166,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                     },
                     function() { console.log('failed to create banner view'); }
                 );
-            }
+            }*/
 
             if(typeof analytics !== undefined) {
                 analytics.startTrackerWithId("UA-63703895-1");
@@ -193,6 +244,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 "coef_min real, " +
                 "coef_max real, " +
                 "coef_junior real, " +
+                "coef_pleno real, " +
                 "coef_senior real, " +
                 "orden integer, " +
                 "status text);");
@@ -264,7 +316,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
 
                     var insertSectors = "INSERT INTO Sectors (sectorId, areaId, name, description, orden, status) VALUES(1, 15, 'Abastecimiento', 'desc: Abastecimiento', 1, 'ACTIVE'),(2, 11, 'Administración', 'desc: Administración', 2, 'ACTIVE'),(3, 25, 'Administración de Base de Datos', 'desc: Administración de Base de Datos', 3, 'ACTIVE'),(4, 23, 'Administración de Personal', 'desc: Administración de Personal', 4, 'ACTIVE'),(5, 11, 'Administración de Ventas', 'desc: Administración de Ventas', 5, 'ACTIVE'),(6, 6, 'Aduana & Despachante de Aduana', 'desc: Aduana & Despachante de Aduana', 6, 'ACTIVE'),(7, 15, 'Almacen', 'desc: Almacen', 7, 'ACTIVE'),(8, 15, 'Almacén & Depósito & Expedición', 'desc: Almacén & Depósito & Expedición', 8, 'ACTIVE'),(9, 13, 'Alta dirección', 'desc: Alta dirección', 9, 'ACTIVE'),(10, 11, 'Análisis de Riesgos', 'desc: Análisis de Riesgos', 10, 'ACTIVE'),(11, 25, 'Análisis Funcional & Proyect Leader', 'desc: Análisis Funcional & Proyect Leader', 11, 'ACTIVE'),(12, 2, 'Arquitectura', 'desc: Arquitectura', 12, 'ACTIVE'),(13, 3, 'Asuntos regulatorios', 'desc: Asuntos regulatorios', 13, 'ACTIVE'),(14, 22, 'Atención al cliente', 'desc: Atención al cliente', 14, 'ACTIVE'),(15, 4, 'Atención Al Consumidor (B2C)', 'desc: Atención Al Consumidor (B2C)', 15, 'ACTIVE'),(16, 11, 'Auditoría', 'desc: Auditoría', 16, 'ACTIVE'),(17, 21, 'Back Office', 'desc: Back Office', 17, 'ACTIVE'),(18, 11, 'Banca Inversora', 'desc: Banca Inversora', 18, 'ACTIVE'),(19, 16, 'Business Intelligence', 'desc: Business Intelligence', 19, 'ACTIVE'),(20, 21, 'Caja', 'desc: Caja', 20, 'ACTIVE'),(21, 20, 'Calidad', 'desc: Calidad', 21, 'ACTIVE'),(22, 12, 'Camareros', 'desc: Camareros', 22, 'ACTIVE'),(23, 23, 'Capacitación y Desarrollo', 'desc: Capacitación y Desarrollo', 23, 'ACTIVE'),(24, 5, 'Comercial & Ventas', 'desc: Comercial & Ventas', 24, 'ACTIVE'),(25, 6, 'Comercio Exterior', 'desc: Comercio Exterior', 25, 'ACTIVE'),(26, 15, 'Compras', 'desc: Compras', 26, 'ACTIVE'),(27, 7, 'Compras y Abastecimiento', 'desc: Compras y Abastecimiento', 27, 'ACTIVE'),(28, 23, 'Comunicaciones internas', 'desc: Comunicaciones internas', 28, 'ACTIVE'),(29, 11, 'Contabilidad', 'desc: Contabilidad', 29, 'ACTIVE'),(30, 20, 'Control de Calidad', 'desc: Control de Calidad', 30, 'ACTIVE'),(31, 11, 'Control de gestión y Presupuesto', 'desc: Control de gestión y Presupuesto', 31, 'ACTIVE'),(32, 15, 'Control de inventario', 'desc: Control de inventario', 32, 'ACTIVE'),(33, 11, 'Control Financiero - Contralor', 'desc: Control Financiero - Contralor', 33, 'ACTIVE'),(34, 13, 'Corporate & Finanzas', 'desc: Corporate & Finanzas', 34, 'ACTIVE'),(35, 11, 'Costos', 'desc: Costos', 35, 'ACTIVE'),(36, 11, 'Créditos y Cobranzas', 'desc: Créditos y Cobranzas', 36, 'ACTIVE'),(37, 11, 'Cuentas Corrientes', 'desc: Cuentas Corrientes', 37, 'ACTIVE'),(38, 21, 'Data Entry', 'desc: Data Entry', 38, 'ACTIVE'),(39, 25, 'Data Warehousing', 'desc: Data Warehousing', 39, 'ACTIVE'),(40, 5, 'Desarrollo de Negocios', 'desc: Desarrollo de Negocios', 40, 'ACTIVE'),(41, 2, 'Dirección de Obra', 'desc: Dirección de Obra', 41, 'ACTIVE'),(42, 8, 'Diseño Gráfico', 'desc: Diseño Gráfico', 42, 'ACTIVE'),(43, 8, 'Diseño Multimedia', 'desc: Diseño Multimedia', 43, 'ACTIVE'),(44, 8, 'Diseño Web', 'desc: Diseño Web', 44, 'ACTIVE'),(45, 5, 'E-Commerce', 'desc: E-Commerce', 45, 'ACTIVE'),(46, 9, 'Educación', 'desc: Educación', 46, 'ACTIVE'),(47, 24, 'Enfermera', 'desc: Enfermera', 47, 'ACTIVE'),(48, 5, 'Entrenamiento De Ventas', 'desc: Entrenamiento De Ventas', 48, 'ACTIVE'),(49, 10, 'Estética y Cuidado Personal', 'desc: Estética y Cuidado Personal', 49, 'ACTIVE'),(50, 11, 'Evaluación Económica', 'desc: Evaluación Económica', 50, 'ACTIVE'),(51, 11, 'Facturación', 'desc: Facturación', 51, 'ACTIVE'),(52, 11, 'Finanzas', 'desc: Finanzas', 52, 'ACTIVE'),(53, 12, 'Gastronomía', 'desc: Gastronomía', 53, 'ACTIVE'),(54, 13, 'Gerencia General', 'desc: Gerencia General', 54, 'ACTIVE'),(55, 1, 'Gestion proyectos', 'desc: Gestion proyectos', 55, 'ACTIVE'),(56, 11, 'Impuestos', 'desc: Impuestos', 56, 'ACTIVE'),(57, 16, 'Investigación de Mercado', 'desc: Investigación de Mercado', 57, 'ACTIVE'),(58, 20, 'Investigación y Desarrollo', 'desc: Investigación y Desarrollo', 58, 'ACTIVE'),(59, 19, 'Jóvenes Profesionales', 'desc: Jóvenes Profesionales', 59, 'ACTIVE'),(60, 14, 'Legales', 'desc: Legales', 60, 'ACTIVE'),(61, 15, 'Logistica', 'desc: Logistica', 61, 'ACTIVE'),(62, 15, 'Logística y Distribución', 'desc: Logística y Distribución', 62, 'ACTIVE'),(63, 20, 'Mantenimiento de planta', 'desc: Mantenimiento de planta', 63, 'ACTIVE'),(64, 21, 'Mantenimiento y Limpieza', 'desc: Mantenimiento y Limpieza', 64, 'ACTIVE'),(65, 16, 'Marketing', 'desc: Marketing', 65, 'ACTIVE'),(66, 16, 'Marketing Online & Digital', 'desc: Marketing Online & Digital', 66, 'ACTIVE'),(67, 24, 'Medico', 'desc: Medico', 67, 'ACTIVE'),(68, 18, 'Música & Arte & Cultura', 'desc: Música & Arte & Cultura', 68, 'ACTIVE'),(69, 20, 'Operaciones', 'desc: Operaciones', 69, 'ACTIVE'),(70, 13, 'Operaciones & Logística', 'desc: Operaciones & Logística', 70, 'ACTIVE'),(71, 3, 'Organización de Eventos', 'desc: Organización de Eventos', 71, 'ACTIVE'),(72, 23, 'Organización y Métodos', 'desc: Organización y Métodos', 72, 'ACTIVE'),(73, 19, 'Pasantía & Trainee', 'desc: Pasantía & Trainee', 73, 'ACTIVE'),(74, 17, 'Periodismo', 'desc: Periodismo', 74, 'ACTIVE'),(75, 5, 'Planeamiento comercial', 'desc: Planeamiento comercial', 75, 'ACTIVE'),(76, 11, 'Planeamiento económico-financiero', 'desc: Planeamiento económico-financiero', 76, 'ACTIVE'),(77, 13, 'Planificación Estratégica', 'desc: Planificación Estratégica', 77, 'ACTIVE'),(78, 20, 'Producción', 'desc: Producción', 78, 'ACTIVE'),(79, 17, 'Producción Audiovisual', 'desc: Producción Audiovisual', 79, 'ACTIVE'),(80, 16, 'Producto', 'desc: Producto', 80, 'ACTIVE'),(81, 25, 'Programación', 'desc: Programación', 81, 'ACTIVE'),(82, 20, 'Programación de producción', 'desc: Programación de producción', 82, 'ACTIVE'),(83, 21, 'Promotoras&es', 'desc: Promotoras&es', 83, 'ACTIVE'),(84, 9, 'Psicopedagogía', 'desc: Psicopedagogía', 84, 'ACTIVE'),(85, 16, 'Publicidad', 'desc: Publicidad', 85, 'ACTIVE'),(86, 22, 'Recepción', 'desc: Recepción', 86, 'ACTIVE'),(87, 23, 'Recursos Humanos', 'desc: Recursos Humanos', 87, 'ACTIVE'),(88, 25, 'Redes', 'desc: Redes', 88, 'ACTIVE'),(89, 3, 'Relaciones Institucionales & Públicas', 'desc: Relaciones Institucionales & Públicas', 89, 'ACTIVE'),(90, 11, 'Relaciones Inversionistas', 'desc: Relaciones Inversionistas', 90, 'ACTIVE'),(91, 23, 'Relaciones Laborales', 'desc: Relaciones Laborales', 91, 'ACTIVE'),(92, 3, 'Relaciones publicas', 'desc: Relaciones publicas', 92, 'ACTIVE'),(93, 23, 'Remuneraciones & Compen. y Beneficios', 'desc: Remuneraciones & Compen. y Beneficios', 93, 'ACTIVE'),(94, 24, 'Salud', 'desc: Salud', 94, 'ACTIVE'),(95, 22, 'Secretaria & Asistente', 'desc: Secretaria & Asistente', 95, 'ACTIVE'),(96, 21, 'Seguridad', 'desc: Seguridad', 96, 'ACTIVE'),(97, 20, 'Seguridad Industrial & Higiene & Medio Ambiente', 'desc: Seguridad Industrial & Higiene & Medio Ambiente', 97, 'ACTIVE'),(98, 25, 'Seguridad Informática', 'desc: Seguridad Informática', 98, 'ACTIVE'),(99, 11, 'Seguros & Análisis de Siniestros', 'desc: Seguros & Análisis de Siniestros', 99, 'ACTIVE'),(100, 23, 'Selección y Empleos', 'desc: Selección y Empleos', 100, 'ACTIVE'),(101, 4, 'Servicio Al Cliente', 'desc: Servicio Al Cliente', 101, 'ACTIVE'),(102, 4, 'Servicios Al Cliente - (B2B)', 'desc: Servicios Al Cliente - (B2B)', 102, 'ACTIVE'),(103, 4, 'Servicios Al Cliente (B2B)', 'desc: Servicios Al Cliente (B2B)', 103, 'ACTIVE'),(104, 25, 'Sistemas', 'desc: Sistemas', 104, 'ACTIVE'),(105, 25, 'Soporte Técnico & Mesa de Ayuda', 'desc: Soporte Técnico & Mesa de Ayuda', 105, 'ACTIVE'),(106, 25, 'Tecnología & Infraestructura', 'desc: Tecnología & Infraestructura', 106, 'ACTIVE'),(107, 22, 'Telefonista', 'desc: Telefonista', 107, 'ACTIVE'),(108, 5, 'Telemarketing', 'desc: Telemarketing', 108, 'ACTIVE'),(109, 11, 'Tesorería', 'desc: Tesorería', 109, 'ACTIVE'),(110, 25, 'Testing & QA & QC', 'desc: Testing & QA & QC', 110, 'ACTIVE'),(111, 17, 'Traducción', 'desc: Traducción', 111, 'ACTIVE'),(112, 21, 'Transporte', 'desc: Transporte', 112, 'ACTIVE'),(113, 13, 'Unidad & División Negocios', 'desc: Unidad & División Negocios', 113, 'ACTIVE'),(114, 24, 'Veterinaria', 'desc: Veterinaria', 114, 'ACTIVE')";
 
-                    var insertHierarchies = "INSERT INTO Hierarchies (hierarchyId, name, description, coef_peq, coef_med, coef_grand, coef_min, coef_max, coef_junior, coef_senior, orden, status) VALUES(1, 'Analista', 'Analista Analista Analista Analista Analista Anali', 0.85, 1.16, 1.38, 0.75, 1.34, 0.79, 1.37, 7, 'ACTIVE'),(2, 'Asistente', 'Asistente Asistente Asistente Asistente Asistente ', 0.76, 1.3, 1.5, 0.62, 1.63, 0.63, 1.24, 5, 'ACTIVE'),(3, 'Auxiliar', 'Auxiliar Auxiliar Auxiliar Auxiliar Auxiliar Auxil', 0.77, 1.28, 1.48, 0.64, 1.59, 0.86, 1, 2, 'ACTIVE'),(4, 'Consultor & Asesor', 'Consultor / Asesor Consultor / Asesor Consultor / ', 0.8, 1.23, 1.41, 0.68, 1.5, 0.52, 2.72, 10, 'ACTIVE'),(5, 'Director', 'Director Director Director Director Director Direc', 0.8, 1.23, 1.47, 0.68, 1.49, 1, 1, 13, 'ACTIVE'),(6, 'Ejecutivo de ventas', 'Ejecutivo de ventas Ejecutivo de ventas Ejecutivo ', 0.82, 1.2, 1.55, 0.71, 1.43, 0.65, 1.27, 8, 'ACTIVE'),(7, 'Gerente', 'Gerente Gerente Gerente Gerente Gerente Gerente Ge', 0.84, 1.17, 1.41, 0.74, 1.36, 0.82, 1.37, 12, 'ACTIVE'),(8, 'Jefe & Supervisor', 'Jefe / Supervisor Jefe / Supervisor Jefe / Supervi', 0.85, 1.15, 1.39, 0.76, 1.33, 0.82, 1.17, 11, 'ACTIVE'),(9, 'Oficio', 'Oficio Oficio Oficio Oficio Oficio Oficio Oficio ', 0.54, 1.83, 2.04, 0.37, 2.72, 0.72, 1.39, 3, 'ACTIVE'),(10, 'Operario', 'Operario Operario Operario Operario Operario Opera', 0.76, 1.29, 1.64, 0.63, 1.61, 0.45, 1.08, 1, 'ACTIVE'),(11, 'Profesional', 'Profesional Profesional Profesional Profesional Pr', 0.8, 1.23, 1.48, 0.68, 1.49, 0.75, 1.37, 9, 'ACTIVE'),(12, 'Secretaria', 'Secretaria Secretaria Secretaria Secretaria Secret', 0.88, 1.12, 1.31, 0.8, 1.26, 0.91, 1.55, 4, 'ACTIVE'),(13, 'Tecnico', 'Tecnico Tecnico Tecnico Tecnico Tecnico Tecnico Te', 0.83, 1.19, 1.41, 0.72, 1.4, 0.69, 1.3, 6, 'ACTIVE')";
+                    var insertHierarchies = "INSERT INTO Hierarchies (hierarchyId, name, description, coef_peq, coef_med, coef_grand, coef_min, coef_max, coef_junior, coef_pleno, coef_senior, orden, status) VALUES(1, 'Analista', 'desc: Analista', 0.85, 1.16, 1.38, 0.75, 1.34, 0.79, 1.06, 1.37, 7, 'ACTIVE'),(2, 'Asistente', 'desc: Asistente', 0.76, 1.3, 1.5, 0.62, 1.63, 0.63, 1.04, 1.24, 5, 'ACTIVE'),(3, 'Auxiliar', 'desc: Auxiliar', 0.77, 1.28, 1.48, 0.64, 1.59, 0.86, 1.03, 1.1, 2, 'ACTIVE'),(4, 'Consultor & Asesor', 'desc: Consultor & Asesor', 0.8, 1.23, 1.41, 0.68, 1.5, 0.52, 1.21, 2.72, 10, 'ACTIVE'),(5, 'Director', 'desc: Director', 0.8, 1.23, 1.47, 0.68, 1.49, 0.87, 1.05, 1.11, 13, 'ACTIVE'),(6, 'Ejecutivo de ventas', 'desc: Ejecutivo de ventas', 0.82, 1.2, 1.55, 0.71, 1.43, 0.65, 1.04, 1.27, 8, 'ACTIVE'),(7, 'Gerente', 'desc: Gerente', 0.84, 1.17, 1.41, 0.74, 1.36, 0.82, 1.03, 1.37, 12, 'ACTIVE'),(8, 'Jefe & Supervisor', 'desc: Jefe & Supervisor', 0.85, 1.15, 1.39, 0.76, 1.33, 0.84, 1.07, 1.23, 11, 'ACTIVE'),(9, 'Oficio', 'desc: Oficio', 0.54, 1.83, 2.04, 0.37, 2.72, 0.72, 1.06, 1.39, 3, 'ACTIVE'),(10, 'Operario', 'desc: Operario', 0.76, 1.29, 1.64, 0.63, 1.61, 0.45, 1.06, 1.08, 1, 'ACTIVE'),(11, 'Profesional', 'desc: Profesional', 0.8, 1.23, 1.48, 0.68, 1.49, 0.75, 1.11, 1.37, 9, 'ACTIVE'),(12, 'Secretaria', 'desc: Secretaria', 0.88, 1.12, 1.31, 0.8, 1.26, 0.91, 1.06, 1.55, 4, 'ACTIVE'),(13, 'Tecnico', 'desc: Tecnico', 0.83, 1.19, 1.41, 0.72, 1.4, 0.72, 1.07, 1.35, 6, 'ACTIVE')";
 
                     var insertSeniorities = "INSERT INTO Seniorities (seniorityId, name, description, orden, status) VALUES(1, 'Junior', 'Junior Junior Junior Junior Junior Junior Junior ', NULL, 'ACTIVE'),(2, 'Semi senior', 'Semi senior Semi senior Semi senior Semi senior Se', NULL, 'ACTIVE'),(3, 'Senior', 'Senior Senior Senior Senior Senior Senior Senior ', NULL, 'ACTIVE')";
 

@@ -459,7 +459,7 @@ angular.module('starter.controllers', ['ngResource'])
 
 
 
-        var query = "SELECT Positions.positionId, Positions.average, Hierarchies.coef_junior, Hierarchies.coef_senior FROM Positions INNER JOIN Hierarchies ON Positions.hierarchyId = Hierarchies.hierarchyId WHERE Positions.status = 'ACTIVE' AND Positions.sectorId = ? AND Positions.hierarchyId = ? ";
+        var query = "SELECT Positions.positionId, Positions.average, Hierarchies.coef_junior, Hierarchies.coef_pleno, Hierarchies.coef_senior FROM Positions INNER JOIN Hierarchies ON Positions.hierarchyId = Hierarchies.hierarchyId WHERE Positions.status = 'ACTIVE' AND Positions.sectorId = ? AND Positions.hierarchyId = ? ";
         $cordovaSQLite.execute(db, query, [$scope.consultData.sectorId, $stateParams.hierarchyId]).then(function (res) {
             if (res.rows.length > 0) {
                 for (var i = 0; i < res.rows.length; i++) {
