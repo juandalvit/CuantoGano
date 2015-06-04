@@ -3,23 +3,35 @@
   <ion-content ng-controller="analyticsTrackView-c4_profileVsPyramid">
 	<ion-list>
 
-		<ion-item class="item " ng-repeat="profileVsPyramid in profileVsPyramids">
+		<div class="list list-inset Tcenter">
+			<h3 class="tcenter">Comparación del sector de {{profileData.sectorName}} del área de {{profileData.areaName}} vs. tu rem. bruta mensual:</h3>
+		</div>
+
+		<ion-item class="item" ng-repeat="profileVsPyramid in profileVsPyramids">
 			<div class="row">
 
 				<div class="col col-80">
 
-				<h2 class="miniDesc">{{profileVsPyramid.hierarchyName}} de {{profileData.sectorName}} de {{profileData.areaName}}</h2>
+				<h2 class="miniDesc">{{profileVsPyramid.hierarchyName}}</h2>
 			<!-- <p style="widht: 100%;">{{profileVsPyramid.description}}</p>
 
 			  <i class="icon icon-right ion-chevron-right"></i>
 
 			 -->
-					<p class="">Rem. bruta mensual: ${{profileVsPyramid.average}}</p>
+				<h3><span class="">Rem. bruta mensual:</span> ${{profileVsPyramid.average}}</h3>
 				</div>
 				<div class="col col-20">
-					<button class="button badge button-balanced">
+
+					<h1 class="text{{profileData.amountStatus}} tCenter itemBadgeC4">
+							{{((((profileData.amount - profileVsPyramid.average)/profileVsPyramid.average))*100)-1  | number:0}}%
+					</h1>
+
+				<!--
+					<button style="margin-left: 10px;" class="button button-balanced">
 						<h2 class="white">{{((((profileData.amount - profileVsPyramid.average)/profileVsPyramid.average))*100)-1  | number:0}}%</h2>
 					</button>
+				-->
+
 				</div>
 
 			</div>
