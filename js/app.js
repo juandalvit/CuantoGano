@@ -95,69 +95,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                 StatusBar.styleDefault();
             }
 
-            if(window.AdMob) {
-
-                // Detect platform
-                var adMobId = "";
-                if ( /(android)/i.test(navigator.userAgent ) ) { // for android
-                    //alert("android");
-                    adMobId = "ca-app-pub-8185646918327384/6127887751";
-                } else if( /(ipod|iphone|ipad)/i.test(navigator.userAgent) ) { // for ios
-                    //alert("iOS");
-                    adMobId = "ca-app-pub-8185646918327384/9081354156";
-                }
-                /*var admob = window.AdMob;
-                admob.createBannerView(
-                    {
-                        'publisherId': adMobId,
-                        'adSize': admob.AD_SIZE.SMART_BANNER,
-                        'bannerAtTop': false
-                    },
-                    function () {
-                        admob.requestAd(
-                            { 'isTesting': false },
-                            function () {
-                                admob.showAd(true);
-                            },
-                            function () { console.log('failed to request ad'); }
-                        );
-                    },
-                    function () { console.log('failed to create banner view'); }
-                );*/
-
-
-
-
-                // Create banner
-                window.AdMob.createBanner({
-                    adId: adMobId,
-                    position: AdMob.AD_POSITION.BOTTOM_CENTER,
-                    adSize: AdMob.AD_SIZE.SMART_BANNER,
-                    isTesting: false,
-                    autoShow: true
-                    },
-                    function(){
-                        //alert("Success Ad");
-                        AdMob.showAd(true);
-                        /*AdMob.requestAd(
-                            { 'isTesting': true },
-                            function() {
-                                AdMob.showAd(true);
-                            },
-                            function() { alert('failed to request ad'); }
-                        );*/
-                    },
-                    function(error){
-                        alert("Error ad: "+error);
-                    }
-
-                );
-            }
-
-            /*
-            if(window.AdMob) {
+            
+            if(window.plugins && window.plugins.AdMob) {
                 var admob_key = device.platform == "Android" ? "ca-app-pub-8185646918327384/6127887751" : "ca-app-pub-8185646918327384/9081354156";
-                var admob = window.AdMob;
+                var admob = window.plugins.AdMob;
                 admob.createBannerView(
                     {
                         'publisherId': admob_key,
@@ -175,7 +116,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                     },
                     function() { console.log('failed to create banner view'); }
                 );
-            }*/
+            }
 
             if(typeof analytics !== undefined) {
                 analytics.startTrackerWithId("UA-63703895-1");
@@ -196,7 +137,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
             }else{
 
 
-                db = window.openDatabase("CuantoGanoDBv2.2", '1', 'my', 1024 * 1024 * 100); // browser
+                db = window.openDatabase("CuantoGanoDBv2.3", '1', 'my', 1024 * 1024 * 100); // browser
 
 
                 /*alert('Detele all DB');
