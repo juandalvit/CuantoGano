@@ -1028,6 +1028,7 @@ angular.module('starter.controllers', ['ngResource'])
 
 
         $scope.profileData = JSON.parse(localStorage.getItem("profileData"));
+        //alert(JSON.stringify($scope.profileData));
         //alert("profile controler");
 
         if($scope.profileData.positionId > 0){

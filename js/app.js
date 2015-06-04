@@ -319,38 +319,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
 
                             if (res.rows.length > 0) {
 
-                                var query1 = "SELECT name FROM Hierarchies WHERE Hierarchies.hierarchyId = "+res.rows.item(0).hierarchyId;
-                                $cordovaSQLite.execute(db, query1, []).then(function (res1) {
-                                    var profileData = JSON.parse(localStorage.getItem("profileData"));
-                                    profileData.hierarchyName = res1.rows.item(0).name;
-                                    //alert("Hierarcy inside name: " + profileData.hierarchyName);
-                                    localStorage.setItem("profileData", JSON.stringify(profileData));
-                                });
-
-                                var query1 = "SELECT name FROM Areas WHERE Areas.areaId = "+res.rows.item(0).areaId;
-                                $cordovaSQLite.execute(db, query1, []).then(function (res1) {
-                                    var profileData = JSON.parse(localStorage.getItem("profileData"));
-                                    profileData.areaName = res1.rows.item(0).name;
-                                    localStorage.setItem("profileData", JSON.stringify(profileData));
-                                });
-
-                                var query1 = "SELECT name FROM Sectors WHERE Sectors.sectorId = "+res.rows.item(0).sectorId;
-                                $cordovaSQLite.execute(db, query1, []).then(function (res1) {
-                                    var profileData = JSON.parse(localStorage.getItem("profileData"));
-                                    profileData.sectorName = res1.rows.item(0).name;
-                                    localStorage.setItem("profileData", JSON.stringify(profileData));
-                                });
-
-                                var query1 = "SELECT name FROM Seniorities WHERE Seniorities.seniorityId = "+res.rows.item(0).seniorityId;
-                                $cordovaSQLite.execute(db, query1, []).then(function (res1) {
-                                    var profileData = JSON.parse(localStorage.getItem("profileData"));
-                                    profileData.seniorityName = res1.rows.item(0).name;
-                                    localStorage.setItem("profileData", JSON.stringify(profileData));
-                                });
-                                //alert(JSON.stringify(res.rows.item));
-                                //alert("COUNT positions: " + res.rows.item(0));
-                                //alert("String result 0" + JSON.stringify(res.rows.item(0)))
-                                //alert("SELECTED 1-> ID: "+ res.rows.item(1).hierarchyId +" -> "+ res.rows.item(1).name);
                                 var profileData = JSON.parse(localStorage.getItem("profileData"));
                                 profileData.positionId = res.rows.item(0).positionId;
                                 profileData.amount = res.rows.item(0).amount;
@@ -360,11 +328,56 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
                                 profileData.seniorityId = res.rows.item(0).seniorityId;
                                 localStorage.setItem("profileData", JSON.stringify(profileData));
 
+                                    //alert('profile loaded form db');
+
+                                    var query1 = "SELECT name, coef_junior, coef_pleno, coef_senior FROM Hierarchies WHERE Hierarchies.hierarchyId = " + res.rows.item(0).hierarchyId;
+                                    $cordovaSQLite.execute(db, query1, []).then(function (res1) {
+                                        var profileData = JSON.parse(localStorage.getItem("profileData"));
+                                        profileData.hierarchyName = res1.rows.item(0).name;
+                                        if(profileData.seniorityId == 1) {
+                                            profileData.siniorityCoef = res1.rows.item(0).coef_junior;
+                                        }else if(profileData.seniorityId == 2) {
+                                            profileData.siniorityCoef = res1.rows.item(0).coef_pleno;
+                                        }else if(profileData.seniorityId == 3){
+                                            profileData.siniorityCoef = res1.rows.item(0).coef_senior;
+                                        }
+                                        localStorage.setItem("profileData", JSON.stringify(profileData));
+                                        //alert("Hierarcy inside name: " + profileData.hierarchyName);localStorage.setItem("profileData", JSON.stringify(profileData));
+                                    });
+
+                                    var query1 = "SELECT name FROM Areas WHERE Areas.areaId = " + res.rows.item(0).areaId;
+                                    $cordovaSQLite.execute(db, query1, []).then(function (res1) {
+                                        var profileData = JSON.parse(localStorage.getItem("profileData"));
+                                        profileData.areaName = res1.rows.item(0).name;
+                                        localStorage.setItem("profileData", JSON.stringify(profileData));
+                                    });
+
+                                    var query1 = "SELECT name FROM Sectors WHERE Sectors.sectorId = " + res.rows.item(0).sectorId;
+                                    $cordovaSQLite.execute(db, query1, []).then(function (res1) {
+                                        var profileData = JSON.parse(localStorage.getItem("profileData"));
+                                        profileData.sectorName = res1.rows.item(0).name;
+                                        localStorage.setItem("profileData", JSON.stringify(profileData));
+                                    });
+
+                                    var query1 = "SELECT name FROM Seniorities WHERE Seniorities.seniorityId = " + res.rows.item(0).seniorityId;
+                                    $cordovaSQLite.execute(db, query1, []).then(function (res1) {
+                                        var profileData = JSON.parse(localStorage.getItem("profileData"));
+                                        profileData.seniorityName = res1.rows.item(0).name;
+                                        localStorage.setItem("profileData", JSON.stringify(profileData));
+                                    });
+
+
+                                //alert(JSON.stringify(res.rows.item));
+                                //alert("COUNT positions: " + res.rows.item(0));
+                                //alert("String result 0" + JSON.stringify(res.rows.item(0)))
+                                //alert("SELECTED 1-> ID: "+ res.rows.item(1).hierarchyId +" -> "+ res.rows.item(1).name);
+
+
                                 //alert("Hierarcy outside name: " + profileData.hierarchyName);
 
 
 
-                                //alert('profile loaded form db');
+
 
 
                             } else {
