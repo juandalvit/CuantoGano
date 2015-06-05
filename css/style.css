@@ -116,14 +116,11 @@ input[type=range]::-webkit-slider-thumb {
 	background: #5FBE7E;}
 
 .Tcenter, .tCenter {
-	text-align: center;
-}
+	text-align: center;}
 
 .p32 {
 	margin-top: 32px;
-	margin-bottom: 32px;
-}
-
+	margin-bottom: 32px;}
 
 .itemBadgeC4 {
 	top: 30px !important;
@@ -134,5 +131,15 @@ input[type=range]::-webkit-slider-thumb {
 	align-items: center;  }
 
 .backgroundOdd {
-	background-color: #eee;
+	background-color: #eee;}
+
+.darkBack {
+	background-color: #EBA538;}
+
+.bits0 {
+	background: url("/img/bits0.png");
+	width: 66px !important;
+	max-width: 66px !important;
+	height: 64px;
+	border: 1px solid #ffffff;
 }
