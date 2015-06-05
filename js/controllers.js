@@ -130,7 +130,7 @@ angular.module('starter.controllers', ['ngResource'])
 
             //hacemos uso de $http para obtener los datos del json
 
-            var query = "SELECT Sync.date FROM Sync WHERE Sync.syncId = '1'";
+            var query = "SELECT * FROM Profiles WHERE Profiles.uploaded = '0'";
             $cordovaSQLite.execute(db, query, []).then(function (res) {
 
 
@@ -142,21 +142,39 @@ angular.module('starter.controllers', ['ngResource'])
                 $scope.postData.push({name: 2, value: 2});
                 $scope.postData.push({name: 3, value: 3});*/
 
-                $scope.post = {'storyMessage': 'Hello', postToFB: true, postToTwitter: true, postToTeam: false};
+                $scope.post = {
+                    profileId: res.rows.item(0).profileId,
+                    name: res.rows.item(0).name,
+                    date: res.rows.item(0).date,
+                    areaId: res.rows.item(0).areaId,
+                    sectorId: res.rows.item(0).sectorId,
+                    hierarchyId: res.rows.item(0).hierarchyId,
+                    seniorityId: res.rows.item(0).seniorityId,
+                    amount: res.rows.item(0).amount,
+                    positionId: res.rows.item(0).positionId,
+                    countryId: res.rows.item(0).countryId,
+                    uploaded: res.rows.item(0).uploaded,
+                    status: res.rows.item(0).status
+                };
 
-                $scope.posts = JSON.stringify($scope.post);
+                //$scope.posts = JSON.stringify($scope.post);
+
+                //alert('Data posts: '+JSON.stringify($scope.posts));
 
 
 
-                $scope.jsonSendURL = 'http://bits0.com/CuantoGano/Json/dbpush.php';
-
+                $scope.jsonSendURL = 'http://bits0.com/CuantoGanas/Json/dbpush.php';
 
                 //alert('jsonURL: '+$scope.jsonURL);
 
                 $http.post($scope.jsonSendURL, $scope.post).success(function (data) {
 
-
-                    alert('Data: '+JSON.stringify(data));
+                    //alert('Data Sended -- Update Profile to uploaded: '+JSON.stringify(data));
+                    var query = "UPDATE Profiles SET uploaded='1' WHERE profileId='1';";
+                    $cordovaSQLite.execute(db, query, []).then(function (res) {
+                    }, function (err) {
+                        alert(JSON.stringify(err));
+                    });
 
                 }).error(function(error) {
                     alert(JSON.stringify(error));
@@ -164,8 +182,7 @@ angular.module('starter.controllers', ['ngResource'])
 
 
             }, function (err) {
-                console.error(err);
-                alert(JSON.stringify(err));
+                //console.error(err);
             });
 
 
@@ -497,6 +514,13 @@ angular.module('starter.controllers', ['ngResource'])
 
     .controller('c2_areasCtrl', function ($scope, $stateParams, $cordovaSQLite) {
 
+        $scope.profileData = JSON.parse(localStorage.getItem("profileData"));
+        //alert("posId: "+$scope.profileData.positionId);
+
+        if($scope.profileData.positionId > 0){
+            //alert("already set position");
+            window.location = "#/app/c2_analysis/"+$scope.profileData.amount;
+        }
 
         $scope.areas = [];
 
@@ -760,11 +784,11 @@ angular.module('starter.controllers', ['ngResource'])
                 if (res.rows.length == 0) {
 
 
-                    var query = "INSERT INTO Profiles (profileId, name, date, areaId, sectorId, hierarchyId, seniorityId, amount, positionId, countryId, uploaded, status) VALUES ('1', '', datetime('now','localtime'), "+$scope.profileData.areaId+", "+$scope.profileData.sectorId+", "+$scope.profileData.hierarchyId+", "+$scope.profileData.seniorityId+", "+$scope.profileData.amount+", "+$scope.profileData.positionId+", 1, '', 'ACTIVE');";
+                    var query = "INSERT INTO Profiles (profileId, name, date, areaId, sectorId, hierarchyId, seniorityId, amount, positionId, countryId, uploaded, status) VALUES ('1', '', datetime('now','localtime'), "+$scope.profileData.areaId+", "+$scope.profileData.sectorId+", "+$scope.profileData.hierarchyId+", "+$scope.profileData.seniorityId+", "+$scope.profileData.amount+", "+$scope.profileData.positionId+", 1, 0, 'ACTIVE');";
                     $cordovaSQLite.execute(db, query, []);
                     //alert('insertProfile');
                 } else {
-                    var query = "UPDATE Profiles SET date = datetime('now','localtime'), hierarchyId= '"+$scope.profileData.hierarchyId+"', areaId='"+$scope.profileData.areaId+"', seniorityId='"+$scope.profileData.seniorityId+"', positionId='"+$scope.profileData.positionId+"', amount='"+$scope.profileData.amount+"', countryId='1' WHERE profileId='1';";
+                    var query = "UPDATE Profiles SET date = datetime('now','localtime'), hierarchyId= '"+$scope.profileData.hierarchyId+"', areaId='"+$scope.profileData.areaId+"', seniorityId='"+$scope.profileData.seniorityId+"', positionId='"+$scope.profileData.positionId+"', amount='"+$scope.profileData.amount+"', countryId='1', uploaded='0' WHERE profileId='1';";
                     $cordovaSQLite.execute(db, query, []).then(function (res) {
                     }, function (err) {
                         alert(JSON.stringify(err));
@@ -1032,7 +1056,7 @@ angular.module('starter.controllers', ['ngResource'])
 
     })
 
-    .controller('profileCtrl', function ($scope, $stateParams, $cordovaSQLite) {
+    .controller('profileCtrl', function ($scope, $stateParams, $cordovaSQLite, $http) {
 
 
         $scope.profileData = JSON.parse(localStorage.getItem("profileData"));
@@ -1040,8 +1064,73 @@ angular.module('starter.controllers', ['ngResource'])
         //alert("profile controler");
 
         if($scope.profileData.positionId > 0){
-            //alert('profile already loaded');
+
+            var query = "SELECT * FROM Profiles WHERE Profiles.uploaded = '0'";
+            $cordovaSQLite.execute(db, query, []).then(function (res) {
+
+
+                $scope.date = res.rows.item(0).date;
+
+
+                /*$scope.postData = [];
+                 $scope.postData.push({name: 1, value: 1});
+                 $scope.postData.push({name: 2, value: 2});
+                 $scope.postData.push({name: 3, value: 3});*/
+
+                $scope.post = {
+                    profileId: res.rows.item(0).profileId,
+                    name: res.rows.item(0).name,
+                    date: res.rows.item(0).date,
+                    areaId: res.rows.item(0).areaId,
+                    sectorId: res.rows.item(0).sectorId,
+                    hierarchyId: res.rows.item(0).hierarchyId,
+                    seniorityId: res.rows.item(0).seniorityId,
+                    amount: res.rows.item(0).amount,
+                    positionId: res.rows.item(0).positionId,
+                    countryId: res.rows.item(0).countryId,
+                    uploaded: res.rows.item(0).uploaded,
+                    status: res.rows.item(0).status
+                };
+
+                //$scope.posts = JSON.stringify($scope.post);
+
+                //alert('Data posts: '+JSON.stringify($scope.posts));
+
+
+
+                $scope.jsonSendURL = 'http://bits0.com/CuantoGanas/Json/dbpush.php';
+
+                //alert('jsonURL: '+$scope.jsonURL);
+
+                $http.post($scope.jsonSendURL, $scope.post).success(function (data) {
+
+                    //alert('Data Sended -- Update Profile to uploaded: '+JSON.stringify(data));
+                    var query = "UPDATE Profiles SET uploaded='1' WHERE profileId='1';";
+                    $cordovaSQLite.execute(db, query, []).then(function (res) {
+                    }, function (err) {
+                        alert(JSON.stringify(err));
+                    });
+
+                }).error(function(error) {
+                    alert(JSON.stringify(error));
+                });
+
+
+            }, function (err) {
+                //console.error(err);
+            });
+
         }else {
+            window.location = "#/app/c2_areas";
+        }
+
+        $scope.editProfile = function () {
+
+            $scope.profileData = JSON.parse(localStorage.getItem("profileData"));
+            $scope.profileData.positionId = 0;
+            localStorage.setItem("profileData", JSON.stringify($scope.profileData));
+
+
             window.location = "#/app/c2_areas";
         }
 
