@@ -1,24 +1,24 @@
-<ion-side-menus enable-menu-with-back-views="true">
-  <ion-side-menu-content>
+<ion-side-menus enable-menu-with-back-views="false" drag-content="false">
+  <ion-side-menu-content drag-content="false">
     <ion-nav-bar class="bar-dark">
-      <ion-nav-back-button>
-      </ion-nav-back-button>
+      <!--<ion-nav-back-button drag-content="false">
+      </ion-nav-back-button>-->
 
       <!--<ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
       </ion-nav-buttons>-->
-   
+
       <ion-nav-buttons side="right" >
         <ion-item class="button button-icon button-clear ion-android-home" ng-click="goHome()">
         </ion-item>
       </ion-nav-buttons>
-   
+
     </ion-nav-bar>
-    <ion-nav-view name="menuContent"></ion-nav-view>
+    <ion-nav-view name="menuContent" drag-content="false"></ion-nav-view>
   </ion-side-menu-content>
 
-  <ion-side-menu side="left">
+  <!--<ion-side-menu side="left" drag-content="false">
     <ion-header-bar class="bar-dark">
       <h1 class="title">Cuanto ganas?</h1>
     </ion-header-bar>
@@ -35,7 +35,7 @@
 
 
 
-        <!--<ion-item nav-clear menu-close href="#/app/search">
+        &lt;!&ndash;<ion-item nav-clear menu-close href="#/app/search">
           Buscador
         </ion-item>
         <ion-item nav-clear menu-close href="#/app/profileVsSearch">
@@ -50,7 +50,7 @@
         <ion-item nav-clear menu-close href="#/app/playlist">
           Pronostico Aumentos
         </ion-item>
-        -->
+        &ndash;&gt;
 
           <ion-item nav-clear menu-close href="#/app/help">
              Ayuda
@@ -59,7 +59,7 @@
 
 
 		 <ion-item nav-clear menu-close >
-          ------DEV DATA ------
+          &#45;&#45;&#45;&#45;&#45;&#45;DEV DATA &#45;&#45;&#45;&#45;&#45;&#45;
         </ion-item>
 
         <ion-item nav-clear menu-close ng-click="login()">
@@ -74,9 +74,9 @@
         <ion-item nav-clear menu-close href="#/app/browse">
           Browse
         </ion-item>
-       
+
 
       </ion-list>
     </ion-content>
-  </ion-side-menu>
+  </ion-side-menu>-->
 </ion-side-menus>
